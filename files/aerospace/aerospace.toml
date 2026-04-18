@@ -1,0 +1,163 @@
+config-version = 2
+start-at-login = true
+
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+accordion-padding = 60
+default-root-container-layout = "tiles"
+default-root-container-orientation = "auto"
+automatically-unhide-macos-hidden-apps = false
+
+after-startup-command = [
+  "exec-and-forget /opt/homebrew/bin/borders active_color=0xffd08770 inactive_color=0xff494d64 width=10.0 hidpi=on blacklist='Microsoft PowerPoint'",
+  "exec-and-forget /opt/homebrew/bin/aerospace reload-config",
+]
+
+persistent-workspaces = [
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "0",
+  "B",
+  "D",
+  "M",
+  "O",
+  "S",
+  "T",
+]
+
+[key-mapping]
+preset = "qwerty"
+
+[gaps]
+inner.horizontal = 8
+inner.vertical = 8
+outer.left = 8
+outer.bottom = 8
+outer.top = 8
+outer.right = 8
+
+[mode.main.binding]
+alt-slash = "layout tiles horizontal vertical"
+alt-comma = "layout accordion horizontal vertical"
+
+alt-e = "focus left"
+alt-i = "focus down"
+alt-l = "focus up"
+alt-a = "focus right"
+alt-shift-e = "move left"
+alt-shift-i = "move down"
+alt-shift-l = "move up"
+alt-shift-a = "move right"
+
+alt-minus = "resize smart -50"
+alt-semicolon = "resize smart +50"
+
+alt-1 = "workspace 1"
+alt-2 = "workspace 2"
+alt-3 = "workspace 3"
+alt-4 = "workspace 4"
+alt-5 = "workspace 5"
+alt-6 = "workspace 6"
+alt-7 = "workspace 7"
+alt-8 = "workspace 8"
+alt-9 = "workspace 9"
+alt-0 = "workspace 0"
+alt-b = "workspace B"
+alt-d = "workspace D"
+alt-m = "workspace M"
+alt-o = "workspace O"
+alt-t = "workspace T"
+alt-s = "workspace S"
+alt-shift-1 = "move-node-to-workspace 1"
+alt-shift-2 = "move-node-to-workspace 2"
+alt-shift-3 = "move-node-to-workspace 3"
+alt-shift-4 = "move-node-to-workspace 4"
+alt-shift-5 = "move-node-to-workspace 5"
+alt-shift-6 = "move-node-to-workspace 6"
+alt-shift-7 = "move-node-to-workspace 7"
+alt-shift-8 = "move-node-to-workspace 8"
+alt-shift-9 = "move-node-to-workspace 9"
+alt-shift-0 = "move-node-to-workspace 0"
+alt-shift-b = "move-node-to-workspace B"
+alt-shift-d = "move-node-to-workspace D"
+alt-shift-m = "move-node-to-workspace M"
+alt-shift-o = "move-node-to-workspace O"
+alt-shift-t = "move-node-to-workspace T"
+alt-shift-s = "move-node-to-workspace S"
+
+alt-tab = "workspace-back-and-forth"
+alt-shift-tab = "move-workspace-to-monitor --wrap-around next"
+alt-shift-semicolon = "mode service"
+
+[workspace-to-monitor-force-assignment]
+"1" = "main"
+"2" = "main"
+"3" = "main"
+"4" = "main"
+"5" = "main"
+"6" = "secondary"
+"7" = "secondary"
+"8" = "secondary"
+"9" = "secondary"
+"0" = "secondary"
+# Main (Built-in Display): Reference, documentation, and background apps
+# Secondary (External Monitor): Primary workspace for coding, editing, etc.
+"B" = "main"      # Browser: typically used alongside the workspace
+"D" = "secondary"
+"M" = "main"
+"O" = "secondary"
+"T" = "main"      # Terminal: stays in the background
+"S" = "secondary"
+
+[mode.service.binding]
+esc = ["reload-config", "mode main"]
+r = ["flatten-workspace-tree", "mode main"]
+f = ["layout floating tiling", "mode main"]
+backspace = ["close-all-windows-but-current", "mode main"]
+alt-shift-h = ["join-with left", "mode main"]
+alt-shift-j = ["join-with down", "mode main"]
+alt-shift-k = ["join-with up", "mode main"]
+alt-shift-l = ["join-with right", "mode main"]
+
+[[on-window-detected]]
+if.app-id = "com.apple.systempreferences"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.apple.finder"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "io.mpv"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.github.wez.wezterm"
+run = "move-node-to-workspace T"
+
+[[on-window-detected]]
+if.app-id = "md.obsidian"
+run = "move-node-to-workspace O"
+
+[[on-window-detected]]
+if.app-id = "com.hnc.Discord"
+run = "move-node-to-workspace D"
+
+[[on-window-detected]]
+if.app-id = "company.thebrowser.dia"
+run = "move-node-to-workspace B"
+
+[[on-window-detected]]
+if.app-id = "com.apple.Music"
+run = "move-node-to-workspace M"
+
+[[on-window-detected]]
+if.app-id = "com.tinyspeck.slackmacgap"
+run = "move-node-to-workspace S"

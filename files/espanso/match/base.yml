@@ -1,0 +1,120 @@
+matches:
+  # 日時
+  - trigger: ";now"
+    replace: "{{now}}"
+    vars:
+      - name: "now"
+        type: "date"
+        params:
+          format: "%Y-%m-%d"
+  - trigger: ";genzai"
+    replace: "現在（{{now}}）"
+    vars:
+      - name: "now"
+        type: "date"
+        params:
+          format: "%Y-%m-%d"
+  - trigger: ";genjou"
+    replace: "現状（{{now}}）"
+    vars:
+      - name: "now"
+        type: "date"
+        params:
+          format: "%Y-%m-%d"
+  - trigger: ";iso"
+    replace: "{{iso}}"
+    vars:
+      - name: "iso"
+        type: "date"
+        params:
+          format: "%Y-%m-%dT%H:%M:%S"
+  - trigger: ";end"
+    replace: "23:59"
+
+  # 絵文字
+  - trigger: ";gd"
+    replace: "👍️"
+  - trigger: ";plz"
+    replace: "🙏"
+  - trigger: ";ok"
+    replace: "👌"
+  - trigger: ";pw"
+    replace: "💪"
+
+  # テキスト
+  - trigger: ";ps"
+    replace: "projects"
+  - trigger: ";dd"
+    replace: "Downloads"
+  - trigger: ";lorem"
+    replace: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+
+  # 記号
+  - trigger: ";;"
+    replace: "_"
+  - trigger: ";-"
+    replace: "|"
+  - trigger: ";v "
+    replace: "- "
+  - trigger: ";vc"
+    replace: "---"
+
+  # ネットワーク
+  - trigger: ";lh"
+    replace: "http://localhost:"
+  - trigger: ";li"
+    replace: "http://127.0.0.1:"
+
+  # クリップボード活用
+  - regex: ";cb(?P<lang>\\w*) "
+    replace: "```{{lang}}\n{{clipboard}}\n```"
+    vars:
+      - name: "clipboard"
+        type: "clipboard"
+  - trigger: ";ci"
+    replace: "`{{clipboard}}`"
+    vars:
+      - name: "clipboard"
+        type: "clipboard"
+
+  # コマンド
+  - regex: ";z(?P<session>\\w+) "
+    replace: "zellij a -c {{session}}"
+  - trigger: ";gc "
+    replace: 'git commit -m "$|$"'
+  - trigger: ";gcft"
+    replace: 'git commit -m "feat: $|$"'
+  - trigger: ";gcfx"
+    replace: 'git commit -m "fix: $|$"'
+  - trigger: ";gcrf"
+    replace: 'git commit -m "refactor: $|$"'
+  - trigger: ";gcch"
+    replace: 'git commit -m "chore: $|$"'
+  - trigger: ";gcdc"
+    replace: 'git commit -m "docs: $|$"'
+  - trigger: ";gcci"
+    replace: 'git commit -m "ci: $|$"'
+  - trigger: ";gcts"
+    replace: 'git commit -m "test: $|$"'
+
+  # Neovim
+  - trigger: ";vy"
+    replace: "%y+\n"
+
+  # ファイル名
+  - trigger: ";fdc"
+    replace: "docker-compose.yaml"
+  - trigger: ";fdf"
+    replace: "Dockerfile"
+  - trigger: ";fgi"
+    replace: ".gitignore"
+  - trigger: ";frm"
+    replace: "README.md"
+  - trigger: ";fcl"
+    replace: "CHANGELOG.md"
+  - trigger: ";fjf"
+    replace: "justfile"
+  - trigger: ";fmi"
+    replace: "mise.toml"
+  - trigger: ";fcs"
+    replace: "cspell.json"
