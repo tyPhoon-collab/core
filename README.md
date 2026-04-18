@@ -45,8 +45,14 @@
 `extraSpecialArgs` で必要な値を渡します。
 
 ```nix
+let
+  mkFeatures = import (shared + /lib/features.nix);
+in
 extraSpecialArgs = {
-  inherit username homeDirectory features shared;
+  inherit username homeDirectory shared;
+  features = mkFeatures {
+    extended = true;
+  };
   nixvim = inputs.nixvim;
   yaziPlugins = inputs.yazi-plugins;
 };
@@ -100,6 +106,21 @@ features = {
 };
 ```
 
+親側では `lib/features.nix` を import して、必要な差分だけ上書きしてください。
+
+もしくは、すべてのフラグを定義して渡してください。
+
+```nix
+let
+  mkFeatures = import (shared + /lib/features.nix);
+in
+{
+  features = mkFeatures {
+    extended = true;
+  };
+}
+```
+
 ## 境界
 
 このリポジトリに置くもの:
@@ -143,16 +164,11 @@ features = {
 
   outputs = inputs@{ nixpkgs, home-manager, shared, ... }:
     let
+      mkFeatures = import (shared + /lib/features.nix);
       system = "x86_64-linux";
       username = "user";
       homeDirectory = "/home/user";
-      features = {
-        desktop = false;
-        fonts = false;
-        extended = false;
-        dev = 1;
-        wsl = false;
-      };
+      features = mkFeatures { };
       pkgs = import nixpkgs { inherit system; };
     in
     {

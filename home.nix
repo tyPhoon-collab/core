@@ -1,24 +1,13 @@
-args@{
+{
   config,
   pkgs,
   lib,
   username,
   homeDirectory,
-  features ? { },
+  features,
   ...
 }:
-let
-  features = {
-    desktop = false;
-    fonts = false;
-    extended = false;
-    dev = 1;
-    wsl = false;
-  } // args.features;
-in
 {
-  _module.args.features = features;
-
   imports = [
     ./modules/shell/shell.nix
     ./modules/programs/espanso.nix
