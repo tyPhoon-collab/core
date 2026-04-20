@@ -50,6 +50,27 @@
     };
   };
 
+  programs.nixvim.keymaps = [
+    {
+      mode = "n";
+      key = "<leader>y";
+      action = "<cmd>Yazi<cr>";
+      options.desc = "Yazi at File";
+    }
+    {
+      mode = "n";
+      key = "<leader>cw";
+      action = "<cmd>Yazi cwd<cr>";
+      options.desc = "Yazi in CWD";
+    }
+    {
+      mode = "n";
+      key = "<leader>n";
+      action = "<cmd>Yazi toggle<cr>";
+      options.desc = "Resume Yazi";
+    }
+  ];
+
   programs.fzf.enable = true;
   programs.ripgrep.enable = true;
   programs.fd.enable = true;

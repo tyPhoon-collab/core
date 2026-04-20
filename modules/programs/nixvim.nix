@@ -71,12 +71,6 @@
       # Basic
       {
         mode = "n";
-        key = "<leader>gg";
-        action.__raw = "function() Snacks.lazygit() end";
-        options.desc = "Lazygit";
-      }
-      {
-        mode = "n";
         key = "<leader>w";
         action = "<cmd>w<CR>";
         options.desc = "Save";
@@ -206,26 +200,6 @@
         key = "<A-Right>";
         action = "<cmd>wincmd l<CR>";
         options.desc = "Focus Right";
-      }
-
-      # Yazi
-      {
-        mode = "n";
-        key = "<leader>y";
-        action = "<cmd>Yazi<cr>";
-        options.desc = "Yazi at File";
-      }
-      {
-        mode = "n";
-        key = "<leader>cw";
-        action = "<cmd>Yazi cwd<cr>";
-        options.desc = "Yazi in CWD";
-      }
-      {
-        mode = "n";
-        key = "<leader>n";
-        action = "<cmd>Yazi toggle<cr>";
-        options.desc = "Resume Yazi";
       }
 
       # Flash
