@@ -4,7 +4,54 @@
 
 このリポジトリは flake ではなく、親の flake から `flake = false` の source input として読み込む前提です。依存関係の固定や `flake.lock` の管理は親リポジトリ側で行います。
 
-## 含まれるもの
+## クイックスタート
+
+1. 親 flake の `inputs` に `shared` を追加
+2. `extraSpecialArgs` で必要引数を渡す
+3. Home Manager モジュールに `(shared + /home.nix)` を import
+
+入力例:
+
+```nix
+{
+  inputs.shared = {
+    url = "path:/path/to/shared";
+    flake = false;
+  };
+}
+```
+
+引数の受け渡し例:
+
+```nix
+let
+  mkFeatures = import (shared + /lib/features.nix);
+in
+extraSpecialArgs = {
+  inherit username homeDirectory shared;
+  features = mkFeatures {
+    extended = true;
+  };
+  nixvim = inputs.nixvim;
+  yaziPlugins = inputs.yazi-plugins;
+};
+```
+
+import 例:
+
+```nix
+{
+  shared,
+  ...
+}:
+{
+  imports = [
+    (shared + /home.nix)
+  ];
+}
+```
+
+## このリポジトリが持つもの
 
 - `home.nix`: 共有エントリーポイント
 - `modules/`: Home Manager / platform 向けモジュール
@@ -29,49 +76,6 @@
     └── system/
 ```
 
-## 親 flake からの使い方
-
-入力例:
-
-```nix
-{
-  inputs.shared = {
-    url = "path:/path/to/shared";
-    flake = false;
-  };
-}
-```
-
-`extraSpecialArgs` で必要な値を渡します。
-
-```nix
-let
-  mkFeatures = import (shared + /lib/features.nix);
-in
-extraSpecialArgs = {
-  inherit username homeDirectory shared;
-  features = mkFeatures {
-    extended = true;
-  };
-  nixvim = inputs.nixvim;
-  yaziPlugins = inputs.yazi-plugins;
-};
-```
-
-`home.nix` を import します。
-
-```nix
-{
-  shared,
-  ...
-}:
-{
-  imports = [
-    (shared + /home.nix)
-  ];
-}
-```
-
 ## 必要な引数
 
 `home.nix` は少なくとも次を受け取ります。
@@ -88,11 +92,13 @@ extraSpecialArgs = {
 
 主なフラグは次のとおりです。
 
-- `desktop`: GUI / デスクトップ向け設定を有効化
-- `fonts`: `true` で fontconfig と Nerd Font を有効化
-- `extended`: 追加の CLI ツールを有効化
-- `dev`: 値が大きいほど開発向け設定を拡張
-- `wsl`: WSL 向け分岐に使用
+| フラグ     | 役割                                       |
+| ---------- | ------------------------------------------ |
+| `desktop`  | GUI / デスクトップ向け設定を有効化         |
+| `fonts`    | `true` で fontconfig と Nerd Font を有効化 |
+| `extended` | 追加の CLI ツールを有効化                  |
+| `dev`      | 値が大きいほど開発向け設定を拡張           |
+| `wsl`      | WSL 向け分岐に使用                         |
 
 既定値:
 
@@ -121,21 +127,29 @@ in
 }
 ```
 
-## 境界
+## 役割の境界
 
-このリポジトリに置くもの:
+| shared 側に置く                        | 親リポジトリ側に置く             |
+| -------------------------------------- | -------------------------------- |
+| 再利用できる shell / editor / CLI 設定 | ユーザー名やホスト固有の識別情報 |
+| 公開して問題ない静的ファイル           | マシンごとに変わるポリシー       |
+| 汎用的な macOS / Linux 向け設定        | 秘密情報                         |
 
-- 再利用できる shell / editor / CLI 設定
-- 公開して問題ない静的ファイル
-- 汎用的な macOS / Linux 向け設定
+## 設定の上書き
 
-親リポジトリに置くもの:
+取り込み側で差分を重ねるためのガイドをモジュール別に分離しています。
 
-- ユーザー名やホスト固有の識別情報
-- マシンごとに変わるポリシー
-- 秘密情報
+- [AeroSpace の上書き](docs/overrides/aerospace.md)
+- [Git の上書き](docs/overrides/git.md)
+- [Jujutsu の上書き](docs/overrides/jujutsu.md)
 
-`git` と `jujutsu` についても、ユーザー名やメールアドレスのような個人識別情報は shared 側では持ちません。各利用側の flake で追記してください。
+共通ルール:
+
+- shared 側は再利用できる既定値のみを持つ
+- 個人識別情報（ユーザー名やメールアドレス）は取り込み側で設定する
+- ホスト固有・環境固有のポリシーは取り込み側で設定する
+
+`git` と `jujutsu` の個人識別情報は、各利用側の flake で追記してください。
 
 ```nix
 {
