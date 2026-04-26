@@ -5,6 +5,7 @@
 - `programs.git.enable = true`
 - 共通設定:
   - `init.defaultBranch = "main"`
+  - `pull.rebase = true`
   - `push.autoSetupRemote = true`
 - 関連ツール:
   - `programs.lazygit.enable = true`
@@ -21,6 +22,8 @@
 ```nix
 {
   programs.git.settings = {
+    # shared 側の既定値を必要に応じて上書き
+    pull.rebase = false;
     user.name = "Your Name";
     user.email = "you@example.com";
   };
