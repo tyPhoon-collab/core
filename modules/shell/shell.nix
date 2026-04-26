@@ -39,12 +39,14 @@
       source ~/.config/nushell/aliases/git-aliases.nu
       source ~/.config/nushell/aliases/original-aliases.nu
 
-      if $nu.is-interactive and "ZELLIJ" not-in $env and "SSH_CLIENT" not-in $env and "WSL_DISTRO_NAME" not-in $env {
-          let allow_terminals = ["ghostty", "WezTerm"]
-          if ($env.TERM_PROGRAM? in $allow_terminals) {
-              exec zellij a -c main
-          }
-      }
+      # zellij auto-start was convenient, but too aggressive as a shared default.
+      # Re-enable if you want terminal-specific opt-in again.
+      # if $nu.is-interactive and "ZELLIJ" not-in $env and "SSH_CLIENT" not-in $env and "WSL_DISTRO_NAME" not-in $env {
+      #     let allow_terminals = ["ghostty", "WezTerm"]
+      #     if ($env.TERM_PROGRAM? in $allow_terminals) {
+      #         exec zellij a -c main
+      #     }
+      # }
     '';
 
     extraEnv = ''
