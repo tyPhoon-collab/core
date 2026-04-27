@@ -30,21 +30,6 @@
 }
 ```
 
-```nix
-{
-  programs.git = {
-    signing = {
-      key = "YOUR_GPG_KEY";
-      signByDefault = true;
-    };
-    aliases = {
-      st = "status -sb";
-      co = "checkout";
-    };
-  };
-}
-```
-
 ## 注意点
 
 - shared 側の既定値は `programs.git.settings` に入っているため、取り込み側で同じキーを設定すると上書きされます。

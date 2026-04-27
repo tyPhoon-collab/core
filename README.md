@@ -68,7 +68,8 @@ import 例:
 ├── home.nix
 ├── lib/
 │   ├── features.nix
-│   └── home-manager.nix
+│   ├── home-manager.nix
+│   └── darwin-homebrew.nix
 ├── files/
 │   ├── aerospace/
 │   ├── espanso/
@@ -196,7 +197,46 @@ in
 
 `modules/system/darwin-defaults.nix` は、必要なら親リポジトリ側で直接 import して使えます。
 
-このモジュールを取り込んで `system.defaults` を適用する場合、`darwin-rebuild` を実行するターミナルや Nix 関連プロセスに Full Disk Access が必要になることがあります。
+`lib/darwin-homebrew.nix` は、Darwin 向けの標準 Homebrew リストを plain data として提供します。
+親リポジトリ側で import して `homebrew.taps` / `homebrew.brews` / `homebrew.casks` / `homebrew.masApps` に流し込んでください。
+
+例:
+
+```nix
+{
+  username,
+  homeDirectory,
+  inputs,
+  ...
+}:
+let
+  sharedHomebrew = import (inputs.shared + /lib/darwin-homebrew.nix);
+in
+{
+  imports = [
+    (inputs.shared + /modules/system/darwin-defaults.nix)
+  ];
+
+  system.primaryUser = username;
+
+  homebrew = {
+    enable = true;
+    taps = sharedHomebrew.taps;
+    brews = sharedHomebrew.brews ++ [
+      "mole"
+    ];
+    casks = sharedHomebrew.casks;
+    masApps = sharedHomebrew.masApps;
+  };
+
+  users.users.${username} = {
+    name = username;
+    home = homeDirectory;
+  };
+}
+```
+
+`darwin-defaults.nix` を取り込んで `system.defaults` を適用する場合、`darwin-rebuild` を実行するターミナルや Nix 関連プロセスに Full Disk Access が必要になることがあります。
 
 ## Standalone Home Manager の最小例
 
