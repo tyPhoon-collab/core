@@ -32,6 +32,7 @@
       signcolumn = "yes";
       cursorline = true;
       scrolloff = 8;
+      autoread = true;
       updatetime = 250;
       timeoutlen = 300;
     };
@@ -48,6 +49,7 @@
 
     extraConfigLua = ''
       local ime_group = vim.api.nvim_create_augroup("macos-ime-reset", { clear = true })
+      local autoread_group = vim.api.nvim_create_augroup("autoread-checktime", { clear = true })
 
       local function to_eisuu()
         if vim.fn.executable("macism") == 1 then
@@ -63,6 +65,15 @@
       vim.api.nvim_create_autocmd("CmdlineEnter", {
         group = ime_group,
         callback = to_eisuu,
+      })
+
+      vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "CursorHold", "CursorHoldI" }, {
+        group = autoread_group,
+        callback = function()
+          if vim.fn.mode() ~= "c" then
+            vim.cmd("checktime")
+          end
+        end,
       })
     '';
 
