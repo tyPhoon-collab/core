@@ -2,12 +2,11 @@
   config,
   pkgs,
   lib,
-  features,
   ...
 }:
 let
   path = "/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:${config.home.homeDirectory}/.nix-profile/bin:/usr/local/bin:/usr/bin:/bin";
-  isDesktop = features.desktop;
+  isDesktop = config.core.system.desktop;
 in
 lib.mkIf pkgs.stdenv.isLinux {
   systemd.user = {

@@ -3,18 +3,18 @@
 ## デフォルト設定
 
 - ベース設定: `files/aerospace/aerospace.toml`
-- 追加用オプション: `shared.aerospace.extraRules`
+- 追加用オプション: `core.apps.aerospace.extraRules`
 
 ## 上書き方法
 
-`shared.aerospace.extraRules` は app-id をキーとして、
+`core.apps.aerospace.extraRules` は app-id をキーとして、
 `workspace` / `floating` を意図ベースで指定できます。
 
 ## 例
 
 ```nix
 {
-  shared.aerospace.extraRules = {
+  core.apps.aerospace.extraRules = {
     "company.thebrowser.dia" = {
       workspace = "B";
     };

@@ -1,45 +1,34 @@
 {
   pkgs,
   lib,
-  features,
   config,
+  coreConfig ? { },
   ...
 }:
 let
-  cfg = config.shared.aerospace;
+  cfg = config.core.apps.aerospace;
   baseToml = builtins.readFile ../../files/aerospace/aerospace.toml;
 
-  extraRules = lib.mapAttrsToList (
-    appId: rule:
-    {
-      inherit appId;
-      run =
-        if rule.workspace != null then
-          "move-node-to-workspace ${rule.workspace}"
-        else
-          "layout floating";
-    }
-  ) cfg.extraRules;
+  extraRules = lib.mapAttrsToList (appId: rule: {
+    inherit appId;
+    run =
+      if rule.workspace != null then "move-node-to-workspace ${rule.workspace}" else "layout floating";
+  }) cfg.extraRules;
 
-  appendedRules = lib.concatMapStringsSep "\n\n" (
-    rule:
-    ''
-      [[on-window-detected]]
-      if.app-id = "${rule.appId}"
-      run = "${rule.run}"
-    ''
-  ) extraRules;
+  appendedRules = lib.concatMapStringsSep "\n\n" (rule: ''
+    [[on-window-detected]]
+    if.app-id = "${rule.appId}"
+    run = "${rule.run}"
+  '') extraRules;
 
   renderedConfig =
     baseToml
     + lib.optionalString (appendedRules != "") (
-      "\n\n# Appended by shared.aerospace options\n"
-      + appendedRules
-      + "\n"
+      "\n\n# Appended by core.apps.aerospace.extraRules\n" + appendedRules + "\n"
     );
 in
 {
-  options.shared.aerospace = {
+  options.core.apps.aerospace = {
     extraRules = lib.mkOption {
       type = lib.types.attrsOf (
         lib.types.submodule {
@@ -60,7 +49,6 @@ in
           };
         }
       );
-      default = { };
       example = {
         "company.thebrowser.dia" = {
           workspace = "B";
@@ -69,6 +57,7 @@ in
           floating = true;
         };
       };
+      default = lib.attrByPath [ "apps" "aerospace" "extraRules" ] { } coreConfig;
       description = ''
         Extra app rules keyed by app-id. `workspace` has priority over `floating`.
       '';
@@ -78,14 +67,14 @@ in
   config = {
     assertions = [
       {
-        assertion = lib.all (
-          rule: rule.workspace != null || rule.floating
-        ) (builtins.attrValues cfg.extraRules);
-        message = "shared.aerospace.extraRules.<appId> must set at least one of workspace or floating.";
+        assertion = lib.all (rule: rule.workspace != null || rule.floating) (
+          builtins.attrValues cfg.extraRules
+        );
+        message = "core.apps.aerospace.extraRules.<appId> must set at least one of workspace or floating.";
       }
     ];
 
-    xdg.configFile = lib.mkIf (pkgs.stdenv.isDarwin && features.desktop) {
+    xdg.configFile = lib.mkIf cfg.enable {
       "aerospace/aerospace.toml".text = renderedConfig;
     };
   };

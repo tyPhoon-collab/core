@@ -4,11 +4,11 @@
   lib,
   username,
   homeDirectory,
-  features,
   ...
 }:
 {
   imports = [
+    ./modules/core.nix
     ./modules/shell/shell.nix
     ./modules/programs/espanso.nix
     ./modules/programs/git.nix
@@ -33,10 +33,10 @@
       procs
       rsync
     ]
-    ++ lib.optionals features.fonts [
+    ++ lib.optionals config.core.system.fonts [
       nerd-fonts.hack
     ]
-    ++ lib.optionals features.extended [
+    ++ lib.optionals config.core.system.extended [
       ffmpeg
       nixfmt
     ];
@@ -49,7 +49,7 @@
     clean.extraArgs = "--keep-since 7d --keep 10";
   };
 
-  fonts.fontconfig.enable = features.fonts;
+  fonts.fontconfig.enable = config.core.system.fonts;
 
   home.username = username;
   home.homeDirectory = homeDirectory;

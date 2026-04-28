@@ -2,7 +2,7 @@
   lib,
   nixvim,
   pkgs,
-  features,
+  config,
   ...
 }:
 {
@@ -259,17 +259,17 @@
     plugins = {
       # LSP
       lsp = {
-        enable = features.dev >= 1;
+        enable = config.core.system.devLevel >= 1;
         servers =
           (lib.genAttrs [ "lua_ls" "nixd" "marksman" ] (name: {
-            enable = features.dev >= 1;
+            enable = config.core.system.devLevel >= 1;
           }))
           // (lib.genAttrs [ "ts_ls" "pyright" "yamlls" ] (name: {
-            enable = features.dev >= 2;
+            enable = config.core.system.devLevel >= 2;
           }))
           // {
             rust_analyzer = {
-              enable = features.dev >= 2;
+              enable = config.core.system.devLevel >= 2;
               installCargo = false;
               installRustc = false;
             };
@@ -396,7 +396,7 @@
 
       # Copilot (Level 2 only)
       copilot-lua = {
-        enable = features.dev >= 2;
+        enable = config.core.system.devLevel >= 2;
         settings = {
           suggestion = {
             enabled = true;

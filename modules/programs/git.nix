@@ -1,9 +1,16 @@
-{ ... }:
+{ config, lib, ... }:
 {
   programs.git = {
     enable = true;
     lfs.enable = true;
     settings = {
+      user =
+        lib.optionalAttrs (config.core.identity.name != null) {
+          name = config.core.identity.name;
+        }
+        // lib.optionalAttrs (config.core.identity.email != null) {
+          email = config.core.identity.email;
+        };
       init.defaultBranch = "main";
       pull.rebase = true;
       push.autoSetupRemote = true;

@@ -2,7 +2,7 @@
   yaziPlugins,
   pkgs,
   lib,
-  features,
+  config,
   ...
 }:
 {
@@ -83,7 +83,7 @@
       file
       p7zip
     ]
-    ++ lib.optionals features.extended [
+    ++ lib.optionals config.core.system.extended [
       poppler
       resvg
       imagemagick

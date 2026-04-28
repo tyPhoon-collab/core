@@ -2,10 +2,10 @@
   lib,
   pkgs,
   username,
-  features,
+  config,
   ...
 }:
-lib.mkIf (pkgs.stdenv.isLinux && features.wsl) {
+lib.mkIf (pkgs.stdenv.isLinux && config.core.system.wsl) {
   # Activation Script for WSL config files
   home.activation.syncWslConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     # Runtime check: Ensure we are actually running on WSL

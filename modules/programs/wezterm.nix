@@ -1,9 +1,14 @@
 {
   pkgs,
   lib,
-  features,
+  config,
   ...
 }:
-lib.mkIf (features.desktop && (pkgs.stdenv.isDarwin || pkgs.stdenv.isLinux)) {
-  xdg.configFile."wezterm".source = ../../files/wezterm;
+let
+  cfg = config.core.apps.wezterm;
+in
+{
+  config = lib.mkIf cfg.enable {
+    xdg.configFile."wezterm".source = ../../files/wezterm;
+  };
 }
