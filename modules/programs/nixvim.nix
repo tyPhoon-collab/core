@@ -102,6 +102,12 @@
       # Snacks Picker
       {
         mode = "n";
+        key = "<leader>e";
+        action.__raw = "function() Snacks.explorer() end";
+        options.desc = "Explorer";
+      }
+      {
+        mode = "n";
         key = "<leader>ff";
         action.__raw = "function() Snacks.picker.files() end";
         options.desc = "Find Files";
@@ -348,6 +354,7 @@
         settings =
           (lib.genAttrs
             [
+              "explorer"
               "indent"
               "input"
               "notifier"

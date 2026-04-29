@@ -24,12 +24,18 @@
     keymap = {
       mgr.prepend_keymap = [
         {
-          on = [ "," "d" ];
+          on = [
+            ","
+            "d"
+          ];
           run = "sort --dir-first=no";
           desc = "Files first";
         }
         {
-          on = [ "," "D" ];
+          on = [
+            ","
+            "D"
+          ];
           run = "sort --dir-first";
           desc = "Dirs first";
         }
