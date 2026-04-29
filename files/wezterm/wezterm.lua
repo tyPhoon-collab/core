@@ -11,6 +11,8 @@ return {
 		"Hiragino Sans",
 	}),
 	keys = {
+		{ key = "d", mods = "SUPER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+		{ key = "d", mods = "SUPER|SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 		{ key = "w", mods = "SUPER", action = act.CloseCurrentTab({ confirm = false }) },
 	},
 }
