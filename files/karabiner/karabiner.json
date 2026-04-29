@@ -932,7 +932,10 @@
                 },
                 "to": [
                   {
-                    "key_code": "slash"
+                    "key_code": "slash",
+                    "modifiers": [
+                      "left_shift"
+                    ]
                   }
                 ],
                 "type": "basic"
@@ -955,10 +958,7 @@
                 },
                 "to": [
                   {
-                    "key_code": "slash",
-                    "modifiers": [
-                      "left_shift"
-                    ]
+                    "key_code": "return_or_enter"
                   }
                 ],
                 "type": "basic"
