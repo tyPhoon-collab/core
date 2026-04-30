@@ -398,6 +398,12 @@
                 # { section = "startup"; } # lazy.nvim dependency (startup stats) disabled
               ];
             };
+            picker.sources.explorer = {
+              watch = true;
+              git_status = true;
+              git_status_open = true;
+              git_untracked = true;
+            };
           };
       };
 
