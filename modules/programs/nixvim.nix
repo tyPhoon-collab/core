@@ -149,22 +149,22 @@
         options.desc = "Notification History";
       }
       {
-        mode = [
-          "n"
-          "t"
-        ];
+        mode = "n";
         key = "<leader>t";
         action.__raw = "function() Snacks.terminal() end";
         options.desc = "Toggle Terminal";
       }
       {
-        mode = [
-          "n"
-          "t"
-        ];
+        mode = "n";
         key = "<leader>T";
         action.__raw = ''function() Snacks.terminal(nil, { count = 2, win = { position = "right" } }) end'';
         options.desc = "Toggle Terminal Right";
+      }
+      {
+        mode = "t";
+        key = "<A-Esc>";
+        action = "<C-\\><C-n>";
+        options.desc = "Exit Terminal Mode";
       }
 
       # Buffer Navigation
