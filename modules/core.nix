@@ -9,6 +9,7 @@ let
   defaultDarwinHomebrew = {
     taps = [
       "FelixKratz/formulae"
+      "nikitabobko/tap"
     ];
 
     brews = [
