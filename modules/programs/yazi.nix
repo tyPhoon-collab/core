@@ -93,6 +93,6 @@
       poppler
       resvg
       imagemagick
-      mpv
+      # (mpv.override { youtubeSupport = false; })
     ];
 }
