@@ -150,8 +150,19 @@ let
       email = "you@example.com";
     };
 
-    apps.aerospace.extraRules = {
-      "company.thebrowser.dia".workspace = "B";
+    apps.aerospace = {
+      workspaces.S = {
+        monitor = "secondary";
+        appIds = [
+          "com.tinyspeck.slackmacgap"
+        ];
+      };
+      workspaces.B.appIds = [
+        "company.thebrowser.dia"
+      ];
+      floatingAppIds = [
+        "com.apple.Preview"
+      ];
     };
 
     apps.espanso.extraMatches = [
@@ -194,8 +205,19 @@ Home Manager や nix-darwin の module 側では、この `coreConfig` をもと
       email = "you@example.com";
     };
 
-    apps.aerospace.extraRules = {
-      "company.thebrowser.dia".workspace = "B";
+    apps.aerospace = {
+      workspaces.S = {
+        monitor = "secondary";
+        appIds = [
+          "com.tinyspeck.slackmacgap"
+        ];
+      };
+      workspaces.B.appIds = [
+        "company.thebrowser.dia"
+      ];
+      floatingAppIds = [
+        "com.apple.Preview"
+      ];
     };
 
     apps.espanso.extraMatches = [
