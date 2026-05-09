@@ -12,10 +12,11 @@
     ./modules/shell/shell.nix
     ./modules/programs/espanso.nix
     ./modules/programs/git.nix
+    ./modules/programs/ghostty.nix
     ./modules/programs/jujutsu.nix
     ./modules/programs/yazi.nix
     ./modules/programs/nixvim.nix
-    ./modules/programs/wezterm.nix
+    # ./modules/programs/wezterm.nix
     ./modules/platform/entrypoint.nix
   ];
 

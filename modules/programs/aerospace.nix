@@ -79,7 +79,7 @@ let
     T = {
       enable = true;
       monitor = "main";
-      appIds = [ "com.github.wez.wezterm" ];
+      appIds = [ "com.mitchellh.ghostty" ];
     };
   };
 

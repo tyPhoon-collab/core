@@ -129,7 +129,8 @@ public schema を持ちます。まずは次の軸から始めています。
 - `core.identity.*`
 - `core.apps.aerospace.*`
 - `core.apps.espanso.*`
-- `core.apps.wezterm.*`
+- `core.apps.ghostty.*`
+<!-- - `core.apps.wezterm.*` -->
 - `core.apps.karabiner.*`
 - `core.brew.*`
 

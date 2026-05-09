@@ -42,7 +42,7 @@
       # zellij auto-start was convenient, but too aggressive as a shared default.
       # Re-enable if you want terminal-specific opt-in again.
       # if $nu.is-interactive and "ZELLIJ" not-in $env and "SSH_CLIENT" not-in $env and "WSL_DISTRO_NAME" not-in $env {
-      #     let allow_terminals = ["ghostty", "WezTerm"]
+      #     let allow_terminals = ["ghostty"]
       #     if ($env.TERM_PROGRAM? in $allow_terminals) {
       #         exec zellij a -c main
       #     }

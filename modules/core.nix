@@ -19,8 +19,9 @@ let
     casks = [
       "aerospace"
       "espanso"
+      "ghostty"
       "karabiner-elements"
-      "wezterm"
+      # "wezterm"
     ];
 
     masApps = { };
@@ -98,13 +99,19 @@ in
         description = "Whether the core Karabiner configuration should be installed.";
       };
 
-      wezterm.enable = lib.mkOption {
+      ghostty.enable = lib.mkOption {
         type = lib.types.bool;
-        default = fromPath [ "apps" "wezterm" "enable" ] (
+        default = fromPath [ "apps" "ghostty" "enable" ] (
           config.core.system.desktop && (pkgs.stdenv.isDarwin || pkgs.stdenv.isLinux)
         );
-        description = "Whether the core WezTerm configuration should be installed.";
+        description = "Whether the core Ghostty configuration should be installed.";
       };
+
+      # wezterm.enable = lib.mkOption {
+      #   type = lib.types.bool;
+      #   default = fromPath [ "apps" "wezterm" "enable" ] false;
+      #   description = "Whether the core WezTerm configuration should be installed.";
+      # };
     };
 
     brew = {
