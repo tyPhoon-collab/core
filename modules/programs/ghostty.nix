@@ -13,6 +13,10 @@ in
       font-family = "Hack Nerd Font Mono"
       font-family = "Hiragino Sans W4"
       macos-option-as-alt = left
+      keybind = alt+left=unbind
+      keybind = alt+right=unbind
+      keybind = alt+up=unbind
+      keybind = alt+down=unbind
       macos-titlebar-style = hidden
       confirm-close-surface = false
     '';
