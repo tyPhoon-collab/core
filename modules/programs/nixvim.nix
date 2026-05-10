@@ -57,7 +57,7 @@
         end
       end
 
-      vim.api.nvim_create_autocmd("InsertLeave", {
+      vim.api.nvim_create_autocmd({ "InsertLeave", "TermLeave" }, {
         group = ime_group,
         callback = to_eisuu,
       })
