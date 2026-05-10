@@ -234,6 +234,8 @@ Home Manager や nix-darwin の module 側では、この `coreConfig` をもと
 ```
 
 `core.brew.resolved` には、core 側の標準リストと `extra*` をマージした結果が入ります。
+`core.system.desktop = false` のときは `core.brew.enable` も既定で `false` になり、
+`core.brew.resolved` は空になります。
 Darwin 側ではこの値を `homebrew.*` に流し込む使い方を想定しています。
 
 `coreConfig` は外から渡す生の入力です。module 評価後の正規化済み状態は
@@ -279,6 +281,9 @@ core 内部 module が参照するのは `config.core` です。
 
 Darwin 向けの標準 Homebrew リストは `modules/core.nix` の既定値として持ち、
 親リポジトリ側では `config.core.brew.resolved` を `homebrew.*` に流し込む想定です。
+この連携は desktop 環境向けです。headless/server 構成では core の Homebrew 設定を
+取り込まず、親リポジトリ側で nix-darwin 標準の `homebrew` 記法を使って
+ホスト固有の CLI パッケージを直接追加してください。
 
 例:
 
