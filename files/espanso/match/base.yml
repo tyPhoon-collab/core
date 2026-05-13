@@ -54,6 +54,8 @@ matches:
     replace: "_"
   - trigger: ";-"
     replace: "|"
+  - trigger: ";."
+    replace: "/"
   - trigger: ";v "
     replace: "- "
   - trigger: ";vc"
