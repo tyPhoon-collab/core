@@ -23,7 +23,7 @@
   programs.nixvim.keymaps = [
     {
       mode = "n";
-      key = "<leader>gg";
+      key = "<leader>g";
       action.__raw = "function() Snacks.lazygit() end";
       options.desc = "Lazygit";
     }
