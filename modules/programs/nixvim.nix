@@ -168,6 +168,12 @@
         options.desc = "Toggle Terminal Right";
       }
       {
+        mode = "n";
+        key = "<leader>z";
+        action.__raw = "function() Snacks.zen.zoom() end";
+        options.desc = "Zoom Window";
+      }
+      {
         mode = "t";
         key = "<A-Esc>";
         action = "<C-\\><C-n>";
