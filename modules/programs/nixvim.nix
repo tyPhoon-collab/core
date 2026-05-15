@@ -19,11 +19,10 @@
     # Vimオプション
     opts = {
       number = true;
-      relativenumber = true;
       shiftwidth = 2;
       tabstop = 2;
       expandtab = true;
-      smartindent = true;
+      autoindent = true;
       wrap = false;
       clipboard = "unnamedplus";
       ignorecase = true;
@@ -32,9 +31,18 @@
       signcolumn = "yes";
       cursorline = true;
       scrolloff = 8;
-      autoread = true;
-      updatetime = 250;
+      updatetime = 1000;
       timeoutlen = 300;
+      confirm = true;
+      splitbelow = true;
+      splitright = true;
+      undofile = true;
+      breakindent = true;
+      showmode = false;
+      laststatus = 3;
+      completeopt = "menuone,noselect,popup";
+      pumborder = "rounded";
+      winborder = "rounded";
     };
 
     globals = {
