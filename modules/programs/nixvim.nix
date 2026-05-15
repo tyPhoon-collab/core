@@ -414,19 +414,6 @@
             };
           };
       };
-
-      # Copilot (Level 2 only)
-      copilot-lua = {
-        enable = config.core.system.devLevel >= 2;
-        settings = {
-          suggestion = {
-            enabled = true;
-            auto_trigger = false;
-            keymap.accept = "<C-l>";
-          };
-          filetypes."*" = true;
-        };
-      };
     }
     // (lib.genAttrs
       [
