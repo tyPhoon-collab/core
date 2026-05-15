@@ -39,7 +39,6 @@
       undofile = true;
       breakindent = true;
       showmode = false;
-      laststatus = 3;
       completeopt = "menuone,noselect,popup";
       pumborder = "rounded";
       winborder = "rounded";
@@ -261,6 +260,32 @@
         key = "<leader>st";
         action.__raw = "function() Snacks.picker.todo_comments() end";
         options.desc = "Todo Comments";
+      }
+      {
+        mode = "n";
+        key = "<leader>sd";
+        action.__raw = "function() Snacks.picker.diagnostics() end";
+        options.desc = "Diagnostics";
+      }
+      {
+        mode = "n";
+        key = "<leader>sD";
+        action.__raw = "function() Snacks.picker.diagnostics_buffer() end";
+        options.desc = "Buffer Diagnostics";
+      }
+
+      # Trouble
+      {
+        mode = "n";
+        key = "<leader>xx";
+        action = "<cmd>Trouble diagnostics toggle<CR>";
+        options.desc = "Diagnostics";
+      }
+      {
+        mode = "n";
+        key = "<leader>xX";
+        action = "<cmd>Trouble diagnostics toggle filter.buf=0<CR>";
+        options.desc = "Buffer Diagnostics";
       }
     ];
 
