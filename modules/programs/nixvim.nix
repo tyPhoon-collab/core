@@ -232,6 +232,44 @@
         options.desc = "Focus Right";
       }
 
+      # Window Resize
+      {
+        mode = [
+          "n"
+          "t"
+        ];
+        key = "<A-S-Left>";
+        action = "<cmd>vertical resize -2<CR>";
+        options.desc = "Resize Left";
+      }
+      {
+        mode = [
+          "n"
+          "t"
+        ];
+        key = "<A-S-Down>";
+        action = "<cmd>resize +2<CR>";
+        options.desc = "Resize Down";
+      }
+      {
+        mode = [
+          "n"
+          "t"
+        ];
+        key = "<A-S-Up>";
+        action = "<cmd>resize -2<CR>";
+        options.desc = "Resize Up";
+      }
+      {
+        mode = [
+          "n"
+          "t"
+        ];
+        key = "<A-S-Right>";
+        action = "<cmd>vertical resize +2<CR>";
+        options.desc = "Resize Right";
+      }
+
       # Flash
       {
         mode = [
