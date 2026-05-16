@@ -74,6 +74,20 @@ in
         default = fromPath [ "system" "wsl" ] false;
         description = "Whether the target environment is WSL.";
       };
+
+      openFiles = {
+        soft = lib.mkOption {
+          type = lib.types.ints.positive;
+          default = fromPath [ "system" "openFiles" "soft" ] 65536;
+          description = "Soft open files limit applied to newly launched processes.";
+        };
+
+        hard = lib.mkOption {
+          type = lib.types.ints.positive;
+          default = fromPath [ "system" "openFiles" "hard" ] 200000;
+          description = "Hard open files limit applied to newly launched processes.";
+        };
+      };
     };
 
     apps = {

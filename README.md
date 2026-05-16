@@ -144,6 +144,10 @@ let
       fonts = true;
       extended = true;
       devLevel = 2;
+      openFiles = {
+        soft = 65536;
+        hard = 200000;
+      };
     };
 
     identity = {
@@ -278,6 +282,11 @@ core 内部 module が参照するのは `config.core` です。
 ## 補足
 
 `modules/system/darwin-defaults.nix` は、必要なら親リポジトリ側で直接 import して使えます。
+`modules/system/darwin-limits.nix` は、import された場合に macOS の
+`launchctl limit maxfiles` を activation 時と boot 時の LaunchDaemon で適用します。
+これは既存プロセスではなく、設定後に新しく起動されるプロセスの open files limit の既定値を
+上げるためのものです。値は `core.system.openFiles.soft` と `core.system.openFiles.hard` で
+上書きできます。
 
 Darwin 向けの標準 Homebrew リストは `modules/core.nix` の既定値として持ち、
 親リポジトリ側では `config.core.brew.resolved` を `homebrew.*` に流し込む想定です。
@@ -300,6 +309,7 @@ Darwin 向けの標準 Homebrew リストは `modules/core.nix` の既定値と�
   imports = [
     (inputs.core + /modules/core.nix)
     (inputs.core + /modules/system/darwin-defaults.nix)
+    (inputs.core + /modules/system/darwin-limits.nix)
   ];
 
   system.primaryUser = username;
