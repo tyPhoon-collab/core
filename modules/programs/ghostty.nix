@@ -17,6 +17,8 @@ in
       keybind = alt+right=unbind
       keybind = alt+up=unbind
       keybind = alt+down=unbind
+      keybind = super+enter=unbind
+      keybind = super+ctrl+f=unbind
       macos-titlebar-style = hidden
       confirm-close-surface = false
     '';
