@@ -344,13 +344,17 @@
       lsp = {
         enable = config.core.system.devLevel >= 1;
         servers =
-          (lib.genAttrs [ "lua_ls" "nixd" "marksman" ] (name: {
+          (lib.genAttrs [ "jsonls" "lua_ls" "nixd" "marksman" ] (name: {
             enable = config.core.system.devLevel >= 1;
           }))
-          // (lib.genAttrs [ "ts_ls" "pyright" "yamlls" ] (name: {
+          // (lib.genAttrs [ "bashls" "ts_ls" "pyright" "yamlls" ] (name: {
             enable = config.core.system.devLevel >= 2;
           }))
           // {
+            dartls = {
+              enable = config.core.system.devLevel >= 2;
+              package = null;
+            };
             rust_analyzer = {
               enable = config.core.system.devLevel >= 2;
               installCargo = false;
