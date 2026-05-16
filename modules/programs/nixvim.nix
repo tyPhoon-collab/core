@@ -157,6 +157,12 @@
       }
       {
         mode = "n";
+        key = "<leader>uw";
+        action.__raw = ''function() Snacks.toggle.option("wrap", { name = "Wrap" }):toggle() end'';
+        options.desc = "Toggle Wrap";
+      }
+      {
+        mode = "n";
         key = "<leader>t";
         action.__raw = "function() Snacks.terminal() end";
         options.desc = "Toggle Terminal";
