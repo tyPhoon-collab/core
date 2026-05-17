@@ -56,7 +56,7 @@
     keymaps = [
       {
         mode = "n";
-        key = "<leader>j";
+        key = "<leader>jj";
         action = "<cmd>LazyJJ<CR>";
         options.desc = "LazyJJ";
       }
