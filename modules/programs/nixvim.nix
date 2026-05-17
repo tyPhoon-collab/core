@@ -491,6 +491,11 @@
               git_status_open = true;
               git_untracked = true;
             };
+            lazygit = {
+              # Snacks' default lazygit config injects `os.editPreset = "nvim-remote"`.
+              # That path is fragile unless Neovim is started with a stable --listen pipe.
+              configure = false;
+            };
           };
       };
     }
