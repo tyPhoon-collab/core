@@ -128,6 +128,16 @@ in
       # };
     };
 
+    shell.nushell.shellAliases = lib.mkOption {
+      type = lib.types.attrsOf lib.types.str;
+      default = fromPath [ "shell" "nushell" "shellAliases" ] { };
+      example = {
+        k = "kubectl";
+        gswm = "git switch main";
+      };
+      description = "Additional Nushell aliases passed through to programs.nushell.shellAliases.";
+    };
+
     brew = {
       enable = lib.mkOption {
         type = lib.types.bool;

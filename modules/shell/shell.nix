@@ -1,4 +1,11 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  ...
+}:
+let
+  cfg = config.core.shell.nushell;
+in
 {
   programs.direnv = {
     enable = true;
@@ -32,6 +39,7 @@
 
   programs.nushell = {
     enable = true;
+    shellAliases = cfg.shellAliases;
     extraConfig = ''
       $env.config.buffer_editor = "nvim"
       $env.config.show_banner = false

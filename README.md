@@ -132,6 +132,7 @@ public schema を持ちます。まずは次の軸から始めています。
 - `core.apps.ghostty.*`
 <!-- - `core.apps.wezterm.*` -->
 - `core.apps.karabiner.*`
+- `core.shell.nushell.*`
 - `core.brew.*`
 
 取り込み側では、この設定木を `coreConfig` として 1 つ渡す想定です。
@@ -176,6 +177,11 @@ let
         replace = "you@example.com";
       }
     ];
+
+    shell.nushell.shellAliases = {
+      k = "kubectl";
+      gswm = "git switch main";
+    };
 
     brew.extraBrews = [ "mole" ];
   };
@@ -232,12 +238,18 @@ Home Manager や nix-darwin の module 側では、この `coreConfig` をもと
       }
     ];
 
+    shell.nushell.shellAliases = {
+      k = "kubectl";
+      gswm = "git switch main";
+    };
+
     brew.extraBrews = [ "mole" ];
   };
 }
 ```
 
 `core.brew.resolved` には、core 側の標準リストと `extra*` をマージした結果が入ります。
+`core.shell.nushell.shellAliases` は `programs.nushell.shellAliases` にそのまま流れます。
 `core.system.desktop = false` のときは `core.brew.enable` も既定で `false` になり、
 `core.brew.resolved` は空になります。
 Darwin 側ではこの値を `homebrew.*` に流し込む使い方を想定しています。
