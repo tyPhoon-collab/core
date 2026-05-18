@@ -105,6 +105,48 @@
         action = "<cmd>qa!<CR>";
         options.desc = "Force Quit All";
       }
+      {
+        mode = "n";
+        key = "U";
+        action = "<C-r>";
+        options.desc = "Redo";
+      }
+      {
+        mode = "n";
+        key = "n";
+        action.__raw = ''
+          function()
+            vim.cmd.normal({ "n", bang = true })
+            vim.cmd.normal({ "zz", bang = true })
+            vim.cmd.normal({ "zv", bang = true })
+          end
+        '';
+        options.desc = "Next Search Result";
+      }
+      {
+        mode = "n";
+        key = "N";
+        action.__raw = ''
+          function()
+            vim.cmd.normal({ "N", bang = true })
+            vim.cmd.normal({ "zz", bang = true })
+            vim.cmd.normal({ "zv", bang = true })
+          end
+        '';
+        options.desc = "Prev Search Result";
+      }
+      {
+        mode = "n";
+        key = "J";
+        action = "mzJ`z";
+        options.desc = "Join Lines";
+      }
+      {
+        mode = "n";
+        key = "Q";
+        action = "<nop>";
+        options.desc = "Disable Ex Mode";
+      }
 
       # Snacks Picker
       {
