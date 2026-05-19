@@ -158,7 +158,7 @@
       {
         mode = "n";
         key = "<leader>ff";
-        action.__raw = "function() Snacks.picker.files({ hidden = true, ignored = true }) end";
+        action.__raw = "function() Snacks.picker.files() end";
         options.desc = "Find Files";
       }
       {
@@ -169,7 +169,7 @@
       }
       {
         mode = "n";
-        key = "<leader>fb";
+        key = "<leader>,";
         action.__raw = "function() Snacks.picker.buffers() end";
         options.desc = "Buffers";
       }
