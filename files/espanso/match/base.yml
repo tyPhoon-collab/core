@@ -99,6 +99,16 @@ matches:
   - trigger: ";gcts"
     replace: 'git commit -m "test: $|$"'
 
+  # AI
+  - trigger: ";aib"
+    replace: "壁打ちしてください。"
+  - trigger: ";ais"
+    replace: "簡潔に回答してください。"
+  - trigger: ";aik"
+    replace: "改善案を示してください。"
+  - trigger: ";air"
+    replace: "調査してください。"
+
   # Neovim
   - trigger: ";vy"
     replace: "%y+\n"
