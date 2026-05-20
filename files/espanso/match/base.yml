@@ -31,6 +31,17 @@ matches:
   - trigger: ";end"
     replace: "23:59"
 
+  # Obsidian
+  - trigger: ";ot"
+    replace: "➕ {{today}} 🛫 {{today}}"
+    vars:
+      - name: "today"
+        type: "date"
+        params:
+          format: "%Y-%m-%d"
+  - trigger: ";["
+    replace: "[[$|$]]"
+
   # 絵文字
   - trigger: ";gd"
     replace: "👍️"
