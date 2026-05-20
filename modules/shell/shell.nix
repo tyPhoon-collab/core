@@ -5,6 +5,13 @@
 }:
 let
   cfg = config.core.shell.nushell;
+  defaultAliases = {
+    j = "just";
+    m = "mise";
+    nhd = "nh darwin switch .";
+    nhh = "nh home switch .";
+    nho = "nh os switch .";
+  };
 in
 {
   programs.direnv = {
@@ -39,13 +46,12 @@ in
 
   programs.nushell = {
     enable = true;
-    shellAliases = cfg.shellAliases;
+    shellAliases = defaultAliases // cfg.shellAliases;
     extraConfig = ''
       $env.config.buffer_editor = "nvim"
       $env.config.show_banner = false
 
-      source ~/.config/nushell/aliases/git-aliases.nu
-      source ~/.config/nushell/aliases/original-aliases.nu
+      source ${pkgs.nu_scripts}/share/nu_scripts/aliases/git/git-aliases.nu
 
       # zellij auto-start was convenient, but too aggressive as a shared default.
       # Re-enable if you want terminal-specific opt-in again.

@@ -135,7 +135,7 @@ in
         k = "kubectl";
         gswm = "git switch main";
       };
-      description = "Additional Nushell aliases passed through to programs.nushell.shellAliases.";
+      description = "Additional or overriding Nushell aliases merged on top of the core defaults before being passed to programs.nushell.shellAliases.";
     };
 
     brew = {

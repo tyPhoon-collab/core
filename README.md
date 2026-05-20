@@ -249,7 +249,10 @@ Home Manager や nix-darwin の module 側では、この `coreConfig` をもと
 ```
 
 `core.brew.resolved` には、core 側の標準リストと `extra*` をマージした結果が入ります。
-`core.shell.nushell.shellAliases` は `programs.nushell.shellAliases` にそのまま流れます。
+`core.shell.nushell.shellAliases` は consumer 側の追加・上書き用です。
+core 側の既定 alias に対して `defaultAliases // core.shell.nushell.shellAliases`
+の形でマージしてから `programs.nushell.shellAliases` に流れます。
+そのため consumer 側は alias を追加でき、同名キーで core 側の既定 alias を上書きできます。
 `core.system.desktop = false` のときは `core.brew.enable` も既定で `false` になり、
 `core.brew.resolved` は空になります。
 Darwin 側ではこの値を `homebrew.*` に流し込む使い方を想定しています。

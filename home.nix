@@ -20,15 +20,12 @@
     ./modules/platform/entrypoint.nix
   ];
 
-  home.file.".config/nushell/aliases/git-aliases.nu".source = ./files/nushell/git-aliases.nu;
-  home.file.".config/nushell/aliases/original-aliases.nu".source =
-    ./files/nushell/original-aliases.nu;
-
   home.packages =
     with pkgs;
     [
       home-manager
       nix-output-monitor
+      nu_scripts
       nvd
       gdu
       procs
