@@ -1,16 +1,29 @@
 # core
 
-個人用端末群の環境構築に使う、再利用用の core 設定です。
+Determine Systems を使うマシン向けの、再利用前提の共通設定です。
 
-このリポジトリは flake ではなく、親の flake から `flake = false` の source input として読み込む前提です。依存関係の固定や `flake.lock` の管理は親リポジトリ側で行います。
+このリポジトリは flake ではありません。consumer 側の flake から `flake = false` の source input として読み込み、依存関係の固定と `flake.lock` の管理は consumer 側で行います。
 
-## クイックスタート
+## 何が入っているか
 
-1. 親 flake の `inputs` に `core` を追加
+- `home.nix`: Home Manager 向けの entrypoint
+- `modules/`: `core.*` option と各種 module
+- `files/`: 配布する静的設定ファイル
+- `lib/home-manager.nix`: Home Manager 統合時の共通既定値
+
+扱うのは複数環境で再利用しやすい設定だけです。秘密情報やホスト固有の値は持ちません。
+
+## 使い方
+
+### AIエージェント向け
+
+`llms.md` を参照すること
+
+### 人間向け
+
+1. 親 flake の `inputs` に `core` を追加する
 2. `extraSpecialArgs` と必要なら `specialArgs` で `coreConfig` を渡す
-3. Home Manager モジュールに `(core + /home.nix)` を import
-
-入力例:
+3. Home Manager module に `(core + /home.nix)` を import する
 
 ```nix
 {
@@ -21,16 +34,14 @@
 }
 ```
 
-引数の受け渡し例:
-
 ```nix
 extraSpecialArgs = {
   inherit username homeDirectory core;
   coreConfig = {
     system = {
       desktop = true;
-      extended = true;
       fonts = true;
+      extended = true;
       devLevel = 2;
     };
   };
@@ -38,8 +49,6 @@ extraSpecialArgs = {
   yaziPlugins = inputs.yazi-plugins;
 };
 ```
-
-import 例:
 
 ```nix
 {
@@ -53,370 +62,45 @@ import 例:
 }
 ```
 
-## このリポジトリが持つもの
+`home.nix` が前提にしている主な引数は `username`、`homeDirectory`、`coreConfig`、`nixvim`、`yaziPlugins` です。
 
-- `home.nix`: core エントリーポイント
-- `modules/`: Home Manager / platform 向けモジュール
-- `lib/`: 取り込み側で使う helper
-- `files/`: 各種設定ファイル
-- `docs/`: 取り込み側での上書きガイド
+## 設定の考え方
 
-扱うのは、複数環境で使い回せる環境構築のコアだけです。秘密情報やホスト固有の値は含めません。
+consumer 側からは `coreConfig` を渡します。core 内部ではこれをもとに `config.core` が正規化され、各 module は `config.core` を参照します。
 
-## ディレクトリ構成
-
-```text
-.
-├── home.nix
-├── lib/
-│   └── home-manager.nix
-├── files/
-│   ├── aerospace/
-│   ├── espanso/
-│   ├── karabiner/
-│   ├── nushell/
-│   └── wezterm/
-├── modules/
-│   ├── platform/
-│   ├── programs/
-│   ├── shell/
-│   └── system/
-└── docs/
-    └── overrides/
-```
-
-## 必要な引数
-
-`home.nix` は少なくとも次を受け取ります。
-
-- `username`
-- `homeDirectory`
-- `coreConfig`
-- `nixvim`
-- `yaziPlugins`
-
-加えて、Home Manager が通常渡す `pkgs` や `lib` を利用します。
-
-## Home Manager のシステム統合
-
-NixOS / nix-darwin に Home Manager を組み込む場合は、共通の既定値として
-`lib/home-manager.nix` の `default` を利用できます。
-
-```nix
-let
-  coreHomeManager = import (core + /lib/home-manager.nix);
-in
-{
-  home-manager = coreHomeManager.default // {
-    users.${username} = import ./home.nix;
-    extraSpecialArgs = {
-      inherit username homeDirectory core coreConfig;
-      nixvim = inputs.nixvim;
-      yaziPlugins = inputs.yazi-plugins;
-    };
-  };
-}
-```
-
-取り込み側で同じ属性を書いた場合は、取り込み側の値が優先されます。
-
-## Core Config Tree
-
-`core` は、取り込み側からひとつの設定木を流し込めるように、`core.*` の
-public schema を持ちます。まずは次の軸から始めています。
-
-- `core.system.*`
-- `core.identity.*`
-- `core.apps.aerospace.*`
-- `core.apps.espanso.*`
-- `core.apps.ghostty.*`
-<!-- - `core.apps.wezterm.*` -->
-- `core.apps.karabiner.*`
-- `core.shell.nushell.*`
-- `core.brew.*`
-
-取り込み側では、この設定木を `coreConfig` として 1 つ渡す想定です。
-
-```nix
-let
-  coreConfig = {
-    system = {
-      desktop = true;
-      fonts = true;
-      extended = true;
-      devLevel = 2;
-      openFiles = {
-        soft = 65536;
-        hard = 200000;
-      };
-    };
-
-    identity = {
-      name = "Your Name";
-      email = "you@example.com";
-    };
-
-    apps.aerospace = {
-      workspaces.S = {
-        monitor = "secondary";
-        appIds = [
-          "com.tinyspeck.slackmacgap"
-        ];
-      };
-      workspaces.B.appIds = [
-        "company.thebrowser.dia"
-      ];
-      floatingAppIds = [
-        "com.apple.Preview"
-      ];
-    };
-
-    apps.espanso.extraMatches = [
-      {
-        trigger = ";mail";
-        replace = "you@example.com";
-      }
-    ];
-
-    shell.nushell.shellAliases = {
-      k = "kubectl";
-      gswm = "git switch main";
-    };
-
-    brew.extraBrews = [ "mole" ];
-  };
-in
-{
-  specialArgs = {
-    inherit coreConfig;
-  };
-
-  home-manager.extraSpecialArgs = {
-    inherit coreConfig;
-  };
-}
-```
-
-Home Manager や nix-darwin の module 側では、この `coreConfig` をもとに
-`core.*` option の既定値が決まります。必要なら module 側で
-`core.apps.aerospace.enable = false;` のようにさらに上書きできます。
-
-```nix
-{
-  core = {
-    system = {
-      desktop = true;
-      fonts = true;
-      extended = true;
-      devLevel = 2;
-    };
-
-    identity = {
-      name = "Your Name";
-      email = "you@example.com";
-    };
-
-    apps.aerospace = {
-      workspaces.S = {
-        monitor = "secondary";
-        appIds = [
-          "com.tinyspeck.slackmacgap"
-        ];
-      };
-      workspaces.B.appIds = [
-        "company.thebrowser.dia"
-      ];
-      floatingAppIds = [
-        "com.apple.Preview"
-      ];
-    };
-
-    apps.espanso.extraMatches = [
-      {
-        trigger = ";mail";
-        replace = "you@example.com";
-      }
-    ];
-
-    shell.nushell.shellAliases = {
-      k = "kubectl";
-      gswm = "git switch main";
-    };
-
-    brew.extraBrews = [ "mole" ];
-  };
-}
-```
-
-`core.brew.resolved` には、core 側の標準リストと `extra*` をマージした結果が入ります。
-`core.shell.nushell.shellAliases` は consumer 側の追加・上書き用です。
-core 側の既定 alias に対して `defaultAliases // core.shell.nushell.shellAliases`
-の形でマージしてから `programs.nushell.shellAliases` に流れます。
-そのため consumer 側は alias を追加でき、同名キーで core 側の既定 alias を上書きできます。
-`core.system.desktop = false` のときは `core.brew.enable` も既定で `false` になり、
-`core.brew.resolved` は空になります。
-Darwin 側ではこの値を `homebrew.*` に流し込む使い方を想定しています。
-
-`coreConfig` は外から渡す生の入力です。module 評価後の正規化済み状態は
-`config.core` に集約されます。通常、consumer 側が触るのは `coreConfig`、
-core 内部 module が参照するのは `config.core` です。
-
-## 役割の境界
-
-| core 側に置く                          | 親リポジトリ側に置く             |
-| -------------------------------------- | -------------------------------- |
-| 再利用できる shell / editor / CLI 設定 | ユーザー名やホスト固有の識別情報 |
-| 公開して問題ない静的ファイル           | マシンごとに変わるポリシー       |
-| 汎用的な macOS / Linux 向け設定        | 秘密情報                         |
-
-## 設定の上書き
-
-取り込み側で差分を重ねるためのガイドをモジュール別に分離しています。
-
-- [AeroSpace の上書き](docs/overrides/aerospace.md)
-- [Git の上書き](docs/overrides/git.md)
-- [Jujutsu の上書き](docs/overrides/jujutsu.md)
-
-共通ルール:
-
-- core 側は再利用できる既定値のみを持つ
-- 個人識別情報（ユーザー名やメールアドレス）は `coreConfig.identity` など取り込み側で設定する
-- ホスト固有・環境固有のポリシーは取り込み側で設定する
-
-`git` と `jujutsu` の個人識別情報は、通常は `coreConfig.identity` でまとめて渡します。
-
-```nix
-{
-  coreConfig.identity = {
-    name = "Your Name";
-    email = "you@example.com";
-  };
-}
-```
-
-## 補足
-
-`modules/system/darwin-defaults.nix` は、必要なら親リポジトリ側で直接 import して使えます。
-`modules/system/darwin-limits.nix` は、import された場合に macOS の
-`launchctl limit maxfiles` を activation 時と boot 時の LaunchDaemon で適用します。
-これは既存プロセスではなく、設定後に新しく起動されるプロセスの open files limit の既定値を
-上げるためのものです。値は `core.system.openFiles.soft` と `core.system.openFiles.hard` で
-上書きできます。
-
-Darwin 向けの標準 Homebrew リストは `modules/core.nix` の既定値として持ち、
-親リポジトリ側では `config.core.brew.resolved` を `homebrew.*` に流し込む想定です。
-この連携は desktop 環境向けです。headless/server 構成では core の Homebrew 設定を
-取り込まず、親リポジトリ側で nix-darwin 標準の `homebrew` 記法を使って
-ホスト固有の CLI パッケージを直接追加してください。
+- 再利用できる既定値は core 側に置く
+- 個人識別情報は `coreConfig.identity` など consumer 側に置く
+- ホスト固有のポリシーは consumer 側に置く
 
 例:
 
 ```nix
 {
-  username,
-  homeDirectory,
-  inputs,
-  coreConfig,
-  config,
-  ...
-}:
-{
-  imports = [
-    (inputs.core + /modules/core.nix)
-    (inputs.core + /modules/system/darwin-defaults.nix)
-    (inputs.core + /modules/system/darwin-limits.nix)
-  ];
+  coreConfig = {
+    identity = {
+      name = "Your Name";
+      email = "you@example.com";
+    };
 
-  system.primaryUser = username;
+    apps.aerospace.workspaces.S = {
+      monitor = "secondary";
+      appIds = [ "com.tinyspeck.slackmacgap" ];
+    };
 
-  homebrew = {
-    enable = true;
-    taps = config.core.brew.resolved.taps;
-    brews = config.core.brew.resolved.brews;
-    casks = config.core.brew.resolved.casks;
-    masApps = config.core.brew.resolved.masApps;
-  };
+    apps.espanso.extraMatches = [
+      {
+        trigger = ";mail";
+        replace = "you@example.com";
+      }
+    ];
 
-  users.users.${username} = {
-    name = username;
-    home = homeDirectory;
+    shell.nushell.shellAliases.k = "kubectl";
+    brew.extraBrews = [ "mole" ];
   };
 }
 ```
 
-`darwin-defaults.nix` を取り込んで `system.defaults` を適用する場合、`darwin-rebuild` を実行するターミナルや Nix 関連プロセスに Full Disk Access が必要になることがあります。
+## Darwin 統合
 
-## Standalone Home Manager の最小例
+consumer 側で `modules/core.nix` を import すると、`config.core.brew.resolved` を `homebrew.*` に流せます。`modules/system/darwin-defaults.nix` と `modules/system/darwin-limits.nix` は必要な場合だけ追加 import します。
 
-親 flake から `core` を読み込んで、standalone Home Manager に組み込む最小構成です。
-
-```nix
-{
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    core = {
-      url = "path:/path/to/core";
-      flake = false;
-    };
-    nixvim.url = "github:nix-community/nixvim";
-    yazi-plugins = {
-      url = "github:yazi-rs/plugins";
-      flake = false;
-    };
-  };
-
-  outputs = inputs@{ nixpkgs, home-manager, core, ... }:
-    let
-      system = "x86_64-linux";
-      username = "user";
-      homeDirectory = "/home/user";
-      pkgs = import nixpkgs { inherit system; };
-      coreConfig.system.devLevel = 2;
-    in
-    {
-      homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = {
-          inherit username homeDirectory core coreConfig;
-          nixvim = inputs.nixvim;
-          yaziPlugins = inputs.yazi-plugins;
-        };
-        modules = [
-          ({ core, ... }: {
-            imports = [ (core + /home.nix) ];
-          })
-        ];
-      };
-    };
-}
-```
-
-## NixOS / nix-darwin 統合の最小例
-
-NixOS / nix-darwin の module として Home Manager を組み込む場合は、
-`lib/home-manager.nix` の `default` を `home-manager` 設定に重ねます。
-
-```nix
-let
-  coreHomeManager = import (core + /lib/home-manager.nix);
-in
-{
-  modules = [
-    home-manager.nixosModules.home-manager
-    {
-      home-manager = coreHomeManager.default // {
-        users.${username} = import ./home.nix;
-        extraSpecialArgs = {
-          inherit username homeDirectory core coreConfig;
-          nixvim = inputs.nixvim;
-          yaziPlugins = inputs.yazi-plugins;
-        };
-      };
-    }
-  ];
-}
-```
