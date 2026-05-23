@@ -399,6 +399,10 @@
             enable = config.core.system.devLevel >= 2;
           }))
           // {
+            jdtls = {
+              enable = config.core.system.devLevel >= 2;
+              packageFallback = true;
+            };
             dartls = {
               enable = config.core.system.devLevel >= 2;
               package = null;

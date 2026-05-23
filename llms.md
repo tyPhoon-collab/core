@@ -74,6 +74,7 @@ Notes:
 - `programs.nushell.enable = true`
 - Aliases are merged as `defaultAliases // cfg.shellAliases`
 - Enables `direnv`, `zoxide`, `starship`, `carapace`, `mise`, and `zellij`
+- Project-local toolchains such as Java and Maven are expected to come from `mise`, not from fixed Home Manager packages
 
 ### Git
 
@@ -180,6 +181,14 @@ Consumer override example:
 - `core.apps.ghostty.enable` controls installation of the Ghostty config file
 - `core.apps.karabiner.enable` controls installation of the Karabiner config file
 - There are currently no additional public options for either module
+
+### Nixvim
+
+- `programs.nixvim.enable = true`
+- LSP is enabled when `core.system.devLevel >= 1`
+- `jdtls` is enabled when `core.system.devLevel >= 2`
+- `jdtls` is supplied from Nixvim/Home Manager, but `packageFallback = true` is set so a project/devshell-provided `jdtls` on `PATH` can override it
+- Java and Maven are intentionally not pinned here; `jdtls` is expected to inherit `java`, `JAVA_HOME`, and `mvn` from the environment created by `mise`/`direnv`
 
 ### Homebrew
 
