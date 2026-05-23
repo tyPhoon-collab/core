@@ -115,10 +115,12 @@ matches:
     replace: "壁打ちしてください。"
   - trigger: ";ais"
     replace: "簡潔に回答してください。"
-  - trigger: ";aik"
+  - trigger: ";aii"
     replace: "改善案を示してください。"
   - trigger: ";air"
     replace: "調査してください。"
+  - trigger: ";aine"
+    replace: "編集は不要です。"
 
   # Neovim
   - trigger: ";vy"
