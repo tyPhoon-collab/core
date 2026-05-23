@@ -1,29 +1,40 @@
 # core implementation notes
 
-This file is the implementation-oriented reference for humans and AI agents working with this repository. `README.md` is intentionally short and human-facing; this file is the detailed source of truth.
+このファイルは、人間と AI エージェント向けの実装リファレンスです。`README.md` は入口と公開契約、`llms.md` は実装に寄った詳細と運用ルールを扱います。最終的な source of truth はコードです。
+
+## ドキュメント方針
+
+- `README.md` には「何のための repo か」「どう統合するか」「何を公開面とみなすか」を書く
+- `llms.md` には「現在の構成」「公開 option の実態」「実装上の注意」「consumer との整合条件」を書く
+- コードを読めば分かる静的設定の全文や細かい値は、必要がない限りドキュメントに複製しない
+- 実装が変わったら、`README.md` と `llms.md` の両方を、役割分担に沿って更新する
+- 「書いてあること」と「書いていないこと」の境界は意図的に管理する。公開契約でない内部詳細は、無理に README に出さない
 
 ## Repository shape
 
 - `home.nix`
-  Home Manager entrypoint. Imports `modules/core.nix` plus shell, program, and platform modules.
+  Home Manager entrypoint。`modules/core.nix`、shell/program/platform modules を import する
 - `modules/core.nix`
-  Defines the `core.*` options and resolves `core.brew.resolved`.
+  `core.*` option を定義し、`coreConfig` から `config.core` を組み立てる
 - `modules/programs/*`
-  Program modules for Git, Jujutsu, AeroSpace, Espanso, Ghostty, Karabiner, Yazi, Nixvim, and related tooling.
+  Git、Jujutsu、AeroSpace、Espanso、Ghostty、Karabiner、Yazi、Nixvim などの module
 - `modules/platform/*`
-  Platform-specific branching for Darwin, Linux, and WSL.
+  Darwin、Linux、WSL 向けの分岐
 - `modules/system/darwin-defaults.nix`
-  nix-darwin `system.defaults` plus `programs.zsh.enable`.
+  nix-darwin の `system.defaults` と `programs.zsh.enable`
 - `modules/system/darwin-limits.nix`
-  Applies `launchctl limit maxfiles` from `core.system.openFiles.*`.
+  `core.system.openFiles.*` を `launchctl limit maxfiles` に反映
 - `lib/home-manager.nix`
-  Shared defaults for Home Manager integration.
+  Home Manager 統合時の共通既定値
 
-At the moment, `modules/programs/wezterm.nix` and `files/wezterm/` still exist in the tree, but `home.nix` does not import them. Treat WezTerm as inactive, not as part of the supported public surface.
+補足:
+
+- `modules/programs/wezterm.nix` と `files/wezterm/` は tree に残っているが、`home.nix` から import されていない
+- したがって WezTerm は現時点では inactive であり、公開面には含めない
 
 ## Runtime contract
 
-`home.nix` expects at least these arguments:
+`home.nix` が前提にしている引数:
 
 - `username`
 - `homeDirectory`
@@ -31,11 +42,14 @@ At the moment, `modules/programs/wezterm.nix` and `files/wezterm/` still exist i
 - `yaziPlugins`
 - `coreConfig`
 
-`coreConfig` is the raw input passed by the consumer. After module evaluation, normalized state is exposed through `config.core`. Consumers generally write `coreConfig`; modules inside this repo should read `config.core`.
+`coreConfig` は consumer が渡す生の入力です。module 評価後、内部では正規化済みの `config.core` を参照します。
 
-## Public config surface
+- consumer は基本的に `coreConfig` を書く
+- この repo 内の module は `config.core` を読む
 
-The actual public surface currently consumed by `modules/core.nix` and the program modules is:
+## 公開 config surface
+
+現状、公開面として追跡すべき `core.*` は次の通りです。
 
 - `core.identity.name`
 - `core.identity.email`
@@ -61,32 +75,30 @@ The actual public surface currently consumed by `modules/core.nix` and the progr
 - `core.brew.extraMasApps`
 - `core.brew.resolved`
 
-Notes:
+補足:
 
-- `core.apps.ghostty` and `core.apps.karabiner` currently expose only `enable`.
-- `core.shell.nushell` currently exposes only `shellAliases`.
-- `core.brew.resolved` is read-only and contains the merged result of the built-in base lists plus consumer `extra*` values.
+- `core.apps.ghostty` と `core.apps.karabiner` は今のところ `enable` のみを公開する
+- `core.shell.nushell` は今のところ `shellAliases` のみを公開する
+- `core.brew.resolved` は read-only の派生値で、consumer が直接設定するものではない
 
-## Behavior notes by subsystem
+## 振る舞いの要点
 
 ### Shell and base tools
 
 - `programs.nushell.enable = true`
-- Aliases are merged as `defaultAliases // cfg.shellAliases`
-- Enables `direnv`, `zoxide`, `starship`, `carapace`, `mise`, and `zellij`
-- Project-local toolchains such as Java and Maven are expected to come from `mise`, not from fixed Home Manager packages
+- alias は `defaultAliases // cfg.shellAliases` でマージされる
+- `direnv`、`zoxide`、`starship`、`carapace`、`mise`、`zellij` を有効化する
+- Java や Maven のような project-local toolchain は固定 package ではなく `mise` 前提
 
 ### Git
 
 - `programs.git.enable = true`
 - `programs.git.lfs.enable = true`
-- Default settings are `init.defaultBranch = "main"`, `pull.rebase = true`, and `push.autoSetupRemote = true`
-- If `config.core.identity.*` is set, those values flow into `programs.git.settings.user.*`
+- 既定値は `init.defaultBranch = "main"`、`pull.rebase = true`、`push.autoSetupRemote = true`
+- `config.core.identity.*` があれば `programs.git.settings.user.*` に流す
 - `programs.lazygit.enable = true`
 - `programs.gh.enable = true`
-- Nixvim also defines Git keymaps here: `<leader>gg` for Lazygit, `<leader>gs` for `Snacks.picker.git_status()`, and `<leader>gd` for `Snacks.picker.git_diff()`
-- The Git pickers support `<Tab>` for stage/unstage and `<C-r>` for restore/discard
-- Recommended `gitsigns` hunk mappings are enabled: `]c`/`[c`, `<leader>hs`, `<leader>hr`, `<leader>hp`, and `<leader>hi`
+- Nixvim 側で Git keymap も追加する
 
 Consumer override example:
 
@@ -104,10 +116,10 @@ Consumer override example:
 ### Jujutsu
 
 - `programs.jujutsu.enable = true`
-- Defines aliases `f` and `p`
-- Sets `ui.default-command = "log"`
-- Sets `revset-aliases."immutable_heads()" = "builtin_immutable_heads() | present(main) | present(main@origin)"`
-- If `config.core.identity.*` is set, those values flow into `programs.jujutsu.settings.user.*`
+- alias `f` と `p` を定義する
+- `ui.default-command = "log"`
+- `revset-aliases."immutable_heads()" = "builtin_immutable_heads() | present(main) | present(main@origin)"`
+- `config.core.identity.*` があれば `programs.jujutsu.settings.user.*` に流す
 
 Consumer override example:
 
@@ -127,12 +139,12 @@ Consumer override example:
 
 ### AeroSpace
 
-- If `core.apps.aerospace.enable` is true, core generates `xdg.configFile."aerospace/aerospace.toml"`
-- The base file is `files/aerospace/aerospace.toml`
-- `core.apps.aerospace.workspaces.<name>` defines generated workspaces
-- Each workspace supports `enable`, `monitor`, and `appIds`
-- Enabled workspaces feed persistent workspaces, `alt-<key>`, `alt-shift-<key>`, monitor assignment, and `on-window-detected` rules
-- `core.apps.aerospace.floatingAppIds` appends floating window rules
+- `core.apps.aerospace.enable` が true のとき `xdg.configFile."aerospace/aerospace.toml"` を生成する
+- ベースファイルは `files/aerospace/aerospace.toml`
+- `core.apps.aerospace.workspaces.<name>` で workspace を定義する
+- workspace ごとに `enable`、`monitor`、`appIds` を持つ
+- 有効な workspace は persistent workspace、`alt-<key>`、`alt-shift-<key>`、monitor assignment、`on-window-detected` に反映される
+- `core.apps.aerospace.floatingAppIds` は floating window rule を追加する
 
 Consumer override example:
 
@@ -155,16 +167,16 @@ Consumer override example:
 
 Additional notes:
 
-- `workspaces.<name>` defaults to `enable = true`
-- `S` is present in `workspaceOrder` but is not part of the built-in default workspace set
-- `appIds` become rules only for enabled workspaces
+- `workspaces.<name>` の `enable` は既定で `true`
+- `S` は `workspaceOrder` に含まれるが、built-in default workspace set には含まれない
+- `appIds` は有効化された workspace に対してだけ rule になる
 
 ### Espanso
 
-- If `core.apps.espanso.enable` is true, core installs Espanso config files
-- On Darwin, this is only `xdg.configFile`
-- On Linux, this also enables `services.espanso`
-- If `core.apps.espanso.extraMatches` is non-empty, core generates an additional YAML file
+- `core.apps.espanso.enable` が true のとき Espanso 設定を配布する
+- Darwin では `xdg.configFile` のみ
+- Linux では `xdg.configFile` に加えて `services.espanso` も有効化する
+- `core.apps.espanso.extraMatches` が非空なら追加の generated YAML を出力する
 
 Consumer override example:
 
@@ -181,29 +193,39 @@ Consumer override example:
 
 ### Ghostty and Karabiner
 
-- `core.apps.ghostty.enable` controls installation of the Ghostty config file
-- `core.apps.karabiner.enable` controls installation of the Karabiner config file
-- There are currently no additional public options for either module
+- `core.apps.ghostty.enable` は Ghostty config の配布を制御する
+- `core.apps.karabiner.enable` は Karabiner config の配布を制御する
+- 追加の公開 option はまだ持たない
 
 ### Nixvim
 
 - `programs.nixvim.enable = true`
-- LSP is enabled when `core.system.devLevel >= 1`
-- `jdtls` is enabled when `core.system.devLevel >= 2`
-- `jdtls` is supplied from Nixvim/Home Manager, but `packageFallback = true` is set so a project/devshell-provided `jdtls` on `PATH` can override it
-- Java and Maven are intentionally not pinned here; `jdtls` is expected to inherit `java`, `JAVA_HOME`, and `mvn` from the environment created by `mise`/`direnv`
-- `gitsigns` is enabled and the default Git workflow is split between `Snacks` pickers for list-based operations and `gitsigns` hunk mappings for in-buffer operations
+- LSP は `core.system.devLevel >= 1` で有効
+- `jdtls` は `core.system.devLevel >= 2` で有効
+- `jdtls` 自体は Nixvim/Home Manager から供給するが、`packageFallback = true` なので project/devshell 由来の `jdtls` が `PATH` にあればそちらを使える
+- Java と Maven はここで固定しない。`mise`/`direnv` が用意する環境を前提にする
+
+### Yazi
+
+- `programs.yazi.enable = true`
+- Nushell integration と `shellWrapperName = "y"` を有効化する
+- `smart-enter` plugin を `yaziPlugins` から読む
+- `fzf`、`ripgrep`、`fd`、`bat`、`jq` を一緒に有効化する
+- `core.system.extended` が true のとき preview 向け package を追加する
 
 ### Homebrew
 
-`modules/core.nix` defines a built-in Darwin desktop Homebrew base list and resolves these values into `core.brew.resolved`:
+`modules/core.nix` は Darwin desktop 向けの built-in base list を持ち、次を `core.brew.resolved` に解決します。
 
 - `taps`
 - `brews`
 - `casks`
 - `masApps`
 
-When `core.system.desktop = false`, the default for `core.brew.enable` also becomes `false`, and `core.brew.resolved` becomes empty.
+補足:
+
+- `core.system.desktop = false` のとき、`core.brew.enable` の既定値も `false` になる
+- その場合 `core.brew.resolved` は空になる
 
 Consumer integration example:
 
@@ -301,10 +323,17 @@ in
 
 ## Consumer alignment
 
-The main consumer at `/Users/hiroaki/.config/dotfiles` currently:
+主要 consumer である `/Users/hiroaki/.config/dotfiles` では、現在:
 
-- Imports `modules/core.nix`, `modules/system/darwin-defaults.nix`, and `modules/system/darwin-limits.nix` from `hosts/darwin/default.nix`
-- Maps `config.core.brew.resolved` into `homebrew.*`
-- Constructs `coreConfig` in `flake.nix` and passes it through `extraSpecialArgs`
+- `hosts/darwin/default.nix` から `modules/core.nix`、`modules/system/darwin-defaults.nix`、`modules/system/darwin-limits.nix` を import している
+- `config.core.brew.resolved` を `homebrew.*` に流している
+- `flake.nix` で `coreConfig` を構築し、`extraSpecialArgs` で渡している
 
-Keep the docs aligned with that model: this repository is a reusable source input, not a standalone flake.
+この repo の docs はこの利用モデルと整合している必要があります。つまり、この repo は standalone flake ではなく、consumer から読み込まれる reusable source input として説明するのが前提です。
+
+## 変更時のチェックポイント
+
+- 公開面を変えたか。変えたなら `README.md` の説明と `llms.md` の option 一覧を両方更新する
+- 実装詳細だけを変えたか。変えたなら `llms.md` の該当 section だけ更新する
+- inactive なものを active に戻したか、逆に外したか。公開面の説明を更新する
+- consumer 側の統合前提が変わったか。integration example と consumer alignment を更新する
