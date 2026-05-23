@@ -84,6 +84,9 @@ Notes:
 - If `config.core.identity.*` is set, those values flow into `programs.git.settings.user.*`
 - `programs.lazygit.enable = true`
 - `programs.gh.enable = true`
+- Nixvim also defines Git keymaps here: `<leader>gg` for Lazygit, `<leader>gs` for `Snacks.picker.git_status()`, and `<leader>gd` for `Snacks.picker.git_diff()`
+- The Git pickers support `<Tab>` for stage/unstage and `<C-r>` for restore/discard
+- Recommended `gitsigns` hunk mappings are enabled: `]c`/`[c`, `<leader>hs`, `<leader>hr`, `<leader>hp`, and `<leader>hi`
 
 Consumer override example:
 
@@ -189,6 +192,7 @@ Consumer override example:
 - `jdtls` is enabled when `core.system.devLevel >= 2`
 - `jdtls` is supplied from Nixvim/Home Manager, but `packageFallback = true` is set so a project/devshell-provided `jdtls` on `PATH` can override it
 - Java and Maven are intentionally not pinned here; `jdtls` is expected to inherit `java`, `JAVA_HOME`, and `mvn` from the environment created by `mise`/`direnv`
+- `gitsigns` is enabled and the default Git workflow is split between `Snacks` pickers for list-based operations and `gitsigns` hunk mappings for in-buffer operations
 
 ### Homebrew
 

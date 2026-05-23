@@ -103,4 +103,3 @@ consumer 側からは `coreConfig` を渡します。core 内部ではこれを�
 ## Darwin 統合
 
 consumer 側で `modules/core.nix` を import すると、`config.core.brew.resolved` を `homebrew.*` に流せます。`modules/system/darwin-defaults.nix` と `modules/system/darwin-limits.nix` は必要な場合だけ追加 import します。
-
