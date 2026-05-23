@@ -17,7 +17,7 @@
 - `modules/core.nix`
   `core.*` option を定義し、`coreConfig` から `config.core` を組み立てる
 - `modules/programs/*`
-  Git、Jujutsu、AeroSpace、Espanso、Ghostty、Karabiner、Yazi、Nixvim などの module
+  Git、Jujutsu、AeroSpace、Espanso、Ghostty、Karabiner、Yazi、Zellij、Nixvim などの module
 - `modules/platform/*`
   Darwin、Linux、WSL 向けの分岐
 - `modules/system/darwin-defaults.nix`
@@ -78,6 +78,7 @@
 補足:
 
 - `core.apps.ghostty` と `core.apps.karabiner` は今のところ `enable` のみを公開する
+- Zellij は設定ファイルを配布するが、consumer 向けの追加 `core.*` option はまだ持たない
 - `core.shell.nushell` は今のところ `shellAliases` のみを公開する
 - `core.brew.resolved` は read-only の派生値で、consumer が直接設定するものではない
 
@@ -88,6 +89,8 @@
 - `programs.nushell.enable = true`
 - alias は `defaultAliases // cfg.shellAliases` でマージされる
 - `direnv`、`zoxide`、`starship`、`carapace`、`mise`、`zellij` を有効化する
+- `modules/programs/zellij.nix` が `files/zellij/config.kdl` を `xdg.configFile."zellij/config.kdl"` として配布する
+- Zellij の keybind や theme は静的ファイル管理で、Nix option 化された公開 override 面はまだない
 - Java や Maven のような project-local toolchain は固定 package ではなく `mise` 前提
 
 ### Git

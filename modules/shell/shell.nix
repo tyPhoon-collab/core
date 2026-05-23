@@ -42,6 +42,7 @@ in
 
   programs.zellij = {
     enable = true;
+    # The shared config file is distributed from modules/programs/zellij.nix.
   };
 
   programs.nushell = {
