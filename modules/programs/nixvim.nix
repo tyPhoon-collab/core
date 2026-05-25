@@ -147,6 +147,18 @@
         action = "<nop>";
         options.desc = "Disable Ex Mode";
       }
+      {
+        mode = "i";
+        key = "tn";
+        action = "<Esc>";
+        options.desc = "Exit Insert Mode";
+      }
+      {
+        mode = "t";
+        key = "tn";
+        action = "<C-\\><C-n>";
+        options.desc = "Exit Terminal Mode";
+      }
 
       # Snacks Picker
       {

@@ -205,6 +205,7 @@ Consumer override example:
 - `programs.nixvim.enable = true`
 - LSP は `core.system.devLevel >= 1` で有効
 - `jdtls` は `core.system.devLevel >= 2` で有効
+- insert mode では `tn` を `<Esc>`、terminal mode では `tn` を `<C-\><C-n>` に割り当てる
 - `jdtls` 自体は Nixvim/Home Manager から供給するが、`packageFallback = true` なので project/devshell 由来の `jdtls` が `PATH` にあればそちらを使える
 - Java と Maven はここで固定しない。`mise`/`direnv` が用意する環境を前提にする
 
