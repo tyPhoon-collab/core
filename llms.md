@@ -88,7 +88,8 @@
 
 - `programs.nushell.enable = true`
 - alias は `defaultAliases // cfg.shellAliases` でマージされる
-- `direnv`、`zoxide`、`starship`、`carapace`、`mise`、`zellij` を有効化する
+- core 既定 alias は `b`, `j`, `m`, `nhd`, `nhh`, `nho`
+- `direnv`、`zoxide`、`starship`、`carapace`、`mise`、`bat`、`zellij` を有効化する
 - `modules/programs/zellij.nix` が `files/zellij/config.kdl` を `xdg.configFile."zellij/config.kdl"` として配布する
 - Zellij の keybind や theme は静的ファイル管理で、Nix option 化された公開 override 面はまだない
 - Java や Maven のような project-local toolchain は固定 package ではなく `mise` 前提
@@ -214,7 +215,7 @@ Consumer override example:
 - `programs.yazi.enable = true`
 - Nushell integration と `shellWrapperName = "y"` を有効化する
 - `smart-enter` plugin を `yaziPlugins` から読む
-- `fzf`、`ripgrep`、`fd`、`bat`、`jq` を一緒に有効化する
+- `fzf`、`ripgrep`、`fd`、`jq` を一緒に有効化する
 - `core.system.extended` が true のとき preview 向け package を追加する
 
 ### Homebrew

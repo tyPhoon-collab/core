@@ -80,7 +80,6 @@
   programs.fzf.enable = true;
   programs.ripgrep.enable = true;
   programs.fd.enable = true;
-  programs.bat.enable = true;
   programs.jq.enable = true;
 
   home.packages =

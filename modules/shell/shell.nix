@@ -6,6 +6,7 @@
 let
   cfg = config.core.shell.nushell;
   defaultAliases = {
+    b = "bat";
     j = "just";
     m = "mise";
     nhd = "nh darwin switch .";
@@ -39,6 +40,8 @@ in
     enable = true;
     enableNushellIntegration = true;
   };
+
+  programs.bat.enable = true;
 
   programs.zellij = {
     enable = true;
