@@ -28,6 +28,7 @@
       nix-output-monitor
       nu_scripts
       nvd
+      eza
       gdu
       procs
       rsync

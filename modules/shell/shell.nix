@@ -8,6 +8,9 @@ let
   defaultAliases = {
     b = "bat";
     j = "just";
+    la = "eza -a";
+    ll = "eza -lah";
+    lt = "eza --tree";
     m = "mise";
     nhd = "nh darwin switch .";
     nhh = "nh home switch .";
