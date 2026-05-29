@@ -113,7 +113,7 @@ matches:
   # AI
   - trigger: ";aib"
     replace: "壁打ちしてください。"
-  - trigger: ";ais"
+  - trigger: ";aisi"
     replace: "簡潔に回答してください。"
   - trigger: ";aii"
     replace: "改善案を示してください。"
@@ -121,6 +121,10 @@ matches:
     replace: "調査してください。"
   - trigger: ";aine"
     replace: "編集は不要です。"
+  - trigger: ";aism"
+    replace: "整理して教えてください。"
+  - trigger: ";aisr"
+    replace: "セルフレビューしてください。"
 
   # Neovim
   - trigger: ";vy"
