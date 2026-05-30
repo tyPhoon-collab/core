@@ -10,7 +10,9 @@
     ../programs/karabiner.nix
   ];
 
-  home.packages = lib.optionals config.core.system.desktop [
-    pkgs.macism
-  ];
+  config = lib.mkIf pkgs.stdenv.isDarwin {
+    home.packages = lib.optionals config.core.system.desktop [
+      pkgs.macism
+    ];
+  };
 }
