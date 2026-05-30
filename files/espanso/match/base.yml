@@ -125,6 +125,10 @@ matches:
     replace: "整理して教えてください。"
   - trigger: ";aisr"
     replace: "セルフレビューしてください。"
+  - trigger: ";aia"
+    replace: "アドバイスしてください。"
+  - trigger: ";ai3"
+    replace: "3行で出力してください。"
 
   # Neovim
   - trigger: ";vy"
