@@ -1,2 +1,4 @@
 search_shortcut: off
 undo_backspace: false
+keyboard_layout:
+  layout: "jp"
