@@ -92,6 +92,7 @@
 - `direnv`、`zoxide`、`starship`、`carapace`、`mise`、`bat`、`zellij` を有効化する
 - `modules/programs/zellij.nix` が `files/zellij/config.kdl` を `xdg.configFile."zellij/config.kdl"` として配布する
 - Zellij の keybind や theme は静的ファイル管理で、Nix option 化された公開 override 面はまだない
+- 日常の pane 管理は Zellij 側を主担当とし、locked でも `Alt+矢印` / `Alt+h/j/k/l` で移動できる前提にする
 - Java や Maven のような project-local toolchain は固定 package ではなく `mise` 前提
 
 ### Git
@@ -207,6 +208,7 @@ Consumer override example:
 - LSP は `core.system.devLevel >= 1` で有効
 - `jdtls` は `core.system.devLevel >= 2` で有効
 - insert mode では `tn` を `<Esc>`、terminal mode では `tn` を `<C-\><C-n>` に割り当てる
+- 日常の pane 移動ショートカットは Nixvim に持たせず、Neovim window は必要時に素の `Ctrl-w` 系操作で扱う
 - `jdtls` 自体は Nixvim/Home Manager から供給するが、`packageFallback = true` なので project/devshell 由来の `jdtls` が `PATH` にあればそちらを使える
 - Java と Maven はここで固定しない。`mise`/`direnv` が用意する環境を前提にする
 

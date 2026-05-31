@@ -15,7 +15,7 @@ Determine Systems を使うマシン向けの、再利用前提の共通設定�
 ## 提供するもの
 
 - 基本環境: Nushell、direnv、zoxide、starship、mise、Zellij、`bat`、`nh` などの共通 CLI 環境
-- 開発ツール: Git、GitHub CLI、Lazygit、Jujutsu、Nixvim、Yazi などの開発向け設定。Nixvim は insert/terminal で `tn` を Esc 系として扱う
+- 開発ツール: Git、GitHub CLI、Lazygit、Jujutsu、Nixvim、Yazi などの開発向け設定。Nixvim は insert/terminal で `tn` を Esc 系として扱い、日常のペイン移動は Zellij 側を前提にする
 - デスクトップ連携: AeroSpace、Espanso、Ghostty、Karabiner などの GUI アプリ設定
 - システム統合: Darwin / Linux / WSL の分岐、nix-darwin 向け defaults と open files limit の補助 module
 - consumer 向け公開面: `core.*` option と `config.core.brew.resolved` を通じた上書き・統合ポイント
@@ -128,7 +128,7 @@ consumer 側で `modules/core.nix` を import すると、`config.core.brew.reso
 ## サポート範囲
 
 - 公開面として扱うのは、`home.nix`、`modules/core.nix` が定義する `core.*` option、必要に応じた `modules/system/*` の統合方法です
-- Zellij は core 管理の `config.kdl` を配布しますが、現時点では consumer 向けの追加 `core.*` option は公開しません
+- Zellij は core 管理の `config.kdl` を配布しますが、現時点では consumer 向けの追加 `core.*` option は公開しません。ペイン管理の主担当は Zellij とし、Alt 系の移動キーも Zellij 側に集約します
 - `files/` 配下の具体的な中身や、module 内部の細かい既定値は実装詳細であり、必要な要点だけを `llms.md` に記録します
 - `modules/programs/wezterm.nix` と `files/wezterm/` は現時点では未使用です。存在していてもサポート対象の公開面とはみなしません
 

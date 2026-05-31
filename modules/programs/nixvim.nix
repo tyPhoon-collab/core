@@ -227,12 +227,6 @@
       }
       {
         mode = "n";
-        key = "<leader>T";
-        action.__raw = ''function() Snacks.terminal(nil, { count = 2, win = { position = "right" } }) end'';
-        options.desc = "Toggle Terminal Right";
-      }
-      {
-        mode = "n";
         key = "<leader>z";
         action.__raw = "function() Snacks.zen.zoom() end";
         options.desc = "Zoom Window";
@@ -256,82 +250,6 @@
         key = "<S-l>";
         action = "<cmd>bnext<CR>";
         options.desc = "Next Buffer";
-      }
-
-      # Window Navigation
-      {
-        mode = [
-          "n"
-          "t"
-        ];
-        key = "<A-Left>";
-        action = "<cmd>wincmd h<CR>";
-        options.desc = "Focus Left";
-      }
-      {
-        mode = [
-          "n"
-          "t"
-        ];
-        key = "<A-Down>";
-        action = "<cmd>wincmd j<CR>";
-        options.desc = "Focus Down";
-      }
-      {
-        mode = [
-          "n"
-          "t"
-        ];
-        key = "<A-Up>";
-        action = "<cmd>wincmd k<CR>";
-        options.desc = "Focus Up";
-      }
-      {
-        mode = [
-          "n"
-          "t"
-        ];
-        key = "<A-Right>";
-        action = "<cmd>wincmd l<CR>";
-        options.desc = "Focus Right";
-      }
-
-      # Window Resize
-      {
-        mode = [
-          "n"
-          "t"
-        ];
-        key = "<A-S-Left>";
-        action = "<cmd>vertical resize -2<CR>";
-        options.desc = "Resize Left";
-      }
-      {
-        mode = [
-          "n"
-          "t"
-        ];
-        key = "<A-S-Down>";
-        action = "<cmd>resize +2<CR>";
-        options.desc = "Resize Down";
-      }
-      {
-        mode = [
-          "n"
-          "t"
-        ];
-        key = "<A-S-Up>";
-        action = "<cmd>resize -2<CR>";
-        options.desc = "Resize Up";
-      }
-      {
-        mode = [
-          "n"
-          "t"
-        ];
-        key = "<A-S-Right>";
-        action = "<cmd>vertical resize +2<CR>";
-        options.desc = "Resize Right";
       }
 
       # Flash
