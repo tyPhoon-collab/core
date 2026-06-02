@@ -208,6 +208,10 @@ Consumer override example:
 - LSP は `core.system.devLevel >= 1` で有効
 - `jdtls` は `core.system.devLevel >= 2` で有効
 - insert mode では `tn` を `<Esc>`、terminal mode では `tn` を `<C-\><C-n>` に割り当てる
+- `cutlass.nvim` を追加し、`c`/`d`/`x` 系は既定で black-hole register に流して unnamed / system clipboard を汚しにくくする
+- ただし `flash.nvim` と衝突しないよう、`s` / `S` の cutlass 上書きは無効化する
+- 専用の `cut` キーはまだ増やさず、必要なら consumer 側で追加判断する
+- Visual mode の `J` / `K` で選択範囲を上下移動し、Normal / Insert mode の `<A-j>` / `<A-k>` で現在行を上下移動する
 - 日常の pane 移動ショートカットは Nixvim に持たせず、Neovim window は必要時に素の `Ctrl-w` 系操作で扱う
 - `jdtls` 自体は Nixvim/Home Manager から供給するが、`packageFallback = true` なので project/devshell 由来の `jdtls` が `PATH` にあればそちらを使える
 - Java と Maven はここで固定しない。`mise`/`direnv` が用意する環境を前提にする

@@ -58,6 +58,10 @@
       loaded_netrwPlugin = 1;
     };
 
+    extraPlugins = with pkgs.vimPlugins; [
+      cutlass-nvim
+    ];
+
     extraConfigLua = ''
       local ime_group = vim.api.nvim_create_augroup("macos-ime-reset", { clear = true })
       local autoread_group = vim.api.nvim_create_augroup("autoread-checktime", { clear = true })
@@ -85,6 +89,12 @@
             vim.cmd("checktime")
           end
         end,
+      })
+    '';
+
+    extraConfigLuaPost = ''
+      require("cutlass").setup({
+        exclude = { "ns", "nS", "xs", "xS", "os", "oS" },
       })
     '';
 
@@ -146,6 +156,18 @@
         options.desc = "Join Lines";
       }
       {
+        mode = "x";
+        key = "J";
+        action = ":move '>+1<CR>gv=gv";
+        options.desc = "Move Selection Down";
+      }
+      {
+        mode = "x";
+        key = "K";
+        action = ":move '<-2<CR>gv=gv";
+        options.desc = "Move Selection Up";
+      }
+      {
         mode = "n";
         key = "Q";
         action = "<nop>";
@@ -156,6 +178,30 @@
         key = "tn";
         action = "<Esc>";
         options.desc = "Exit Insert Mode";
+      }
+      {
+        mode = "n";
+        key = "<A-j>";
+        action = "<cmd>move .+1<CR>==";
+        options.desc = "Move Line Down";
+      }
+      {
+        mode = "n";
+        key = "<A-k>";
+        action = "<cmd>move .-2<CR>==";
+        options.desc = "Move Line Up";
+      }
+      {
+        mode = "i";
+        key = "<A-j>";
+        action = "<Esc><cmd>move .+1<CR>==gi";
+        options.desc = "Move Line Down";
+      }
+      {
+        mode = "i";
+        key = "<A-k>";
+        action = "<Esc><cmd>move .-2<CR>==gi";
+        options.desc = "Move Line Up";
       }
       {
         mode = "t";
