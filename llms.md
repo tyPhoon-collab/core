@@ -205,13 +205,39 @@ Consumer override example:
 ### Nixvim
 
 - `programs.nixvim.enable = true`
+- `defaultEditor = true`、`viAlias = true`、`vimAlias = true`
+- provider は絞り、Node / Perl / Python / Ruby provider は Home Manager 側からは持たない
+- clipboard は基本 `unnamedplus` を使い、Darwin 以外では global clipboard provider を `osc52` に寄せる
+- `netrw` は完全に無効化し、ファイル操作は `Snacks.explorer` と `yazi.nvim` 側に寄せる
+- colorscheme は `catppuccin` の `mocha`
+- `number`、`expandtab`、`ignorecase + smartcase`、`signcolumn=yes`、`cursorline`、`scrolloff=8`、`splitbelow/splitright`、`undofile`、`breakindent`、`confirm` を基本既定値にする
+- `completeopt = menuone,noselect,popup`、`pumborder = rounded`、`winborder = rounded`
+- IME まわりは `macism` があれば `InsertLeave` / `TermLeave` / `CmdlineEnter` で英数入力へ戻す
+- `FocusGained` / `TermClose` / `CursorHold` / `CursorHoldI` で `checktime` を走らせ、外部変更の自動追従を優先する
 - LSP は `core.system.devLevel >= 1` で有効
+- `jsonls`、`lua_ls`、`nixd`、`marksman` は `devLevel >= 1`
+- `bashls`、`ts_ls`、`pyright`、`yamlls` は `devLevel >= 2`
 - `jdtls` は `core.system.devLevel >= 2` で有効
+- `dartls` も `devLevel >= 2` で有効だが package は固定しない
+- `rust_analyzer` も `devLevel >= 2` で有効だが `rustc` / `cargo` はここで配らない
 - insert mode では `tn` を `<Esc>`、terminal mode では `tn` を `<C-\><C-n>` に割り当てる
+- terminal mode では `<A-Esc>` でも normal mode に戻せる
+- `n` / `N` は検索結果へ移動した後に `zz` と `zv` を入れて、中央寄せと fold 展開を行う
+- Normal mode の `J` は join lines のまま維持する
 - `cutlass.nvim` を追加し、`c`/`d`/`x` 系は既定で black-hole register に流して unnamed / system clipboard を汚しにくくする
 - ただし `flash.nvim` と衝突しないよう、`s` / `S` の cutlass 上書きは無効化する
 - 専用の `cut` キーはまだ増やさず、必要なら consumer 側で追加判断する
 - Visual mode の `J` / `K` で選択範囲を上下移動し、Normal / Insert mode の `<A-j>` / `<A-k>` で現在行を上下移動する
+- `Snacks` は `explorer`、`picker`、`terminal`、`toggle`、`scope`、`notifier`、`quickfile` などを有効化し、dashboard も有効にする
+- picker/explorer の主要導線は `<leader>e`、`<leader>ff`、`<leader>fg`、`<leader><leader>`、`<leader>,`、`<leader>fh`
+- `Snacks.explorer` は watch と git status 表示を有効にする
+- `Snacks.lazygit` の `configure = false` にして、`nvim-remote` 前提の fragile な既定値を避ける
+- `cmp` は `nvim_lsp` / `path` / `buffer` source を使い、`<C-Space>` 補完開始、`<CR>` 確定、`<Tab>` / `<S-Tab>` で候補移動
+- `treesitter` は highlight / indent を有効にする
+- `flash.nvim` は `s` / `S` を normal / visual / operator-pending に割り当てる
+- diagnostics は `]d` / `[d`、`<leader>cd`、`<leader>xx`、`<leader>xX` を使う
+- LSP の主な導線は `K` hover、`gd` 定義、`grr` 参照、`gri` 実装、`grt` 型定義
+- buffer 移動は `<S-h>` / `<S-l>`
 - 日常の pane 移動ショートカットは Nixvim に持たせず、Neovim window は必要時に素の `Ctrl-w` 系操作で扱う
 - `jdtls` 自体は Nixvim/Home Manager から供給するが、`packageFallback = true` なので project/devshell 由来の `jdtls` が `PATH` にあればそちらを使える
 - Java と Maven はここで固定しない。`mise`/`direnv` が用意する環境を前提にする
