@@ -18,6 +18,8 @@
   `core.*` option を定義し、`coreConfig` から `config.core` を組み立てる
 - `modules/programs/*`
   Git、Jujutsu、AeroSpace、Espanso、Ghostty、Karabiner、Yazi、Zellij、Nixvim などの module
+- `modules/programs/codex.nix`
+  Darwin 向けに `files/codex/hooks.json` を `~/.codex/hooks.json` として配布する
 - `modules/platform/*`
   Darwin、Linux、WSL 向けの分岐
 - `modules/system/darwin-defaults.nix`
@@ -91,9 +93,18 @@
 - core 既定 alias は `b`, `j`, `m`, `nhd`, `nhh`, `nho`
 - `direnv`、`zoxide`、`starship`、`carapace`、`mise`、`bat`、`zellij` を有効化する
 - `modules/programs/zellij.nix` が `files/zellij/config.kdl` を `xdg.configFile."zellij/config.kdl"` として配布する
+- `modules/programs/codex.nix` が Darwin で `files/codex/hooks.json` を `xdg.configFile."codex/hooks.json"` として配布する
 - Zellij の keybind や theme は静的ファイル管理で、Nix option 化された公開 override 面はまだない
 - 日常の pane 管理は Zellij 側を主担当とし、locked でも `Alt+矢印` / `Alt+h/j/k/l` で移動できる前提にする
 - Java や Maven のような project-local toolchain は固定 package ではなく `mise` 前提
+
+### Codex
+
+- Darwin では `~/.codex/hooks.json` を core 側の静的ファイルとして配布する
+- 現在の hook は `PermissionRequest` と `Stop` に対する通知音用 command hook を含む
+- これは consumer 向けの公開 option ではなく、内部実装として管理する
+- Codex 本体のインストールやバージョン固定はこの repo では扱わない
+- Codex は更新速度が高いため、実行バイナリの管理は `mise` など外部の tool manager に委ねる前提にする
 
 ### Git
 

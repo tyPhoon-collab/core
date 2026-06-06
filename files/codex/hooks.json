@@ -1,0 +1,29 @@
+{
+  "hooks": {
+    "PermissionRequest": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Hero.aiff >/dev/null 2>&1 &",
+            "timeout": 3,
+            "statusMessage": "Playing approval sound"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Glass.aiff >/dev/null 2>&1 &",
+            "timeout": 3,
+            "statusMessage": "Playing done sound"
+          }
+        ]
+      }
+    ]
+  }
+}

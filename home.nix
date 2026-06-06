@@ -9,6 +9,7 @@
 {
   imports = [
     ./modules/core.nix
+    ./modules/programs/codex.nix
     ./modules/shell/shell.nix
     ./modules/programs/espanso.nix
     ./modules/programs/git.nix
