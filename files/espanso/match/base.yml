@@ -119,6 +119,8 @@ matches:
     replace: "改善案を示してください。"
   - trigger: ";air"
     replace: "調査してください。"
+  - trigger: ";aif"
+    replace: "修正してください。"
   - trigger: ";aine"
     replace: "編集は不要です。"
   - trigger: ";aism"
