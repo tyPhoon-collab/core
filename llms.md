@@ -199,6 +199,8 @@ Consumer override example:
 ### Ghostty and Karabiner
 
 - `core.apps.ghostty.enable` は Ghostty config の配布を制御する
+- Ghostty の既定値は `Catppuccin Mocha`、`background-opacity = 0.85`、`background-opacity-cells = true`、`background-blur = true`
+- 半透明背景は見た目優先ではなく可読性とのバランス重視の既定値として扱う
 - `core.apps.karabiner.enable` は Karabiner config の配布を制御する
 - 追加の公開 option はまだ持たない
 
@@ -210,6 +212,7 @@ Consumer override example:
 - clipboard は基本 `unnamedplus` を使い、Darwin 以外では global clipboard provider を `osc52` に寄せる
 - `netrw` は完全に無効化し、ファイル操作は `Snacks.explorer` と `yazi.nvim` 側に寄せる
 - colorscheme は `catppuccin` の `mocha`
+- Catppuccin は `transparent_background = true` とし、通常バッファ、split terminal、float を含めて広めに端末側の半透明背景を見せる
 - `number`、`expandtab`、`ignorecase + smartcase`、`signcolumn=yes`、`cursorline`、`scrolloff=8`、`splitbelow/splitright`、`undofile`、`breakindent`、`confirm` を基本既定値にする
 - `completeopt = menuone,noselect,popup`、`pumborder = rounded`、`winborder = rounded`
 - IME まわりは `macism` があれば `InsertLeave` / `TermLeave` / `CmdlineEnter` で英数入力へ戻す

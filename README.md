@@ -15,8 +15,8 @@ Determine Systems を使うマシン向けの、再利用前提の共通設定�
 ## 提供するもの
 
 - 基本環境: Nushell、direnv、zoxide、starship、mise、Zellij、`bat`、`nh` などの共通 CLI 環境
-- 開発ツール: Git、GitHub CLI、Lazygit、Jujutsu、Nixvim、Yazi などの開発向け設定。Nixvim は Snacks ベースの picker / explorer / terminal を中心にしつつ、insert/terminal で `tn` を Esc 系として扱い、`cutlass.nvim` で change/delete 系が clipboard を汚しにくい構成にし、選択範囲や現在行の上下移動は専用 keymap で扱い、日常のペイン移動は Zellij 側を前提にする
-- デスクトップ連携: AeroSpace、Espanso、Ghostty、Karabiner などの GUI アプリ設定
+- 開発ツール: Git、GitHub CLI、Lazygit、Jujutsu、Nixvim、Yazi などの開発向け設定。Nixvim は Snacks ベースの picker / explorer / terminal を中心にしつつ、insert/terminal で `tn` を Esc 系として扱い、`cutlass.nvim` で change/delete 系が clipboard を汚しにくい構成にし、選択範囲や現在行の上下移動は専用 keymap で扱い、日常のペイン移動は Zellij 側を前提にする。Ghostty の半透明背景と馴染むよう、Catppuccin 側も広めに透明化する
+- デスクトップ連携: AeroSpace、Espanso、Ghostty、Karabiner などの GUI アプリ設定。Ghostty は Catppuccin Mocha をベースに、macOS で見やすさを崩しにくい半透明背景を既定にする
 - システム統合: Darwin / Linux / WSL の分岐、nix-darwin 向け defaults と open files limit の補助 module
 - consumer 向け公開面: `core.*` option と `config.core.brew.resolved` を通じた上書き・統合ポイント
 

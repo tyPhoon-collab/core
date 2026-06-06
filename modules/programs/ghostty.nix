@@ -12,6 +12,9 @@ in
       theme = Catppuccin Mocha
       font-family = "Hack Nerd Font Mono"
       font-family = "Hiragino Sans W4"
+      background-opacity = 0.85
+      background-opacity-cells = true
+      background-blur = true
       macos-option-as-alt = left
       keybind = alt+left=unbind
       keybind = alt+right=unbind
