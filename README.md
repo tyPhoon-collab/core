@@ -15,7 +15,7 @@ Determine Systems を使うマシン向けの、再利用前提の共通設定�
 ## 提供するもの
 
 - 基本環境: Nushell、direnv、zoxide、starship、mise、Zellij、`bat`、`nh` などの共通 CLI 環境
-- 開発ツール: Git、GitHub CLI、Lazygit、Jujutsu、Nixvim、Yazi などの開発向け設定。Nixvim は Snacks ベースの picker / explorer / terminal を中心にしつつ、insert/terminal で `tn` を Esc 系として扱い、`cutlass.nvim` で change/delete 系が clipboard を汚しにくい構成にし、選択範囲や現在行の上下移動は専用 keymap で扱い、日常のペイン移動は Zellij 側を前提にする。Ghostty の半透明背景と馴染むよう、Catppuccin 側も広めに透明化する
+- 開発ツール: Git、GitHub CLI、Lazygit、Jujutsu、Nixvim、Yazi などの開発向け設定。Nixvim は Snacks ベースの picker / explorer / terminal を中心にしつつ、insert/terminal で `tn` を Esc 系として扱い、`cutlass.nvim` で change/delete 系が clipboard を汚しにくい構成にし、選択範囲や現在行の上下移動は専用 keymap で扱い、日常のペイン移動は Zellij 側を前提にする。Ghostty の半透明背景と馴染むよう、Catppuccin 側も広めに透明化し、カーソル移動には `smear-cursor.nvim` で通常時と insert 時の両方にアニメーションを付ける
 - デスクトップ連携: AeroSpace、Espanso、Ghostty、Karabiner などの GUI アプリ設定。Ghostty は Catppuccin Mocha をベースに、macOS で見やすさを崩しにくい半透明背景を既定にする
 - Codex 連携: macOS では `~/.codex/hooks.json` も静的設定として配布し、PermissionRequest / Stop の通知 hook を管理する
 - システム統合: Darwin / Linux / WSL の分岐、nix-darwin 向け defaults と open files limit の補助 module

@@ -241,6 +241,8 @@ Consumer override example:
 - `cutlass.nvim` を追加し、`c`/`d`/`x` 系は既定で black-hole register に流して unnamed / system clipboard を汚しにくくする
 - ただし `flash.nvim` と衝突しないよう、`s` / `S` の cutlass 上書きは無効化する
 - 専用の `cut` キーはまだ増やさず、必要なら consumer 側で追加判断する
+- `smear-cursor.nvim` を有効にし、カーソル移動に控えめなアニメーションを付ける
+- upstream README の紹介値に近い stiffness / damping を採用し、insert mode でもアニメーションを有効にする
 - Visual mode の `J` / `K` で選択範囲を上下移動し、Normal / Insert mode の `<A-j>` / `<A-k>` で現在行を上下移動する
 - `Snacks` は `explorer`、`picker`、`terminal`、`toggle`、`scope`、`notifier`、`quickfile` などを有効化し、dashboard も有効にする
 - picker/explorer の主要導線は `<leader>e`、`<leader>ff`、`<leader>fg`、`<leader><leader>`、`<leader>,`、`<leader>fh`
