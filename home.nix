@@ -18,7 +18,6 @@
     ./modules/programs/yazi.nix
     ./modules/programs/zellij.nix
     ./modules/programs/nixvim.nix
-    # ./modules/programs/wezterm.nix
     ./modules/platform/entrypoint.nix
   ];
 

@@ -21,7 +21,6 @@ let
       "espanso"
       "ghostty"
       "karabiner-elements"
-      # "wezterm"
     ];
 
     masApps = { };
@@ -120,12 +119,6 @@ in
         );
         description = "Whether the core Ghostty configuration should be installed.";
       };
-
-      # wezterm.enable = lib.mkOption {
-      #   type = lib.types.bool;
-      #   default = fromPath [ "apps" "wezterm" "enable" ] false;
-      #   description = "Whether the core WezTerm configuration should be installed.";
-      # };
     };
 
     shell.nushell.shellAliases = lib.mkOption {

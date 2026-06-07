@@ -14,10 +14,10 @@ Determine Systems を使うマシン向けの、再利用前提の共通設定�
 
 ## 提供するもの
 
-- 基本環境: Nushell、direnv、zoxide、starship、mise、Zellij、`bat`、`nh` などの共通 CLI 環境
-- 開発ツール: Git、GitHub CLI、Lazygit、Jujutsu、Nixvim、Yazi などの開発向け設定。Nixvim は Snacks ベースの picker / explorer / terminal を中心にしつつ、insert/terminal で `tn` を Esc 系として扱い、`cutlass.nvim` で change/delete 系が clipboard を汚しにくい構成にし、選択範囲や現在行の上下移動は専用 keymap で扱い、日常のペイン移動は Zellij 側を前提にする。Ghostty の半透明背景と馴染むよう、Catppuccin 側も広めに透明化し、カーソル移動には `smear-cursor.nvim` で通常時と insert 時の両方にアニメーションを付ける
-- デスクトップ連携: AeroSpace、Espanso、Ghostty、Karabiner などの GUI アプリ設定。Ghostty は Catppuccin Mocha をベースに、macOS で見やすさを崩しにくい半透明背景を既定にする
-- Codex 連携: macOS では `~/.codex/hooks.json` も静的設定として配布し、PermissionRequest / Stop の通知 hook を管理する
+- 基本環境: Nushell と補完・prompt・移動補助、Zellij、`nh`、Nix 補助、検索・ファイル操作・システム確認系の共通 CLI 環境
+- 開発ツール: Git、GitHub CLI、Lazygit、Jujutsu、Nixvim、Yazi などの開発向け設定
+- デスクトップ連携: AeroSpace、Espanso、Ghostty、Karabiner などの GUI アプリ設定
+- Codex 連携: macOS 向けの静的 hook 設定配布
 - システム統合: Darwin / Linux / WSL の分岐、nix-darwin 向け defaults と open files limit の補助 module
 - consumer 向け公開面: `core.*` option と `config.core.brew.resolved` を通じた上書き・統合ポイント
 
@@ -133,6 +133,5 @@ consumer 側で `modules/core.nix` を import すると、`config.core.brew.reso
 - Codex については `~/.codex/hooks.json` のような静的設定だけを扱い、Codex 本体のインストールやバージョン固定はこの repo では管理しません。更新が速いツールなので、`mise` など外部の tool manager 側に委ねます
 - Zellij は core 管理の `config.kdl` を配布しますが、現時点では consumer 向けの追加 `core.*` option は公開しません。ペイン管理の主担当は Zellij とし、Alt 系の移動キーも Zellij 側に集約します
 - `files/` 配下の具体的な中身や、module 内部の細かい既定値は実装詳細であり、必要な要点だけを `llms.md` に記録します
-- `modules/programs/wezterm.nix` と `files/wezterm/` は現時点では未使用です。存在していてもサポート対象の公開面とはみなしません
 
 実装寄りの詳細や現在の option 一覧は `llms.md` を参照してください。

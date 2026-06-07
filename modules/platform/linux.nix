@@ -20,7 +20,6 @@ lib.mkIf pkgs.stdenv.isLinux {
     [
       kitty
       ghostty
-      # wezterm
       alacritty
       fuzzel
       waybar
