@@ -362,11 +362,11 @@
     ];
 
     # カラースキーム
-    colorschemes.catppuccin = {
+    colorschemes.gruvbox = {
       enable = true;
       settings = {
-        flavour = "mocha";
-        transparent_background = true;
+        contrast = "dark";
+        transparent_mode = true;
       };
     };
 

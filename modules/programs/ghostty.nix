@@ -9,7 +9,7 @@ in
 {
   config = lib.mkIf cfg.enable {
     xdg.configFile."ghostty/config.ghostty".text = ''
-      theme = Catppuccin Mocha
+      theme = Gruvbox Dark
       font-family = "Hack Nerd Font Mono"
       font-family = "Hiragino Sans W4"
       background-opacity = 0.85
