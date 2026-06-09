@@ -1,0 +1,11 @@
+layout {
+    pane size=1 borderless=true {
+        plugin location="compact-bar"
+    }
+    pane split_direction="vertical" {
+        pane name="nvim" command="nvim" size="60%" {
+            focus true
+        }
+        pane name="codex" command="codex"
+    }
+}

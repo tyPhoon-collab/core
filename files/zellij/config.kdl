@@ -273,3 +273,4 @@ web_client {
 
 theme "gruvbox-dark"
 default_mode "locked"
+show_startup_tips false

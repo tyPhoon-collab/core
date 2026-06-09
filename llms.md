@@ -57,7 +57,7 @@ Nushell を中心に、direnv、zoxide、starship、carapace、mise、Zellij を
 
 Nushell alias は core 既定値に `core.shell.nushell.shellAliases` を上書きマージします。Java や Maven のような project-local toolchain は固定 package ではなく、`mise` / `direnv` で供給する前提です。
 
-Zellij は `files/zellij/config.kdl` を静的に配布します。pane 管理の主担当は Zellij とし、現時点では consumer 向けの option 化された override 面を持ちません。
+Zellij は `files/zellij/config.kdl` と `files/zellij/layouts/*.kdl` を静的に配布します。pane 管理の主担当は Zellij とし、現時点では consumer 向けの option 化された override 面を持ちません。`work` layout は左に `nvim`、右に `codex` を置く開発用 layout です。
 
 常用 CLI として、`bat`、`eza`、`bottom`、`gdu`、`procs`、`fzf`、`ripgrep`、`fd`、`jq`、`file`、`p7zip`、`rsync` を有効化または配布します。Nix 周辺では `home-manager`、`nh`、`nix-output-monitor`、`nvd`、`nu_scripts` を含めます。
 
