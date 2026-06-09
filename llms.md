@@ -59,7 +59,7 @@ Nushell alias は core 既定値に `core.shell.nushell.shellAliases` を上書�
 
 Zellij は `files/zellij/config.kdl` と `files/zellij/layouts/*.kdl` を静的に配布します。pane 管理の主担当は Zellij とし、現時点では consumer 向けの option 化された override 面を持ちません。`work` layout は左に `nvim`、右に `codex` を置く開発用 layout です。
 
-端末・pane・editor の通常テーマは gruvbox dark 系に寄せます。具体値は Ghostty module、Zellij 静的 config、Nixvim module をSSoTとし、ドキュメント側では方針だけを記録します。
+端末・pane・editor の通常テーマは gruvbox dark 系に寄せます。Ghostty は透明化や blur よりも文字のコントラストを優先し、gruvbox の淡い配色が眠くならない状態を既定にします。具体値は Ghostty module、Zellij 静的 config、Nixvim module をSSoTとし、ドキュメント側では方針だけを記録します。
 
 常用 CLI として、`bat`、`eza`、`bottom`、`gdu`、`procs`、`fzf`、`ripgrep`、`fd`、`jq`、`file`、`p7zip`、`rsync` を有効化または配布します。Nix 周辺では `home-manager`、`nh`、`nix-output-monitor`、`nvd`、`nu_scripts` を含めます。
 

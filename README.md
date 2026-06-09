@@ -133,6 +133,6 @@ consumer 側で `modules/core.nix` を import すると、`config.core.brew.reso
 - Codex については `~/.codex/hooks.json` のような静的設定だけを扱い、Codex 本体のインストールやバージョン固定はこの repo では管理しません。更新が速いツールなので、`mise` など外部の tool manager 側に委ねます
 - Zellij は core 管理の `config.kdl` と用途別 layout を配布しますが、現時点では consumer 向けの追加 `core.*` option は公開しません。ペイン管理の主担当は Zellij とし、Alt 系の移動キーも Zellij 側に集約します
 - `files/` 配下の具体的な中身や、module 内部の細かい既定値は実装詳細であり、必要な要点だけを `llms.md` に記録します
-- 常用の端末・pane・editor 体験は gruvbox dark 系に寄せ、Zellij / Ghostty / Nixvim の見た目を大きく外さない方針です
+- 常用の端末・pane・editor 体験は gruvbox dark 系に寄せ、透明・blur よりも文字の読みやすさを優先します
 
 実装寄りの詳細や現在の option 一覧は `llms.md` を参照してください。
