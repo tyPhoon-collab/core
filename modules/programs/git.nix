@@ -23,21 +23,9 @@
   programs.nixvim.keymaps = [
     {
       mode = "n";
-      key = "<leader>gg";
+      key = "<leader>g";
       action.__raw = "function() Snacks.lazygit() end";
       options.desc = "Lazygit";
-    }
-    {
-      mode = "n";
-      key = "<leader>gs";
-      action.__raw = "function() Snacks.picker.git_status() end";
-      options.desc = "Git Status";
-    }
-    {
-      mode = "n";
-      key = "<leader>gd";
-      action.__raw = "function() Snacks.picker.git_diff() end";
-      options.desc = "Git Diff Hunks";
     }
     {
       mode = "n";
