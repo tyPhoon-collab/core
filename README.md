@@ -15,7 +15,7 @@ Determine Systems を使うマシン向けの、再利用前提の共通設定�
 ## 提供するもの
 
 - 基本環境: Nushell と補完・prompt・移動補助、Zellij と用途別 layout、`nh`、Nix 補助、検索・ファイル操作・システム確認系の共通 CLI 環境
-- 開発ツール: Git、GitHub CLI、Lazygit、Jujutsu、Nixvim、Yazi などの開発向け設定。Git 操作の入口は Nixvim から `lazygit` を開く前提に寄せ、Nixvim は Treesitter ベースの構文表示と現在位置の文脈表示を含む
+- 開発ツール: Git、GitHub CLI、Lazygit、Jujutsu、Nixvim、Yazi などの開発向け設定。Git の CLI diff は `delta` を既定 pager とし、Nixvim からは `lazygit` を入口に使う前提に寄せる。Nixvim 自体は Treesitter ベースの構文表示と現在位置の文脈表示を含む
 - デスクトップ連携: AeroSpace、Espanso、Ghostty、Karabiner などの GUI アプリ設定
 - Codex 連携: macOS 向けの静的 hook 設定配布
 - システム統合: Darwin / Linux / WSL の分岐、nix-darwin 向け defaults と open files limit の補助 module

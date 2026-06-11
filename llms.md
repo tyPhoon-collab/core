@@ -65,7 +65,7 @@ Zellij は `files/zellij/config.kdl` と `files/zellij/layouts/*.kdl` を静的�
 
 ### Developer tools
 
-Git、GitHub CLI、Lazygit、Jujutsu、Nixvim、Yazi を開発向けの既定ツールとして有効化します。`core.identity.*` が設定されている場合は、Git と Jujutsu の user 設定に反映します。Nixvim 上の Git 操作は `lazygit` を主入口とし、細かな status/diff picker よりも統合 UI 側に寄せます。
+Git、GitHub CLI、Lazygit、Jujutsu、Nixvim、Yazi を開発向けの既定ツールとして有効化します。`core.identity.*` が設定されている場合は、Git と Jujutsu の user 設定に反映します。Git の CLI diff pager は `delta` を既定とし、`merge.conflictStyle = zdiff3` を使います。Nixvim 上の Git 操作は `lazygit` を主入口とし、`lazygit` の diff も `delta` pager に寄せます。
 
 Nixvim は editor として常時有効です。大枠として、clipboard は system clipboard 寄り、Darwin 以外では OSC52 寄り、ファイル操作は Snacks explorer / Yazi 側、日常の pane 移動は Zellij 側に寄せます。Treesitter は構文ハイライトとインデントに加え、現在位置の文脈表示を有効化します。
 
