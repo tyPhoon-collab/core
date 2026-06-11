@@ -57,7 +57,7 @@ Nushell を中心に、direnv、zoxide、starship、carapace、mise、Zellij を
 
 Nushell alias は core 既定値に `core.shell.nushell.shellAliases` を上書きマージします。Java や Maven のような project-local toolchain は固定 package ではなく、`mise` / `direnv` で供給する前提です。
 
-Zellij は `files/zellij/config.kdl` と `files/zellij/layouts/*.kdl` を静的に配布します。pane 管理の主担当は Zellij とし、現時点では consumer 向けの option 化された override 面を持ちません。`work` layout は左に `nvim`、右に `codex` を置く開発用 layout です。
+Zellij は `files/zellij/config.kdl` と `files/zellij/layouts/*.kdl` を静的に配布します。pane 管理の主担当は Zellij とし、現時点では consumer 向けの option 化された override 面を持ちません。Alt 系 shortcut は pane 移動に限定し、resize は resize mode 経由に寄せます。`work` layout は左に `nvim`、右に `codex` を置く開発用 layout です。
 
 端末・pane・editor の通常テーマは gruvbox dark 系に寄せます。Ghostty は透明化や blur よりも文字のコントラストを優先し、gruvbox の淡い配色が眠くならない状態を既定にします。具体値は Ghostty module、Zellij 静的 config、Nixvim module をSSoTとし、ドキュメント側では方針だけを記録します。
 
@@ -67,7 +67,7 @@ Zellij は `files/zellij/config.kdl` と `files/zellij/layouts/*.kdl` を静的�
 
 Git、GitHub CLI、Lazygit、Jujutsu、Nixvim、Yazi を開発向けの既定ツールとして有効化します。`core.identity.*` が設定されている場合は、Git と Jujutsu の user 設定に反映します。
 
-Nixvim は editor として常時有効です。大枠として、clipboard は system clipboard 寄り、Darwin 以外では OSC52 寄り、ファイル操作は Snacks explorer / Yazi 側、日常の pane 移動は Zellij 側に寄せます。
+Nixvim は editor として常時有効です。大枠として、clipboard は system clipboard 寄り、Darwin 以外では OSC52 寄り、ファイル操作は Snacks explorer / Yazi 側、日常の pane 移動は Zellij 側に寄せます。Treesitter は構文ハイライトとインデントに加え、現在位置の文脈表示を有効化します。
 
 LSP や言語サポートは `core.system.devLevel` に応じて増えます。ただし Dart、Rust、Java、Maven などの project-local toolchain はこの repo では固定せず、project/devshell/tool manager 側を優先します。
 

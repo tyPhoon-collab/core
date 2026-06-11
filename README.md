@@ -15,7 +15,7 @@ Determine Systems を使うマシン向けの、再利用前提の共通設定�
 ## 提供するもの
 
 - 基本環境: Nushell と補完・prompt・移動補助、Zellij と用途別 layout、`nh`、Nix 補助、検索・ファイル操作・システム確認系の共通 CLI 環境
-- 開発ツール: Git、GitHub CLI、Lazygit、Jujutsu、Nixvim、Yazi などの開発向け設定
+- 開発ツール: Git、GitHub CLI、Lazygit、Jujutsu、Nixvim、Yazi などの開発向け設定。Nixvim は Treesitter ベースの構文表示と現在位置の文脈表示を含む
 - デスクトップ連携: AeroSpace、Espanso、Ghostty、Karabiner などの GUI アプリ設定
 - Codex 連携: macOS 向けの静的 hook 設定配布
 - システム統合: Darwin / Linux / WSL の分岐、nix-darwin 向け defaults と open files limit の補助 module
@@ -131,7 +131,7 @@ consumer 側で `modules/core.nix` を import すると、`config.core.brew.reso
 
 - 公開面として扱うのは、`home.nix`、`modules/core.nix` が定義する `core.*` option、必要に応じた `modules/system/*` の統合方法です
 - Codex については `~/.codex/hooks.json` のような静的設定だけを扱い、Codex 本体のインストールやバージョン固定はこの repo では管理しません。更新が速いツールなので、`mise` など外部の tool manager 側に委ねます
-- Zellij は core 管理の `config.kdl` と用途別 layout を配布しますが、現時点では consumer 向けの追加 `core.*` option は公開しません。ペイン管理の主担当は Zellij とし、Alt 系の移動キーも Zellij 側に集約します
+- Zellij は core 管理の `config.kdl` と用途別 layout を配布しますが、現時点では consumer 向けの追加 `core.*` option は公開しません。ペイン管理の主担当は Zellij とし、Alt 系はペイン移動に限定します。リサイズは Zellij の resize mode 経由で扱います
 - `files/` 配下の具体的な中身や、module 内部の細かい既定値は実装詳細であり、必要な要点だけを `llms.md` に記録します
 - 常用の端末・pane・editor 体験は gruvbox dark 系に寄せ、透明・blur よりも文字の読みやすさを優先します
 

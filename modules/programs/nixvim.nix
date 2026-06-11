@@ -98,6 +98,11 @@
       })
     '';
 
+    highlightOverride = {
+      TreesitterContextBottom.underline = true;
+      TreesitterContextLineNumberBottom.underline = true;
+    };
+
     # Keymaps
     keymaps = [
       # Basic
@@ -264,6 +269,12 @@
         key = "<leader>uw";
         action.__raw = ''function() Snacks.toggle.option("wrap", { name = "Wrap" }):toggle() end'';
         options.desc = "Toggle Wrap";
+      }
+      {
+        mode = "n";
+        key = "<leader>uc";
+        action = "<cmd>TSContext toggle<CR>";
+        options.desc = "Toggle Treesitter Context";
       }
       {
         mode = "n";
@@ -462,6 +473,10 @@
           highlight.enable = true;
           indent.enable = true;
         };
+      };
+
+      "treesitter-context" = {
+        enable = true;
       };
 
       "smear-cursor" = {
