@@ -183,16 +183,6 @@ in
 }
 ```
 
-## Consumer alignment
-
-主要 consumer である `/Users/hiroaki/.config/dotfiles` では、現在:
-
-- `hosts/darwin/default.nix` から `modules/core.nix`、`modules/system/darwin-defaults.nix`、`modules/system/darwin-limits.nix` を import している
-- `config.core.brew.resolved` を `homebrew.*` に流している
-- `flake.nix` で `coreConfig` を構築し、`extraSpecialArgs` で渡している
-
-この repo の docs は、この repo が standalone flake ではなく consumer から読み込まれる reusable source input である前提と整合させます。
-
 ## 変更時のチェックポイント
 
 - 公開面を変えた場合は、`README.md` の説明と `llms.md` の公開 option を両方更新する

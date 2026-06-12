@@ -10,8 +10,6 @@ Determine Systems を使うマシン向けの、再利用前提の共通設定�
 - 秘密情報やホスト固有の値は持たず、consumer 側から `coreConfig` で受け取る
 - 実装の詳細よりも、再利用可能な既定値と統合ポイントを提供する
 
-主要な consumer は `/Users/hiroaki/.config/dotfiles` です。ただし、このリポジトリは consumer に依存しない共通部品として扱います。
-
 ## 提供するもの
 
 - 基本環境: Nushell と補完・prompt・移動補助、Zellij と用途別 layout、`nh`、Nix 補助、検索・ファイル操作・システム確認系の共通 CLI 環境
