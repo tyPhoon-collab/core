@@ -109,6 +109,8 @@ matches:
     replace: 'git commit -m "ci: $|$"'
   - trigger: ";gcts"
     replace: 'git commit -m "test: $|$"'
+  - trigger: ";gom"
+    replace: "origin/main"
 
   # AI
   - trigger: ";aib"
@@ -119,6 +121,8 @@ matches:
     replace: "改善案を示してください。"
   - trigger: ";air"
     replace: "調査してください。"
+  - trigger: ";aiwr"
+    replace: "Webを調査してください。"
   - trigger: ";aif"
     replace: "修正してください。"
   - trigger: ";aine"
