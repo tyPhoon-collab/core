@@ -7,6 +7,7 @@ let
   cfg = config.core.shell.nushell;
   defaultAliases = {
     b = "bat";
+    lg = "lazygit";
     j = "just";
     la = "eza -a";
     ll = "eza -lah";
