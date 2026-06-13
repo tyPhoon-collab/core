@@ -1,6 +1,6 @@
 # core implementation notes
 
-このファイルは、人間と AI エージェント向けの実装リファレンスです。`README.md` は入口と公開契約、`llms.md` は実装に寄った詳細と運用ルールを扱います。最終的な source of truth はコードです。
+このファイルは、利用者が AI に渡すことを想定した実装リファレンスです。`README.md` は入口と公開契約、`llms.md` は実装に寄った詳細と公開面の補足を扱います。最終的な source of truth はコードです。
 
 ## ドキュメント方針
 
@@ -182,11 +182,3 @@ in
   ];
 }
 ```
-
-## 変更時のチェックポイント
-
-- 公開面を変えた場合は、`README.md` の説明と `llms.md` の公開 option を両方更新する
-- 実装詳細だけを変えた場合は、必要な注意点だけを `llms.md` に反映する
-- inactive なものを active に戻した場合、または active なものを外した場合は、公開面と repository shape の説明を更新する
-- consumer 側の統合前提が変わった場合は、integration example と consumer alignment を更新する
-- このマシンでの適用確認を行う場合は、consumer 側で `--override-input` を使って eval や build を検証する
