@@ -6,18 +6,19 @@
   ...
 }:
 let
+  renderTrustedEntries =
+    keyword: entries:
+    map (entry: ''${keyword} "${entry}", trusted: true'') entries;
+
   defaultDarwinHomebrew = {
-    taps = [
-      "FelixKratz/formulae"
-      "nikitabobko/tap"
-    ];
+    taps = [ ];
 
     brews = [
-      "borders"
+      "FelixKratz/formulae/borders"
     ];
 
     casks = [
-      "aerospace"
+      "nikitabobko/tap/aerospace"
       "espanso"
       "ghostty"
       "karabiner-elements"
@@ -172,11 +173,21 @@ in
 
   config.core.brew.resolved =
     if config.core.brew.enable then
+      let
+        resolvedTaps = lib.unique (defaultDarwinHomebrew.taps ++ config.core.brew.extraTaps);
+        resolvedBrews = lib.unique (defaultDarwinHomebrew.brews ++ config.core.brew.extraBrews);
+        resolvedCasks = lib.unique (defaultDarwinHomebrew.casks ++ config.core.brew.extraCasks);
+        trustedConfigLines =
+          (renderTrustedEntries "tap" resolvedTaps)
+          ++ (renderTrustedEntries "brew" resolvedBrews)
+          ++ (renderTrustedEntries "cask" resolvedCasks);
+      in
       {
-        taps = lib.unique (defaultDarwinHomebrew.taps ++ config.core.brew.extraTaps);
-        brews = lib.unique (defaultDarwinHomebrew.brews ++ config.core.brew.extraBrews);
-        casks = lib.unique (defaultDarwinHomebrew.casks ++ config.core.brew.extraCasks);
+        taps = resolvedTaps;
+        brews = resolvedBrews;
+        casks = resolvedCasks;
         masApps = defaultDarwinHomebrew.masApps // config.core.brew.extraMasApps;
+        extraConfig = lib.concatStringsSep "\n" trustedConfigLines;
       }
     else
       {
@@ -184,5 +195,6 @@ in
         brews = [ ];
         casks = [ ];
         masApps = { };
+        extraConfig = "";
       };
 }

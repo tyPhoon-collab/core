@@ -117,13 +117,14 @@ consumer 側は `coreConfig` を渡し、core 内部では `config.core` に正�
 
     shell.nushell.shellAliases.k = "kubectl";
     brew.extraBrews = [ "mole" ];
+    brew.extraCasks = [ "nikitabobko/tap/aerospace" ];
   };
 }
 ```
 
 ## Darwin 統合
 
-consumer 側で `modules/core.nix` を import すると、`config.core.brew.resolved` を `homebrew.*` に流せます。`modules/system/darwin-defaults.nix` と `modules/system/darwin-limits.nix` は必要な場合だけ追加 import します。
+consumer 側では `modules/system/darwin-homebrew.nix` を import すると、`core.brew.resolved` を使った Homebrew 統合まで含めて有効化できます。built-in の Homebrew base list は、tap 依存を減らすため必要な formula / cask を fully-qualified 名で持ちます。consumer の `extraTaps` / `extraBrews` / `extraCasks` は文字列で受け取り、core 側で trust 付きの `extraConfig` を生成します。`modules/system/darwin-defaults.nix` と `modules/system/darwin-limits.nix` は必要な場合だけ追加 import します。
 
 ## サポート範囲
 

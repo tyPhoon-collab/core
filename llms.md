@@ -87,25 +87,18 @@ Codex は Darwin で `~/.codex/hooks.json` を静的設定として配布しま�
 
 ### Homebrew and Darwin modules
 
-`modules/core.nix` は Darwin desktop 向けの built-in Homebrew base list を持ち、consumer の extra 設定とマージして `core.brew.resolved` を作ります。
+`modules/core.nix` は Darwin desktop 向けの built-in Homebrew base list を持ち、consumer の extra 設定とマージして `core.brew.resolved` を作ります。built-in 側は tap 依存を減らすため、必要な formula / cask を fully-qualified 名で持てます。consumer の `extraTaps` / `extraBrews` / `extraCasks` は文字列 list で受け取り、`resolved` には `taps` / `brews` / `casks` / `masApps` に加えて trust 付き `extraConfig` も含まれます。
 
-consumer 側では、必要に応じて `modules/core.nix`、`modules/system/darwin-defaults.nix`、`modules/system/darwin-limits.nix` を import し、`config.core.brew.resolved` を `homebrew.*` に流します。
+consumer 側では、必要に応じて `modules/core.nix`、`modules/system/darwin-homebrew.nix`、`modules/system/darwin-defaults.nix`、`modules/system/darwin-limits.nix` を import します。`darwin-homebrew.nix` は `config.core.brew.resolved` を `homebrew.*` に流し込みます。
 
 ```nix
 {
   imports = [
     (inputs.core + /modules/core.nix)
+    (inputs.core + /modules/system/darwin-homebrew.nix)
     (inputs.core + /modules/system/darwin-defaults.nix)
     (inputs.core + /modules/system/darwin-limits.nix)
   ];
-
-  homebrew = {
-    enable = true;
-    taps = config.core.brew.resolved.taps;
-    brews = config.core.brew.resolved.brews;
-    casks = config.core.brew.resolved.casks;
-    masApps = config.core.brew.resolved.masApps;
-  };
 }
 ```
 
