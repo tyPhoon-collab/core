@@ -15,6 +15,7 @@
 - `home.nix`: Home Manager entrypoint。core option、shell/program/platform modules を import する
 - `modules/core.nix`: `core.*` option を定義し、consumer の `coreConfig` を `config.core` に正規化する
 - `modules/programs/*`: Git、Jujutsu、AeroSpace、Espanso、Ghostty、Karabiner、Yazi、Zellij、Nixvim、Codex などの module
+- `modules/programs/nixvim/`: Nixvim の基幹設定、keymap、plugin 統合を持つディレクトリ module
 - `modules/platform/*`: Darwin、Linux、WSL 向けの分岐
 - `modules/system/*`: consumer 側から必要に応じて import する nix-darwin 補助 module
 - `files/*`: module から配布する静的設定ファイル
@@ -67,7 +68,7 @@ Zellij は `files/zellij/config.kdl` と `files/zellij/layouts/*.kdl` を静的�
 
 Git、GitHub CLI、Lazygit、Jujutsu、Nixvim、Yazi を開発向けの既定ツールとして有効化します。`core.identity.*` が設定されている場合は、Git と Jujutsu の user 設定に反映します。Git の CLI diff pager は `delta` を既定とし、`merge.conflictStyle = zdiff3` を使います。Nixvim 上の Git 操作は `lazygit` を主入口とし、`lazygit` の diff も `delta` pager に寄せます。
 
-Nixvim は editor として常時有効です。大枠として、clipboard は system clipboard 寄り、Darwin 以外では OSC52 寄り、ファイル操作は Snacks explorer / Yazi 側、日常の pane 移動は Zellij 側に寄せます。Treesitter は構文ハイライトとインデントに加え、現在位置の文脈表示を有効化します。
+Nixvim は editor として常時有効です。大枠として、clipboard は system clipboard 寄り、Darwin 以外では OSC52 寄り、ファイル操作は Snacks explorer / Yazi 側、日常の pane 移動は Zellij 側に寄せます。Treesitter は構文ハイライトとインデントに加え、現在位置の文脈表示を有効化します。Git / Yazi / Jujutsu 由来の editor 連携 keymap や plugin 初期化も Nixvim module 側に集約し、周辺 module は各ツール本体の設定に専念させます。
 
 LSP や言語サポートは `core.system.devLevel` に応じて増えます。ただし Dart、Rust、Java、Maven などの project-local toolchain はこの repo では固定せず、project/devshell/tool manager 側を優先します。
 

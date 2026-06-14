@@ -34,6 +34,7 @@ Determine Systems を使うマシン向けの、再利用前提の共通設定�
 - `home.nix`: Home Manager 向け entrypoint
 - `modules/core.nix`: `core.*` option の定義と正規化
 - `modules/programs/`: Git, Jujutsu, AeroSpace, Espanso, Ghostty, Karabiner, Yazi, Nixvim など
+- `modules/programs/nixvim/`: Nixvim の基幹設定、keymap、plugin 統合をまとめたディレクトリ module
 - `modules/programs/codex.nix`: Darwin 向けに Codex の hook 設定を配布
 - `modules/platform/`: Darwin, Linux, WSL 向けの分岐
 - `modules/system/`: 必要に応じて consumer から追加 import する nix-darwin 補助 module

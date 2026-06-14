@@ -17,7 +17,7 @@
     ./modules/programs/jujutsu.nix
     ./modules/programs/yazi.nix
     ./modules/programs/zellij.nix
-    ./modules/programs/nixvim.nix
+    ./modules/programs/nixvim
     ./modules/platform/entrypoint.nix
   ];
 

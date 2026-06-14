@@ -37,29 +37,4 @@
     };
   };
 
-  programs.nixvim = {
-    extraPackages = with pkgs; [
-      lazyjj
-    ];
-
-    extraPlugins = with pkgs.vimPlugins; [
-      plenary-nvim
-      lazyjj-nvim
-    ];
-
-    extraConfigLuaPost = ''
-      require("lazyjj").setup({
-        mapping = false,
-      })
-    '';
-
-    keymaps = [
-      {
-        mode = "n";
-        key = "<leader>jj";
-        action = "<cmd>LazyJJ<CR>";
-        options.desc = "LazyJJ";
-      }
-    ];
-  };
 }
