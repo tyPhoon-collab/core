@@ -133,8 +133,8 @@ matches:
     replace: "セルフレビューしてください。"
   - trigger: ";aia"
     replace: "アドバイスしてください。"
-  - trigger: ";ai3"
-    replace: "3行で出力してください。"
+  - trigger: ";aieis"
+    replace: "簡単に説明してください。"
 
   # Neovim
   - trigger: ";vy"
