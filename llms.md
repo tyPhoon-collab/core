@@ -56,7 +56,7 @@ consumer は生の入力として `coreConfig` を渡します。この repo 内
 
 Nushell を中心に、direnv、zoxide、starship、carapace、mise、Zellij を共通の shell 基盤として有効化します。
 
-Nushell alias は core 既定値に `core.shell.nushell.shellAliases` を上書きマージします。既定では `lg = lazygit` を含みます。Java や Maven のような project-local toolchain は固定 package ではなく、`mise` / `direnv` で供給する前提です。
+Nushell alias は core 既定値に `core.shell.nushell.shellAliases` を上書きマージします。既定では `lg = lazygit` を含みます。対話入力の line editor は Vi モードを既定にし、矢印キーでの履歴移動はそのまま使える前提です。Java や Maven のような project-local toolchain は固定 package ではなく、`mise` / `direnv` で供給する前提です。
 
 Zellij は `files/zellij/config.kdl` と `files/zellij/layouts/*.kdl` を静的に配布します。pane 管理の主担当は Zellij とし、現時点では consumer 向けの option 化された override 面を持ちません。Alt 系 shortcut は pane 移動に限定し、resize は resize mode 経由に寄せます。`work` layout は左に `nvim`、右に `codex` を置く開発用 layout です。
 

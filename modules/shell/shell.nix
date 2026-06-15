@@ -57,6 +57,7 @@ in
     shellAliases = defaultAliases // cfg.shellAliases;
     extraConfig = ''
       $env.config.buffer_editor = "nvim"
+      $env.config.edit_mode = "vi"
       $env.config.show_banner = false
 
       source ${pkgs.nu_scripts}/share/nu_scripts/aliases/git/git-aliases.nu
