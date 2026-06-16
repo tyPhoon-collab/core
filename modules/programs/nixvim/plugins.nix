@@ -34,7 +34,7 @@
             (lib.genAttrs [ "jsonls" "lua_ls" "nixd" "marksman" ] (name: {
               enable = config.core.system.devLevel >= 1;
             }))
-            // (lib.genAttrs [ "bashls" "ts_ls" "pyright" "yamlls" ] (name: {
+            // (lib.genAttrs [ "bashls" "ts_ls" "pyright" "yamlls" "kotlin_language_server" ] (name: {
               enable = config.core.system.devLevel >= 2;
             }))
             // {

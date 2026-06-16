@@ -70,7 +70,7 @@ Git、GitHub CLI、Lazygit、Jujutsu、Nixvim、Yazi を開発向けの既定ツ
 
 Nixvim は editor として常時有効です。大枠として、clipboard は system clipboard 寄り、Darwin 以外では OSC52 寄り、ファイル操作は Snacks explorer / Yazi 側、日常の pane 移動は Zellij 側に寄せます。Treesitter は構文ハイライトとインデントに加え、現在位置の文脈表示を有効化します。Git / Yazi / Jujutsu 由来の editor 連携 keymap や plugin 初期化も Nixvim module 側に集約し、周辺 module は各ツール本体の設定に専念させます。
 
-LSP や言語サポートは `core.system.devLevel` に応じて増えます。ただし Dart、Rust、Java、Maven などの project-local toolchain はこの repo では固定せず、project/devshell/tool manager 側を優先します。
+LSP や言語サポートは `core.system.devLevel` に応じて増えます。現状、`devLevel >= 2` では Bash / TypeScript / Python / YAML / Kotlin を追加します。Kotlin は `kotlin_language_server` を有効化します。ただし Dart、Rust、Java、Maven などの project-local toolchain はこの repo では固定せず、project/devshell/tool manager 側を優先します。
 
 Yazi は Nushell integration と wrapper を有効化し、`yaziPlugins` から plugin を受け取ります。preview 向け package は `core.system.extended` で増やします。
 
