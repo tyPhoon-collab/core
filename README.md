@@ -12,7 +12,7 @@ Determine Systems を使うマシン向けの、再利用前提の共通設定�
 
 ## 提供するもの
 
-- 基本環境: Nushell と補完・prompt・移動補助、Zellij と用途別 layout、`nh`、Nix 補助、検索・ファイル操作・システム確認系の共通 CLI 環境。Nushell には `lg = lazygit` のような短い既定 alias に加え、対話入力を Vi モードで扱う既定設定も含む
+- 基本環境: Nushell と補完・Starship prompt・移動補助、Zellij と用途別 layout、`nh`、Nix 補助、検索・ファイル操作・システム確認系の共通 CLI 環境。Nushell には `lg = lazygit` のような短い既定 alias に加え、対話入力を Vi モードで扱う既定設定も含む
 - 開発ツール: Git、GitHub CLI、Lazygit、Jujutsu、Nixvim、Yazi などの開発向け設定。Git の CLI diff は `delta` を既定 pager とし、Nixvim からは `lazygit` を入口に使う前提に寄せる。Nixvim 自体は Treesitter ベースの構文表示と現在位置の文脈表示を含み、`core.system.devLevel` に応じて LSP 言語サポートも段階的に増える
 - デスクトップ連携: AeroSpace、Espanso、Ghostty、Karabiner などの GUI アプリ設定。端末向けフォントは Home Manager 配布に寄せ、Ghostty では Maple Mono NF CN、Hack Nerd Font、Hiragino Sans の順で扱う
 - Codex 連携: macOS 向けの静的 hook 設定配布
@@ -36,6 +36,7 @@ Determine Systems を使うマシン向けの、再利用前提の共通設定�
 - `modules/programs/`: Git, Jujutsu, AeroSpace, Espanso, Ghostty, Karabiner, Yazi, Nixvim など
 - `modules/programs/nixvim/`: Nixvim の基幹設定、keymap、plugin 統合をまとめたディレクトリ module
 - `modules/programs/codex.nix`: Darwin 向けに Codex の hook 設定を配布
+- `modules/shell/starship.toml`: Starship prompt 設定
 - `modules/platform/`: Darwin, Linux, WSL 向けの分岐
 - `modules/system/`: 必要に応じて consumer から追加 import する nix-darwin 補助 module
 - `files/`: 配布する静的設定ファイル
@@ -133,6 +134,6 @@ consumer 側では `modules/system/darwin-homebrew.nix` を import すると、`
 - Codex については `~/.codex/hooks.json` のような静的設定だけを扱い、Codex 本体のインストールやバージョン固定はこの repo では管理しません。更新が速いツールなので、`mise` など外部の tool manager 側に委ねます
 - Zellij は core 管理の `config.kdl` と用途別 layout を配布しますが、現時点では consumer 向けの追加 `core.*` option は公開しません。ペイン管理の主担当は Zellij とし、Alt 系はペイン移動に限定します。リサイズは Zellij の resize mode 経由で扱います
 - `files/` 配下の具体的な中身や、module 内部の細かい既定値は実装詳細であり、必要な要点だけを `llms.md` に記録します
-- 常用の端末・pane・editor 体験は gruvbox dark 系に寄せ、透明・blur よりも文字の読みやすさを優先します
+- 常用の端末・pane・editor 体験は gruvbox dark 系に寄せ、透明・blur よりも文字の読みやすさを優先します。Starship は TOML 設定を module 側で読み込みます
 
 実装寄りの詳細や現在の option 一覧は `llms.md` を参照してください。

@@ -18,6 +18,7 @@
 - `modules/programs/nixvim/`: Nixvim の基幹設定、keymap、plugin 統合を持つディレクトリ module
 - `modules/platform/*`: Darwin、Linux、WSL 向けの分岐
 - `modules/system/*`: consumer 側から必要に応じて import する nix-darwin 補助 module
+- `modules/shell/starship.toml`: Starship prompt 設定
 - `files/*`: module から配布する静的設定ファイル
 - `lib/home-manager.nix`: Home Manager 統合時の共通既定値
 
@@ -55,6 +56,8 @@ consumer は生の入力として `coreConfig` を渡します。この repo 内
 ### Shell and base tools
 
 Nushell を中心に、direnv、zoxide、starship、carapace、mise、Zellij を共通の shell 基盤として有効化します。
+
+Starship は `modules/shell/starship.toml` を `builtins.fromTOML` で読み込みます。この TOML は `starship preset gruvbox-rainbow` の出力をそのまま置いたものです。由来との差分を確認する場合は `starship preset gruvbox-rainbow | diff -u - modules/shell/starship.toml` を使います。prompt の細かい module 設定値は Nix 側へ複製しません。consumer 向けの追加 `core.*` option はまだ持ちません。
 
 Nushell alias は core 既定値に `core.shell.nushell.shellAliases` を上書きマージします。既定では `lg = lazygit` を含みます。対話入力の line editor は Vi モードを既定にし、矢印キーでの履歴移動はそのまま使える前提です。Java や Maven のような project-local toolchain は固定 package ではなく、`mise` / `direnv` で供給する前提です。
 
