@@ -34,6 +34,7 @@
       rsync
     ]
     ++ lib.optionals config.core.system.fonts [
+      maple-mono.NF-CN-unhinted
       nerd-fonts.hack
     ]
     ++ lib.optionals config.core.system.extended [

@@ -10,6 +10,7 @@ in
   config = lib.mkIf cfg.enable {
     xdg.configFile."ghostty/config.ghostty".text = ''
       theme = Gruvbox Dark
+      font-family = "Maple Mono NF CN"
       font-family = "Hack Nerd Font Mono"
       font-family = "Hiragino Sans W4"
       macos-option-as-alt = left

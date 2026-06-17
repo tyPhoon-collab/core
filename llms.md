@@ -62,6 +62,8 @@ Zellij は `files/zellij/config.kdl` と `files/zellij/layouts/*.kdl` を静的�
 
 端末・pane・editor の通常テーマは gruvbox dark 系に寄せます。Ghostty は透明化や blur よりも文字のコントラストを優先し、gruvbox の淡い配色が眠くならない状態を既定にします。具体値は Ghostty module、Zellij 静的 config、Nixvim module をSSoTとし、ドキュメント側では方針だけを記録します。
 
+`core.system.fonts` は端末向け font を Home Manager の `home.packages` で配布します。現在は Maple Mono NF CN と Hack Nerd Font を共存させ、Ghostty は Maple Mono NF CN、Hack Nerd Font Mono、Hiragino Sans W4 の順に fallback します。Darwin では Home Manager が `~/Library/Fonts/HomeManager` に font を展開しますが、Ghostty など CoreText を使う GUI アプリに反映されるまでログアウト/再ログインまたは再起動が必要になることがあります。nix-darwin の `fonts.packages` には現時点では分離しません。
+
 常用 CLI として、`bat`、`eza`、`bottom`、`gdu`、`procs`、`fzf`、`ripgrep`、`fd`、`jq`、`file`、`p7zip`、`rsync` を有効化または配布します。Nix 周辺では `home-manager`、`nh`、`nix-output-monitor`、`nvd`、`nu_scripts` を含めます。
 
 ### Developer tools

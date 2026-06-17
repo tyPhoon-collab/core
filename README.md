@@ -14,7 +14,7 @@ Determine Systems を使うマシン向けの、再利用前提の共通設定�
 
 - 基本環境: Nushell と補完・prompt・移動補助、Zellij と用途別 layout、`nh`、Nix 補助、検索・ファイル操作・システム確認系の共通 CLI 環境。Nushell には `lg = lazygit` のような短い既定 alias に加え、対話入力を Vi モードで扱う既定設定も含む
 - 開発ツール: Git、GitHub CLI、Lazygit、Jujutsu、Nixvim、Yazi などの開発向け設定。Git の CLI diff は `delta` を既定 pager とし、Nixvim からは `lazygit` を入口に使う前提に寄せる。Nixvim 自体は Treesitter ベースの構文表示と現在位置の文脈表示を含み、`core.system.devLevel` に応じて LSP 言語サポートも段階的に増える
-- デスクトップ連携: AeroSpace、Espanso、Ghostty、Karabiner などの GUI アプリ設定
+- デスクトップ連携: AeroSpace、Espanso、Ghostty、Karabiner などの GUI アプリ設定。端末向けフォントは Home Manager 配布に寄せ、Ghostty では Maple Mono NF CN、Hack Nerd Font、Hiragino Sans の順で扱う
 - Codex 連携: macOS 向けの静的 hook 設定配布
 - システム統合: Darwin / Linux / WSL の分岐、nix-darwin 向け defaults と open files limit の補助 module
 - consumer 向け公開面: `core.*` option と `config.core.brew.resolved` を通じた上書き・統合ポイント
