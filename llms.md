@@ -1,25 +1,23 @@
 # core implementation notes
 
-このファイルは、利用者が AI に渡すことを想定した実装リファレンスです。`README.md` は入口と公開契約、`llms.md` は実装に寄った詳細と公開面の補足を扱います。最終的な source of truth はコードです。
+このファイルは、AI に渡すための実装リファレンスです。現在値の source of truth はコードです。ここには公開面、統合前提、変更時に壊しやすい注意点だけを置きます。
 
-## ドキュメント方針
+## Documentation policy
 
-- `README.md` には、repo の目的、統合方法、公開面として扱う範囲を書く
-- `llms.md` には、現在の構成、公開 option、実装上の注意、consumer との整合条件を書く
-- 静的設定ファイル、keymap、plugin の細かい値は、公開契約や運用上の注意でない限り複製しない
-- 仕様を変えたら `README.md` と `llms.md` を役割分担に沿って更新する
-- コードを読めば分かる現在値より、変更時に壊しやすい前提を優先して記録する
+- `README.md` は repo の目的、統合方法、公開面の境界を書く
+- `llms.md` は AI 向けに、公開 option、統合前提、変更判断を書く
+- 静的設定ファイル、keymap、plugin、font、alias、package list の現在値は原則として複製しない
+- 公開面を変えたら `README.md` と `llms.md` を更新する
+- 実装詳細だけを変えた場合は、consumer 影響や運用上の注意がある時だけ `llms.md` を更新する
 
 ## Repository shape
 
-- `home.nix`: Home Manager entrypoint。core option、shell/program/platform modules を import する
-- `modules/core.nix`: `core.*` option を定義し、consumer の `coreConfig` を `config.core` に正規化する
-- `modules/programs/*`: Git、Jujutsu、AeroSpace、Espanso、Ghostty、Karabiner、Yazi、Zellij、Nixvim、Codex などの module
-- `modules/programs/nixvim/`: Nixvim の基幹設定、keymap、plugin 統合を持つディレクトリ module
-- `modules/platform/*`: Darwin、Linux、WSL 向けの分岐
-- `modules/system/*`: consumer 側から必要に応じて import する nix-darwin 補助 module
-- `modules/shell/starship.toml`: Starship prompt 設定
-- `files/*`: module から配布する静的設定ファイル
+- `home.nix`: Home Manager entrypoint。core option、program、shell、platform module を import する
+- `modules/core.nix`: 基本の `core.*` option と `core.brew.resolved` を定義する
+- `modules/programs/*`: 各 tool / app の Home Manager module。追加の公開 option を持つ場合がある
+- `modules/platform/*`: Darwin、Linux、WSL 向け分岐
+- `modules/system/*`: nix-darwin 側から必要に応じて import する補助 module
+- `files/*`: module から配布する静的設定。具体値はここを SoT とする
 - `lib/home-manager.nix`: Home Manager 統合時の共通既定値
 
 ## Runtime contract
@@ -32,11 +30,11 @@
 - `nixvim`
 - `yaziPlugins`
 
-consumer は生の入力として `coreConfig` を渡します。この repo 内の module は、評価後に正規化された `config.core` を参照します。
+consumer は生の入力として `coreConfig` を渡します。repo 内の module は、評価後に正規化された `config.core` を参照します。
 
-## 公開 config surface
+## Public config surface
 
-公開面として追跡すべき `core.*` option は次の通りです。
+公開面として追跡する `core.*` option:
 
 - Identity: `core.identity.name`, `core.identity.email`
 - System: `core.system.desktop`, `core.system.fonts`, `core.system.extended`, `core.system.devLevel`, `core.system.wsl`, `core.system.openFiles.soft`, `core.system.openFiles.hard`
@@ -44,58 +42,61 @@ consumer は生の入力として `coreConfig` を渡します。この repo 内
 - Shell: `core.shell.nushell.shellAliases`
 - Homebrew: `core.brew.enable`, `core.brew.extraTaps`, `core.brew.extraBrews`, `core.brew.extraCasks`, `core.brew.extraMasApps`, `core.brew.resolved`
 
-補足:
+注意:
 
-- `core.apps.ghostty` と `core.apps.karabiner` は今のところ `enable` のみを公開する
-- Zellij は設定ファイルを配布するが、consumer 向けの追加 `core.*` option はまだ持たない
-- `core.shell.nushell` は今のところ `shellAliases` のみを公開する。既定 alias には `lg = lazygit` と `zw = zellij -l welcome` を含む
-- `core.brew.resolved` は read-only の派生値で、consumer が直接設定するものではない
+- `core.brew.resolved` は read-only の派生値。consumer が直接設定するものではない
+- `core.apps.aerospace.workspaces` は workspace 生成、key binding、monitor assignment、app rule に影響する
+- `core.apps.espanso.extraMatches` は generated YAML として追加される
+- Ghostty と Karabiner は現時点では配布有無だけを公開面にする
+- Zellij は設定を配布するが、consumer 向けの追加 `core.*` option はまだ持たない
 
-## 振る舞いの要点
+## Integration notes
 
-### Shell and base tools
+Home Manager では `(core + /home.nix)` を import し、`extraSpecialArgs` で runtime contract の引数を渡します。
 
-Nushell を中心に、direnv、zoxide、starship、carapace、mise、Zellij を共通の shell 基盤として有効化します。
+nix-darwin 側で Homebrew を使う場合は、`modules/core.nix` と `modules/system/darwin-homebrew.nix` を同じ評価に import します。`darwin-homebrew.nix` は `config.core.brew.resolved` を `homebrew.*` に流します。
 
-Starship は `modules/shell/starship.toml` を `builtins.fromTOML` で読み込みます。この TOML は `starship preset gruvbox-rainbow` の出力をそのまま置いたものです。由来との差分を確認する場合は `starship preset gruvbox-rainbow | diff -u - modules/shell/starship.toml` を使います。prompt の細かい module 設定値は Nix 側へ複製しません。consumer 向けの追加 `core.*` option はまだ持ちません。
+`modules/system/darwin-defaults.nix` と `modules/system/darwin-limits.nix` は必須ではありません。必要な host だけが import します。
 
-Nushell alias は core 既定値に `core.shell.nushell.shellAliases` を上書きマージします。既定では `lg = lazygit` と `zw = zellij -l welcome` を含みます。対話入力の line editor は Vi モードを既定にし、矢印キーでの履歴移動はそのまま使える前提です。Java や Maven のような project-local toolchain は固定 package ではなく、`mise` / `direnv` で供給する前提です。
+## Integration samples
 
-Zellij は `files/zellij/config.kdl` と `files/zellij/layouts/*.kdl` を静的に配布します。pane 管理の主担当は Zellij とし、現時点では consumer 向けの option 化された override 面を持ちません。Alt 系 shortcut は pane 移動に限定し、resize は resize mode 経由に寄せます。`work` layout は左に `nvim`、右に `codex` を置く開発用 layout です。
+Standalone Home Manager:
 
-端末・pane・editor の通常テーマは gruvbox dark 系に寄せます。Ghostty は透明化や blur よりも文字のコントラストを優先し、gruvbox の淡い配色が眠くならない状態を既定にします。具体値は Ghostty module、Zellij 静的 config、Nixvim module をSSoTとし、ドキュメント側では方針だけを記録します。
+```nix
+home-manager.lib.homeManagerConfiguration {
+  inherit pkgs;
+  extraSpecialArgs = {
+    inherit username homeDirectory core coreConfig;
+    nixvim = inputs.nixvim;
+    yaziPlugins = inputs.yazi-plugins;
+  };
+  modules = [
+    ({ core, ... }: {
+      imports = [ (core + /home.nix) ];
+    })
+  ];
+}
+```
 
-`core.system.fonts` は端末向け font を Home Manager の `home.packages` で配布します。現在は Maple Mono NF CN と Hack Nerd Font を共存させ、Ghostty は Maple Mono NF CN、Hack Nerd Font Mono、Hiragino Sans W4 の順に fallback します。Darwin では Home Manager が `~/Library/Fonts/HomeManager` に font を展開しますが、Ghostty など CoreText を使う GUI アプリに反映されるまでログアウト/再ログインまたは再起動が必要になることがあります。nix-darwin の `fonts.packages` には現時点では分離しません。
+nix-darwin or NixOS with Home Manager:
 
-常用 CLI として、`bat`、`eza`、`bottom`、`gdu`、`procs`、`fzf`、`ripgrep`、`fd`、`jq`、`file`、`p7zip`、`rsync` を有効化または配布します。Nix 周辺では `home-manager`、`nh`、`nix-output-monitor`、`nvd`、`nu_scripts` を含めます。
+```nix
+let
+  coreHomeManager = import (core + /lib/home-manager.nix);
+in
+{
+  home-manager = coreHomeManager.default // {
+    users.${username} = import ./home.nix;
+    extraSpecialArgs = {
+      inherit username homeDirectory core coreConfig;
+      nixvim = inputs.nixvim;
+      yaziPlugins = inputs.yazi-plugins;
+    };
+  };
+}
+```
 
-### Developer tools
-
-Git、GitHub CLI、Lazygit、Jujutsu、Nixvim、Yazi を開発向けの既定ツールとして有効化します。`core.identity.*` が設定されている場合は、Git と Jujutsu の user 設定に反映します。Git の CLI diff pager は `delta` を既定とし、`merge.conflictStyle = zdiff3` を使います。Nixvim 上の Git 操作は `lazygit` を主入口とし、`lazygit` の diff も `delta` pager に寄せます。
-
-Nixvim は editor として常時有効です。大枠として、clipboard は system clipboard 寄り、Darwin 以外では OSC52 寄り、ファイル操作は Snacks explorer / Yazi 側、日常の pane 移動は Zellij 側に寄せます。Treesitter は構文ハイライトとインデントに加え、現在位置の文脈表示を有効化します。Git / Yazi / Jujutsu 由来の editor 連携 keymap や plugin 初期化も Nixvim module 側に集約し、周辺 module は各ツール本体の設定に専念させます。
-
-LSP や言語サポートは `core.system.devLevel` に応じて増えます。現状、`devLevel >= 2` では Bash / TypeScript / Python / YAML / Kotlin を追加します。Kotlin は `kotlin_language_server` を有効化します。ただし Dart、Rust、Java、Maven などの project-local toolchain はこの repo では固定せず、project/devshell/tool manager 側を優先します。
-
-Yazi は Nushell integration と wrapper を有効化し、`yaziPlugins` から plugin を受け取ります。preview 向け package は `core.system.extended` で増やします。
-
-### Desktop apps and static config
-
-AeroSpace、Espanso、Ghostty、Karabiner は `core.apps.*.enable` で配布を制御します。Darwin desktop 向けを主対象にしつつ、Espanso と Ghostty は Linux 側の条件分岐も持ちます。
-
-AeroSpace は `core.apps.aerospace.workspaces` と `floatingAppIds` から設定を生成します。workspace は persistent workspace、key binding、monitor assignment、app move rule に反映されます。
-
-Espanso は base config を配布し、`core.apps.espanso.extraMatches` がある場合だけ generated YAML を追加します。
-
-Ghostty と Karabiner は現在、静的設定の配布有無だけを公開面にしています。細かい設定値は `files/` と module 実装をSSoTとします。
-
-Codex は Darwin で `~/.codex/hooks.json` を静的設定として配布します。Codex 本体のインストールやバージョン固定は扱わず、`mise` など外部の tool manager に委ねます。
-
-### Homebrew and Darwin modules
-
-`modules/core.nix` は Darwin desktop 向けの built-in Homebrew base list を持ち、consumer の extra 設定とマージして `core.brew.resolved` を作ります。built-in 側は tap 依存を減らすため、必要な formula / cask を fully-qualified 名で持てます。consumer の `extraTaps` / `extraBrews` / `extraCasks` は文字列 list で受け取り、`resolved` には `taps` / `brews` / `casks` / `masApps` に加えて trust 付き `extraConfig` も含まれます。
-
-consumer 側では、必要に応じて `modules/core.nix`、`modules/system/darwin-homebrew.nix`、`modules/system/darwin-defaults.nix`、`modules/system/darwin-limits.nix` を import します。`darwin-homebrew.nix` は `config.core.brew.resolved` を `homebrew.*` に流し込みます。
+nix-darwin Homebrew integration:
 
 ```nix
 {
@@ -103,81 +104,20 @@ consumer 側では、必要に応じて `modules/core.nix`、`modules/system/dar
     (inputs.core + /modules/core.nix)
     (inputs.core + /modules/system/darwin-homebrew.nix)
     (inputs.core + /modules/system/darwin-defaults.nix)
-    (inputs.core + /modules/system/darwin-limits.nix)
+    # Optional per host:
+    # (inputs.core + /modules/system/darwin-limits.nix)
   ];
 }
 ```
 
-## Integration examples
+## Change rules
 
-### Standalone Home Manager
+- `core.*` option を追加、削除、型変更、意味変更したら README と llms を更新する
+- `home.nix` の required args や import 前提を変えたら README と llms を更新する
+- consumer 側の integration example が古くなる変更では README を更新する
+- `files/` や module 内部の現在値だけを変えた場合、docs に値を写さない
+- inactive な module を active に戻す、または active な module を外す場合は repository shape と公開面を確認する
 
-```nix
-{
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    core = {
-      url = "path:/path/to/core";
-      flake = false;
-    };
-    nixvim.url = "github:nix-community/nixvim";
-    yazi-plugins = {
-      url = "github:yazi-rs/plugins";
-      flake = false;
-    };
-  };
+## Verification
 
-  outputs = inputs@{ nixpkgs, home-manager, core, ... }:
-    let
-      system = "x86_64-linux";
-      username = "user";
-      homeDirectory = "/home/user";
-      pkgs = import nixpkgs { inherit system; };
-      coreConfig = {
-        system.devLevel = 2;
-      };
-    in
-    {
-      homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = {
-          inherit username homeDirectory core coreConfig;
-          nixvim = inputs.nixvim;
-          yaziPlugins = inputs.yazi-plugins;
-        };
-        modules = [
-          ({ core, ... }: {
-            imports = [ (core + /home.nix) ];
-          })
-        ];
-      };
-    };
-}
-```
-
-### NixOS or nix-darwin with Home Manager
-
-```nix
-let
-  coreHomeManager = import (core + /lib/home-manager.nix);
-in
-{
-  modules = [
-    home-manager.nixosModules.home-manager
-    {
-      home-manager = coreHomeManager.default // {
-        users.${username} = import ./home.nix;
-        extraSpecialArgs = {
-          inherit username homeDirectory core coreConfig;
-          nixvim = inputs.nixvim;
-          yaziPlugins = inputs.yazi-plugins;
-        };
-      };
-    }
-  ];
-}
-```
+この repo は consumer 側 flake から `flake = false` input として使われます。consumer 環境で適用前検証をする時は、consumer 側の flake に対して `--override-input core /Users/hiroaki/.config/core` を使い、`eval` や `build` で確認します。
