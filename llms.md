@@ -48,7 +48,7 @@ consumer は生の入力として `coreConfig` を渡します。この repo 内
 
 - `core.apps.ghostty` と `core.apps.karabiner` は今のところ `enable` のみを公開する
 - Zellij は設定ファイルを配布するが、consumer 向けの追加 `core.*` option はまだ持たない
-- `core.shell.nushell` は今のところ `shellAliases` のみを公開する。既定 alias には `lg = lazygit` を含む
+- `core.shell.nushell` は今のところ `shellAliases` のみを公開する。既定 alias には `lg = lazygit` と `zw = zellij -l welcome` を含む
 - `core.brew.resolved` は read-only の派生値で、consumer が直接設定するものではない
 
 ## 振る舞いの要点
@@ -59,7 +59,7 @@ Nushell を中心に、direnv、zoxide、starship、carapace、mise、Zellij を
 
 Starship は `modules/shell/starship.toml` を `builtins.fromTOML` で読み込みます。この TOML は `starship preset gruvbox-rainbow` の出力をそのまま置いたものです。由来との差分を確認する場合は `starship preset gruvbox-rainbow | diff -u - modules/shell/starship.toml` を使います。prompt の細かい module 設定値は Nix 側へ複製しません。consumer 向けの追加 `core.*` option はまだ持ちません。
 
-Nushell alias は core 既定値に `core.shell.nushell.shellAliases` を上書きマージします。既定では `lg = lazygit` を含みます。対話入力の line editor は Vi モードを既定にし、矢印キーでの履歴移動はそのまま使える前提です。Java や Maven のような project-local toolchain は固定 package ではなく、`mise` / `direnv` で供給する前提です。
+Nushell alias は core 既定値に `core.shell.nushell.shellAliases` を上書きマージします。既定では `lg = lazygit` と `zw = zellij -l welcome` を含みます。対話入力の line editor は Vi モードを既定にし、矢印キーでの履歴移動はそのまま使える前提です。Java や Maven のような project-local toolchain は固定 package ではなく、`mise` / `direnv` で供給する前提です。
 
 Zellij は `files/zellij/config.kdl` と `files/zellij/layouts/*.kdl` を静的に配布します。pane 管理の主担当は Zellij とし、現時点では consumer 向けの option 化された override 面を持ちません。Alt 系 shortcut は pane 移動に限定し、resize は resize mode 経由に寄せます。`work` layout は左に `nvim`、右に `codex` を置く開発用 layout です。
 

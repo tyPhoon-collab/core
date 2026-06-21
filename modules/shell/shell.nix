@@ -16,6 +16,7 @@ let
     nhd = "nh darwin switch .";
     nhh = "nh home switch .";
     nho = "nh os switch .";
+    zw = "zellij -l welcome";
   };
 in
 {
