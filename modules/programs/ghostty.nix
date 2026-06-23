@@ -20,6 +20,8 @@ in
       keybind = alt+down=unbind
       keybind = super+enter=unbind
       keybind = super+ctrl+f=unbind
+      keybind = global:super+space=toggle_quick_terminal
+      quick-terminal-animation-duration = 0
       macos-titlebar-style = hidden
       confirm-close-surface = false
     '';
