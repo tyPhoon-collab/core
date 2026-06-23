@@ -9,6 +9,7 @@ Determine Systems を使うマシン向けの共通設定です。
 - Home Manager / nix-darwin 向けの再利用可能な既定値をまとめる
 - 秘密情報やホスト固有値は持たず、consumer 側から `coreConfig` で受け取る
 - Darwin / Linux / WSL の分岐と、必要な nix-darwin 補助 module を提供する
+- Codex などの AI agent 拡張は扱わず、別 repo の `agent-plugins` で管理する
 - 個別ツールの現在値はコードを source of truth とし、ドキュメントには公開契約と統合方法だけを書く
 
 ## 構成
@@ -94,7 +95,7 @@ consumer 側は `coreConfig` を渡し、core 内部では正規化された `co
 }
 ```
 
-公開される `core.*` option の一覧と実装上の注意は `llms.md` を参照してください。細かい tool 設定、keymap、font、alias、静的 config の現在値は `modules/` と `files/` が source of truth です。
+公開される `core.*` option の一覧と実装上の注意は `llms.md` を参照してください。細かい tool 設定、keymap、font、alias、静的 config の現在値は `modules/` と `files/` が source of truth です。Codex hooks などの AI agent plugin はこの repo では配布せず、`agent-plugins` 側で管理します。
 
 ## Darwin 統合
 
