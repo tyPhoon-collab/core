@@ -151,7 +151,6 @@
                 "picker"
                 "quickfile"
                 "scope"
-                "scroll"
                 "statuscolumn"
                 "terminal"
                 "toggle"
@@ -188,6 +187,7 @@
                   # { section = "startup"; } # lazy.nvim dependency (startup stats) disabled
                 ];
               };
+              scroll.enabled = false;
               picker.sources.explorer = {
                 watch = true;
                 git_status = true;

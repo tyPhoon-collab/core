@@ -29,6 +29,18 @@
     }
     {
       mode = "n";
+      key = "<C-d>";
+      action = "<C-d>zz";
+      options.desc = "Scroll Down";
+    }
+    {
+      mode = "n";
+      key = "<C-u>";
+      action = "<C-u>zz";
+      options.desc = "Scroll Up";
+    }
+    {
+      mode = "n";
       key = "n";
       action.__raw = ''
         function()
