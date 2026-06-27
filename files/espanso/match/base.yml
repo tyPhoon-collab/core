@@ -125,6 +125,8 @@ matches:
     replace: "Webを調査してください。"
   - trigger: ";aif"
     replace: "修正してください。"
+  - trigger: ";ait"
+    replace: "対応してください。"
   - trigger: ";aine"
     replace: "編集は不要です。"
   - trigger: ";aism"
