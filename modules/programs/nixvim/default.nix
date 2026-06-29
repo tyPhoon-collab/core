@@ -27,7 +27,8 @@
       tabstop = 2;
       expandtab = true;
       autoindent = true;
-      wrap = false;
+      wrap = true;
+      linebreak = true;
       clipboard = "unnamedplus";
       ignorecase = true;
       smartcase = true;
