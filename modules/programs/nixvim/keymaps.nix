@@ -185,6 +185,12 @@
     }
     {
       mode = "n";
+      key = "<leader>ul";
+      action.__raw = ''function() Snacks.toggle.option("relativenumber", { name = "Relative Line Number" }):toggle() end'';
+      options.desc = "Toggle Relative Line Number";
+    }
+    {
+      mode = "n";
       key = "<leader>t";
       action.__raw = "function() Snacks.terminal() end";
       options.desc = "Toggle Terminal";
