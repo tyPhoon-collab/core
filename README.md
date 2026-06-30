@@ -22,6 +22,10 @@ Determine Systems を使うマシン向けの共通設定です。
 - `files/`: module から配布する静的設定
 - `lib/home-manager.nix`: Home Manager 統合時の共通既定値
 
+静的設定のうち Karabiner は、英数/かなキーを起点にした操作レイヤーを配布します。細かな割り当ては `files/karabiner/karabiner.json` を source of truth とし、ドキュメントには列挙しません。
+
+Karabiner-Elements の設定画面で保存すると、Home Manager が張った `karabiner.json` の symlink が通常ファイルに置き換わる場合があります。core 側の変更を反映するには、consumer 側を再適用してから Karabiner-Elements を起動してください。
+
 ## 使い方
 
 親 flake の input に `core` を追加します。

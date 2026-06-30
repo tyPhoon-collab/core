@@ -20,6 +20,10 @@
 - `files/*`: module から配布する静的設定。具体値はここを SoT とする
 - `lib/home-manager.nix`: Home Manager 統合時の共通既定値
 
+Karabiner の英数/かなレイヤーなど、静的 keymap の具体値は `files/karabiner/karabiner.json` を SoT とする。挙動を変えた場合は README には公開挙動の境界だけを書き、個別キーの網羅表は追加しない。
+
+Karabiner-Elements の UI で設定保存すると、Home Manager が作る `~/.config/karabiner/karabiner.json` symlink が通常ファイルへ置換されることがある。反映確認時は `ls -l ~/.config/karabiner/karabiner.json` で symlink か確認し、必要なら consumer 側を `--override-input core /Users/hiroaki/.config/core` 付きで再適用してから Karabiner-Elements を起動する。
+
 ## Runtime contract
 
 `home.nix` が前提にしている主な引数:
@@ -48,6 +52,7 @@ consumer は生の入力として `coreConfig` を渡します。repo 内の mod
 - `core.apps.aerospace.workspaces` は workspace 生成、key binding、monitor assignment、app rule に影響する
 - `core.apps.espanso.extraMatches` は generated YAML として追加される
 - Ghostty と Karabiner は現時点では配布有無だけを公開面にする
+- Karabiner の静的 keymap は consumer 設定 option ではないが、配布される入力挙動として扱う
 - Zellij は設定を配布するが、consumer 向けの追加 `core.*` option はまだ持たない
 
 ## Integration notes
