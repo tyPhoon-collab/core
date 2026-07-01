@@ -7,8 +7,7 @@
 }:
 let
   renderTrustedEntries =
-    keyword: entries:
-    map (entry: ''${keyword} "${entry}", trusted: true'') entries;
+    keyword: entries: map (entry: ''${keyword} "${entry}", trusted: true'') entries;
 
   defaultDarwinHomebrew = {
     taps = [ ];
@@ -22,6 +21,9 @@ let
       "espanso"
       "ghostty"
       "karabiner-elements"
+      "obsidian"
+      "raycast"
+      "vorssaint/tap/vorssaint"
     ];
 
     masApps = { };
