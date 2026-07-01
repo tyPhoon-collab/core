@@ -9,8 +9,6 @@ Determine Systems を使うマシン向けの共通設定です。
 - Home Manager / nix-darwin 向けの再利用可能な既定値をまとめる
 - 秘密情報やホスト固有値は持たず、consumer 側から `coreConfig` で受け取る
 - Darwin / Linux / WSL の分岐と、必要な nix-darwin 補助 module を提供する
-- Codex などの AI agent 拡張は扱わず、別 repo の `agent-plugins` で管理する
-- 個別ツールの現在値はコードを source of truth とし、ドキュメントには公開契約と統合方法だけを書く
 
 ## 構成
 
@@ -21,10 +19,6 @@ Determine Systems を使うマシン向けの共通設定です。
 - `modules/system/`: consumer 側から必要に応じて import する nix-darwin 補助 module
 - `files/`: module から配布する静的設定
 - `lib/home-manager.nix`: Home Manager 統合時の共通既定値
-
-静的設定のうち Karabiner は、英数/かなキーを起点にした操作レイヤーを配布します。細かな割り当ては `files/karabiner/karabiner.json` を source of truth とし、ドキュメントには列挙しません。
-
-Karabiner-Elements の設定画面で保存すると、Home Manager が張った `karabiner.json` の symlink が通常ファイルに置き換わる場合があります。core 側の変更を反映するには、consumer 側を再適用してから Karabiner-Elements を起動してください。
 
 ## 使い方
 
@@ -45,12 +39,7 @@ Home Manager の `extraSpecialArgs` で必要な値を渡します。
 extraSpecialArgs = {
   inherit username homeDirectory core;
   coreConfig = {
-    system = {
-      desktop = true;
-      fonts = true;
-      extended = true;
-      devLevel = 2;
-    };
+    system.desktop = true;
   };
   nixvim = inputs.nixvim;
   yaziPlugins = inputs.yazi-plugins;
@@ -75,31 +64,18 @@ Home Manager module から import します。
 
 ## 設定
 
-consumer 側は `coreConfig` を渡し、core 内部では正規化された `config.core` を参照します。
+consumer 側は `coreConfig` を渡し、core 内部では正規化された `config.core` を参照します。ここでは最小例だけ示します。実運用の組み合わせは consumer 側の repo で管理してください。
 
 ```nix
 {
   coreConfig = {
-    identity = {
-      name = "Your Name";
-      email = "you@example.com";
-    };
-
-    system = {
-      desktop = true;
-      fonts = true;
-      extended = true;
-      devLevel = 2;
-    };
-
-    shell.nushell.shellAliases.k = "kubectl";
-    brew.extraBrews = [ "mole" ];
-    brew.extraCasks = [ "nikitabobko/tap/aerospace" ];
+    identity.email = "you@example.com";
+    system.desktop = true;
   };
 }
 ```
 
-公開される `core.*` option の一覧と実装上の注意は `llms.md` を参照してください。細かい tool 設定、keymap、font、alias、静的 config の現在値は `modules/` と `files/` が source of truth です。Codex hooks などの AI agent plugin はこの repo では配布せず、`agent-plugins` 側で管理します。
+公開される `core.*` option の一覧、runtime contract、実装上の注意は `llms.md` を参照してください。細かい tool 設定、keymap、font、alias、package list、静的 config の現在値は `modules/` と `files/` が source of truth です。
 
 ## Darwin 統合
 
@@ -120,8 +96,4 @@ consumer 側で Homebrew まで統合する場合は、必要に応じて system
 
 ## ドキュメント方針
 
-- `README.md`: repo の目的、統合方法、公開面の境界
-- `llms.md`: AI 向けの公開 option、壊しやすい前提、更新判断
-- コード: 現在値の source of truth
-
-仕様や公開面を変えた場合だけ、README と llms をこの分担に沿って更新します。実装詳細だけの変更では、必要な注意点がある場合だけ llms に反映します。
+README は repo の目的、統合方法、公開面の境界だけを書きます。公開 option と更新判断は `llms.md`、作業規約は `AGENTS.md` を参照してください。現在値の一覧は docs に写さず、コードを source of truth とします。

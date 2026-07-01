@@ -2,13 +2,14 @@
 
 このファイルは、AI に渡すための実装リファレンスです。現在値の source of truth はコードです。ここには公開面、統合前提、変更時に壊しやすい注意点だけを置きます。
 
+設定値を写経しないでください。keymap、font、alias、package list、plugin list、静的 config の具体値は `modules/` と `files/` を直接確認します。
+
 ## Documentation policy
 
-- `README.md` は repo の目的、統合方法、公開面の境界を書く
-- `llms.md` は AI 向けに、公開 option、統合前提、変更判断を書く
-- 静的設定ファイル、keymap、plugin、font、alias、package list の現在値は原則として複製しない
-- 公開面を変えたら `README.md` と `llms.md` を更新する
-- 実装詳細だけを変えた場合は、consumer 影響や運用上の注意がある時だけ `llms.md` を更新する
+- `README.md`: 人向けに repo の目的、統合方法、公開面の境界を書く
+- `llms.md`: AI 向けに公開 option、runtime contract、統合前提、壊しやすい注意を書く
+- `AGENTS.md`: 作業する agent 向けに検証手順と docs 更新判断を書く
+- 静的設定ファイル、keymap、plugin、font、alias、package list の現在値は docs に複製しない。公開面だけを docs に残す
 
 ## Repository shape
 
@@ -20,9 +21,9 @@
 - `files/*`: module から配布する静的設定。具体値はここを SoT とする
 - `lib/home-manager.nix`: Home Manager 統合時の共通既定値
 
-Karabiner の英数/かなレイヤーなど、静的 keymap の具体値は `files/karabiner/karabiner.json` を SoT とする。挙動を変えた場合は README には公開挙動の境界だけを書き、個別キーの網羅表は追加しない。
+## Known pitfalls
 
-Karabiner-Elements の UI で設定保存すると、Home Manager が作る `~/.config/karabiner/karabiner.json` symlink が通常ファイルへ置換されることがある。反映確認時は `ls -l ~/.config/karabiner/karabiner.json` で symlink か確認し、必要なら consumer 側を `--override-input core /Users/hiroaki/.config/core` 付きで再適用してから Karabiner-Elements を起動する。
+Karabiner-Elements の UI で設定保存すると、Home Manager が作る `~/.config/karabiner/karabiner.json` symlink が通常ファイルへ置換されることがある。反映確認時は symlink か確認し、必要なら consumer 側を `--override-input core /Users/hiroaki/.config/core` 付きで再適用する。
 
 ## Runtime contract
 
@@ -51,9 +52,7 @@ consumer は生の入力として `coreConfig` を渡します。repo 内の mod
 - `core.brew.resolved` は read-only の派生値。consumer が直接設定するものではない
 - `core.apps.aerospace.workspaces` は workspace 生成、key binding、monitor assignment、app rule に影響する
 - `core.apps.espanso.extraMatches` は generated YAML として追加される
-- Ghostty と Karabiner は現時点では配布有無だけを公開面にする
-- Karabiner の静的 keymap は consumer 設定 option ではないが、配布される入力挙動として扱う
-- Zellij は設定を配布するが、consumer 向けの追加 `core.*` option はまだ持たない
+- consumer option を持たない配布設定の具体値は `modules/` と `files/` を確認する
 
 ## Integration notes
 
@@ -121,6 +120,8 @@ nix-darwin Homebrew integration:
 - `home.nix` の required args や import 前提を変えたら README と llms を更新する
 - consumer 側の integration example が古くなる変更では README を更新する
 - `files/` や module 内部の現在値だけを変えた場合、docs に値を写さない
+- keymap、font、alias、package list、plugin list の具体値変更だけなら原則 docs 不要
+- consumer 影響や運用上の注意が増えた場合だけ、その注意を `llms.md` に反映する
 - inactive な module を active に戻す、または active な module を外す場合は repository shape と公開面を確認する
 
 ## Verification
