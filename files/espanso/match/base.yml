@@ -7,14 +7,14 @@ matches:
         type: "date"
         params:
           format: "%Y-%m-%d"
-  - trigger: ";genzai"
+  - trigger: ";genz"
     replace: "現在（{{now}}）"
     vars:
       - name: "now"
         type: "date"
         params:
           format: "%Y-%m-%d"
-  - trigger: ";genjou"
+  - trigger: ";genj"
     replace: "現状（{{now}}）"
     vars:
       - name: "now"
@@ -28,6 +28,13 @@ matches:
         type: "date"
         params:
           format: "%Y-%m-%dT%H:%M:%S"
+  - trigger: ";ts"
+    replace: "{{ts}}"
+    vars:
+      - name: "ts"
+        type: "date"
+        params:
+          format: "%Y%m%d%H%M%S"
   - trigger: ";end"
     replace: "23:59"
 
