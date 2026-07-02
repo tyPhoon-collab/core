@@ -66,6 +66,10 @@ matches:
     replace: "Downloads"
   - trigger: ";lorem"
     replace: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+  - trigger: ";thx"
+    replace: "ありがとうございます"
+  - trigger: ";ack"
+    replace: "承知しました"
 
   # 記号
   - trigger: ";;"
