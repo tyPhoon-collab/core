@@ -22,6 +22,7 @@ in
       keybind = super+ctrl+f=unbind
       keybind = global:super+space=toggle_quick_terminal
       quick-terminal-position = center
+      quick-terminal-size = 70%,80%
       quick-terminal-animation-duration = 0
       macos-titlebar-style = hidden
       confirm-close-surface = false
