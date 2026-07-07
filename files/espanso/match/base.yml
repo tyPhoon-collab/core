@@ -148,6 +148,8 @@ matches:
     replace: "アドバイスしてください。"
   - trigger: ";aieis"
     replace: "簡単に説明してください。"
+  - trigger: ";aicap"
+    replace: "コミットして、プッシュしてください。"
 
   # Neovim
   - trigger: ";vy"
