@@ -9,7 +9,7 @@ default-root-container-orientation = "auto"
 automatically-unhide-macos-hidden-apps = false
 
 after-startup-command = [
-  "exec-and-forget /opt/homebrew/bin/borders active_color=0xffd08770 inactive_color=0xff494d64 width=10.0 hidpi=on blacklist='Microsoft PowerPoint'",
+  "exec-and-forget /opt/homebrew/bin/borders active_color=0xffd08770 inactive_color=0x00494d64 width=10.0 hidpi=on blacklist='Microsoft PowerPoint'",
   "exec-and-forget /opt/homebrew/bin/aerospace reload-config",
 ]
 
