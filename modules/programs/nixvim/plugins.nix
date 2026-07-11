@@ -18,7 +18,7 @@
 
     extraConfigLuaPost = ''
       require("cutlass").setup({
-        exclude = { "ns", "nS", "xs", "xS", "os", "oS" },
+        exclude = { "ns", "nS", "xs", "xS", "os", "oS", "nd", "nD", "xd", "xD" },
       })
 
       require("lazyjj").setup({
