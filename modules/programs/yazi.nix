@@ -49,6 +49,11 @@
           run = "plugin smart-enter";
           desc = "Enter directory or open file";
         }
+        {
+          on = [ "g" "f" ];
+          run = "shell -- open .";
+          desc = "Open current directory in Finder";
+        }
       ];
     };
     plugins = {
