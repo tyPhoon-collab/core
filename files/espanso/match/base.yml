@@ -141,7 +141,7 @@ matches:
   - trigger: ";aine"
     replace: "編集は不要です。"
   - trigger: ";aism"
-    replace: "整理して教えてください。"
+    replace: "整理してください。"
   - trigger: ";aisr"
     replace: "セルフレビューしてください。"
   - trigger: ";aia"
@@ -150,6 +150,8 @@ matches:
     replace: "簡単に説明してください。"
   - trigger: ";aicap"
     replace: "コミットして、プッシュしてください。"
+  - trigger: ";aija"
+    replace: "これはただの質問です。"
 
   # Neovim
   - trigger: ";vy"
