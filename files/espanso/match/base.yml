@@ -150,8 +150,10 @@ matches:
     replace: "簡単に説明してください。"
   - trigger: ";aicap"
     replace: "コミットして、プッシュしてください。"
-  - trigger: ";aija"
+  - trigger: ";aijq"
     replace: "これはただの質問です。"
+  - trigger: ";aija"
+    replace: "これはただの相談です。"
 
   # Neovim
   - trigger: ";vy"
