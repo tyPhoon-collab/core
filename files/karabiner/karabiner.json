@@ -1917,6 +1917,25 @@
               ]
             }
           ]
+        },
+        {
+          "identifiers": {
+            "is_keyboard": true,
+            "product_id": 34,
+            "vendor_id": 1278
+          },
+          "simple_modifications": [
+            {
+              "from": {
+                "key_code": "caps_lock"
+              },
+              "to": [
+                {
+                  "key_code": "left_command"
+                }
+              ]
+            }
+          ]
         }
       ],
       "name": "大西配列",
