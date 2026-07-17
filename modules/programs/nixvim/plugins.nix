@@ -46,6 +46,10 @@
                 enable = config.core.system.devLevel >= 2;
                 package = null;
               };
+              sourcekit = {
+                enable = config.core.system.devLevel >= 2;
+                package = null;
+              };
               rust_analyzer = {
                 enable = config.core.system.devLevel >= 2;
                 installCargo = false;
