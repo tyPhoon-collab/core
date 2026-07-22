@@ -58,6 +58,8 @@ matches:
     replace: "👌"
   - trigger: ";pw"
     replace: "💪"
+  - trigger: ";bow"
+    replace: "🙇‍♂️"
 
   # テキスト
   - trigger: ";ps"
@@ -70,6 +72,8 @@ matches:
     replace: "ありがとうございます"
   - trigger: ";ack"
     replace: "承知しました"
+  - trigger: ";chk"
+    replace: "ご確認よろしくお願いします"
 
   # 記号
   - trigger: ";;"
@@ -133,7 +137,7 @@ matches:
   - trigger: ";air"
     replace: "調査してください。"
   - trigger: ";aiwr"
-    replace: "Webを調査してください。"
+    replace: "Webで調査してください。"
   - trigger: ";aif"
     replace: "修正してください。"
   - trigger: ";ait"
