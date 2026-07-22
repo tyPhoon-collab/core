@@ -1,0 +1,4 @@
+theme = "gruvbox-dark-hard"
+menu_bar = false
+wrap_lines = true
+watch = true
