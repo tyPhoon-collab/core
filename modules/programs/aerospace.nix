@@ -1,5 +1,4 @@
 {
-  pkgs,
   lib,
   config,
   coreConfig ? { },
@@ -35,11 +34,11 @@ let
     };
     "5" = {
       enable = true;
-      monitor = "main";
+      monitor = "3";
     };
     "6" = {
       enable = true;
-      monitor = "secondary";
+      monitor = "3";
     };
     "7" = {
       enable = true;
@@ -80,6 +79,11 @@ let
       enable = true;
       monitor = "main";
       appIds = [ "com.mitchellh.ghostty" ];
+    };
+    W = {
+      enable = true;
+      monitor = "secondary";
+      appIds = [ "dev.nekonata.denbrowser" ];
     };
   };
 
