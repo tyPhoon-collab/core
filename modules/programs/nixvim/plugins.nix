@@ -34,10 +34,18 @@
             (lib.genAttrs [ "jsonls" "lua_ls" "nixd" "markdown_oxide" ] (name: {
               enable = config.core.system.devLevel >= 1;
             }))
-            // (lib.genAttrs [ "bashls" "ts_ls" "pyright" "yamlls" "kotlin_language_server" "gopls" ] (name: {
+            // (lib.genAttrs [ "bashls" "ts_ls" "pyright" "yamlls" "gopls" ] (name: {
               enable = config.core.system.devLevel >= 2;
             }))
             // {
+              kotlin_lsp = {
+                enable = config.core.system.devLevel >= 2;
+                package = null;
+                cmd = [
+                  "kotlin-lsp"
+                  "--stdio"
+                ];
+              };
               jdtls = {
                 enable = config.core.system.devLevel >= 2;
                 packageFallback = true;

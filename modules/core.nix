@@ -14,6 +14,7 @@ let
 
     brews = [
       "FelixKratz/formulae/borders"
+      "JetBrains/utils/kotlin-lsp"
     ];
 
     casks = [
