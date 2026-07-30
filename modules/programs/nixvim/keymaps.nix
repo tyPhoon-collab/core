@@ -335,6 +335,12 @@
     }
     {
       mode = "n";
+      key = "<leader>hb";
+      action.__raw = "function() require(\"gitsigns\").blame_line() end";
+      options.desc = "Blame Line";
+    }
+    {
+      mode = "n";
       key = "<leader>y";
       action = "<cmd>Yazi<cr>";
       options.desc = "Yazi at File";
