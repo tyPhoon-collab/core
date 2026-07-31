@@ -476,7 +476,6 @@
                     "value": 1
                   }
                 ],
-                "description": "A-; → 数字 (Layer)",
                 "from": {
                   "key_code": "a",
                   "modifiers": {
@@ -764,6 +763,29 @@
                 "to": [
                   {
                     "key_code": "period"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "conditions": [
+                  {
+                    "name": "eisuu_layer",
+                    "type": "variable_if",
+                    "value": 1
+                  }
+                ],
+                "from": {
+                  "key_code": "b",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "quote"
                   }
                 ],
                 "type": "basic"
