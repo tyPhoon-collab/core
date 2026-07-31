@@ -49,6 +49,6 @@
     };
   };
 
-  # zsh を有効にしないと darwin-rebuild が正常に動作しない場合があります
-  programs.zsh.enable = true;
+  # compinit は consumer 側で fpath を整理してから初期化する。
+  programs.zsh.enableGlobalCompInit = false;
 }
