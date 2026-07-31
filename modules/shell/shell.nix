@@ -76,6 +76,8 @@ in
 
     extraEnv = ''
       $env.CARAPACE_BRIDGES = 'zsh,bash'
+      $env.EDITOR = "${config.programs.nixvim.package}/bin/nvim"
+      $env.VISUAL = "${config.programs.nixvim.package}/bin/nvim"
       $env.SUDO_EDITOR = "${config.programs.nixvim.package}/bin/nvim"
     '';
   };
