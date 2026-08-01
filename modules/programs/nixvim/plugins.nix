@@ -12,6 +12,7 @@
 
     extraPlugins = with pkgs.vimPlugins; [
       cutlass-nvim
+      mini-nvim
       plenary-nvim
       lazyjj-nvim
     ];
@@ -24,6 +25,28 @@
       require("lazyjj").setup({
         mapping = false,
       })
+
+      require("mini.ai").setup()
+      require("mini.bracketed").setup()
+      require("mini.cursorword").setup()
+      require("mini.files").setup({
+        windows = {
+          preview = true,
+        },
+      })
+
+      require("mini.indentscope").setup()
+      require("mini.jump2d").setup({
+        mappings = {
+          start_jumping = "",
+        },
+      })
+      require("mini.notify").setup()
+      require("mini.pairs").setup()
+      require("mini.pick").setup()
+      require("mini.statusline").setup()
+      require("mini.surround").setup()
+      require("mini.tabline").setup()
     '';
 
     plugins =
@@ -82,25 +105,25 @@
               {
                 mode = "n";
                 key = "gd";
-                action.__raw = "function() Snacks.picker.lsp_definitions() end";
+                action.__raw = "function() vim.lsp.buf.definition() end";
                 options.desc = "Goto Definition";
               }
               {
                 mode = "n";
                 key = "grr";
-                action.__raw = "function() Snacks.picker.lsp_references() end";
+                action.__raw = "function() vim.lsp.buf.references() end";
                 options.desc = "References";
               }
               {
                 mode = "n";
                 key = "gri";
-                action.__raw = "function() Snacks.picker.lsp_implementations() end";
+                action.__raw = "function() vim.lsp.buf.implementation() end";
                 options.desc = "Goto Implementation";
               }
               {
                 mode = "n";
                 key = "grt";
-                action.__raw = "function() Snacks.picker.lsp_type_definitions() end";
+                action.__raw = "function() vim.lsp.buf.type_definition() end";
                 options.desc = "Goto Type Definition";
               }
             ];
@@ -151,77 +174,11 @@
           };
         };
 
-        snacks = {
-          enable = true;
-          settings =
-            (lib.genAttrs
-              [
-                "explorer"
-                "indent"
-                "input"
-                "notifier"
-                "picker"
-                "quickfile"
-                "scope"
-                "statuscolumn"
-                "terminal"
-                "toggle"
-                "words"
-              ]
-              (_: {
-                enabled = true;
-              })
-            )
-            // {
-              dashboard = {
-                enabled = true;
-                sections = [
-                  { section = "header"; }
-                  {
-                    section = "keys";
-                    gap = 1;
-                    padding = 1;
-                  }
-                  {
-                    icon = " ";
-                    title = "Recent Files";
-                    section = "recent_files";
-                    indent = 2;
-                    padding = 1;
-                  }
-                  {
-                    icon = " ";
-                    title = "Projects";
-                    section = "projects";
-                    indent = 2;
-                    padding = 1;
-                  }
-                  # { section = "startup"; } # lazy.nvim dependency (startup stats) disabled
-                ];
-              };
-              scroll.enabled = false;
-              picker.sources.explorer = {
-                watch = true;
-                git_status = true;
-                git_status_open = true;
-                git_untracked = true;
-              };
-              lazygit = {
-                # Snacks' default lazygit config injects `os.editPreset = "nvim-remote"`.
-                # That path is fragile unless Neovim is started with a stable --listen pipe.
-                configure = false;
-              };
-            };
-        };
       }
       // (lib.genAttrs
         [
-          "lualine"
-          "bufferline"
           "web-devicons"
           "gitsigns"
-          "flash"
-          "nvim-autopairs"
           "todo-comments"
           "trouble"
           "yazi"

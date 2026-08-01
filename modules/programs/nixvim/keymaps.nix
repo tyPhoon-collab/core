@@ -17,6 +17,18 @@
     }
     {
       mode = "n";
+      key = "<leader>d";
+      action = "<cmd>bdelete<CR>";
+      options.desc = "Delete Buffer";
+    }
+    {
+      mode = "n";
+      key = "<leader>D";
+      action = "<cmd>bdelete!<CR>";
+      options.desc = "Force Delete Buffer";
+    }
+    {
+      mode = "n";
       key = "<leader>Q";
       action = "<cmd>qa!<CR>";
       options.desc = "Force Quit All";
@@ -126,55 +138,55 @@
     {
       mode = "n";
       key = "<leader>e";
-      action.__raw = "function() Snacks.explorer() end";
+      action.__raw = "function() MiniFiles.open() end";
       options.desc = "Explorer";
     }
     {
       mode = "n";
       key = "<leader>ff";
-      action.__raw = "function() Snacks.picker.files() end";
+      action.__raw = ''function() MiniPick.builtin.cli({ command = { "rg", "--files", "--glob", "!.git", "--glob", "!.jj", "--glob", "!node_modules" } }) end'';
       options.desc = "Find Files";
     }
     {
       mode = "n";
       key = "<leader>fg";
-      action.__raw = "function() Snacks.picker.grep() end";
+      action.__raw = "function() MiniPick.builtin.grep_live() end";
       options.desc = "Live Grep";
     }
     {
       mode = "n";
       key = "<leader>,";
-      action.__raw = "function() Snacks.picker.buffers() end";
+      action.__raw = "function() MiniPick.builtin.buffers() end";
       options.desc = "Buffers";
     }
     {
       mode = "n";
       key = "<leader>fh";
-      action.__raw = "function() Snacks.picker.help() end";
+      action.__raw = "function() MiniPick.builtin.help() end";
       options.desc = "Help Tags";
     }
     {
       mode = "n";
       key = "<leader><leader>";
-      action.__raw = "function() Snacks.picker.files({ hidden = true, ignored = true }) end";
+      action.__raw = ''function() MiniPick.builtin.cli({ command = { "rg", "--files", "--hidden", "--no-ignore", "--glob", "!.git", "--glob", "!.jj", "--glob", "!node_modules" } }) end'';
       options.desc = "Find Files";
     }
     {
       mode = "n";
       key = "<leader>/";
-      action.__raw = "function() Snacks.picker.grep() end";
+      action.__raw = "function() MiniPick.builtin.grep_live() end";
       options.desc = "Live Grep";
     }
     {
       mode = "n";
       key = "<leader>un";
-      action.__raw = "function() Snacks.picker.notifications() end";
-      options.desc = "Notification History";
+      action = "<cmd>messages<CR>";
+      options.desc = "Messages";
     }
     {
       mode = "n";
       key = "<leader>uw";
-      action.__raw = ''function() Snacks.toggle.option("wrap", { name = "Wrap" }):toggle() end'';
+      action.__raw = ''function() vim.opt.wrap = not vim.opt.wrap:get() end'';
       options.desc = "Toggle Wrap";
     }
     {
@@ -186,20 +198,14 @@
     {
       mode = "n";
       key = "<leader>ul";
-      action.__raw = ''function() Snacks.toggle.option("relativenumber", { name = "Relative Line Number" }):toggle() end'';
+      action.__raw = ''function() vim.opt.relativenumber = not vim.opt.relativenumber:get() end'';
       options.desc = "Toggle Relative Line Number";
     }
     {
       mode = "n";
       key = "<leader>t";
-      action.__raw = "function() Snacks.terminal() end";
-      options.desc = "Toggle Terminal";
-    }
-    {
-      mode = "n";
-      key = "<leader>z";
-      action.__raw = "function() Snacks.zen.zoom() end";
-      options.desc = "Zoom Window";
+      action = "<cmd>botright split | resize 15 | terminal<CR>";
+      options.desc = "Open Terminal";
     }
     {
       mode = "t";
@@ -225,42 +231,32 @@
         "x"
         "o"
       ];
-      key = "s";
-      action.__raw = "function() require('flash').jump() end";
-      options.desc = "Flash";
-    }
-    {
-      mode = [
-        "n"
-        "x"
-        "o"
-      ];
-      key = "S";
-      action.__raw = "function() require('flash').treesitter() end";
-      options.desc = "Flash Treesitter";
+      key = "<leader>j";
+      action.__raw = "function() MiniJump2d.start(MiniJump2d.builtin_opts.word_start) end";
+      options.desc = "Jump 2D";
     }
     {
       mode = "n";
       key = "<leader>sw";
-      action.__raw = "function() Snacks.picker.grep_word() end";
+      action.__raw = "function() MiniPick.builtin.grep({ pattern = vim.fn.expand('<cword>') }) end";
       options.desc = "Search Current Word";
     }
     {
       mode = "n";
       key = "<leader>st";
-      action.__raw = "function() Snacks.picker.todo_comments() end";
+      action.__raw = "function() MiniPick.builtin.grep({ pattern = 'TODO|FIXME|HACK|NOTE|WARN' }) end";
       options.desc = "Todo Comments";
     }
     {
       mode = "n";
       key = "<leader>sd";
-      action.__raw = "function() Snacks.picker.diagnostics() end";
+      action.__raw = "function() vim.diagnostic.setqflist({ open = true }) end";
       options.desc = "Diagnostics";
     }
     {
       mode = "n";
       key = "<leader>sD";
-      action.__raw = "function() Snacks.picker.diagnostics_buffer() end";
+      action.__raw = "function() vim.diagnostic.setloclist({ open = true }) end";
       options.desc = "Buffer Diagnostics";
     }
     {
@@ -278,7 +274,7 @@
     {
       mode = "n";
       key = "<leader>g";
-      action.__raw = "function() Snacks.lazygit() end";
+      action = "<cmd>botright split | resize 30 | terminal lazygit<CR>";
       options.desc = "Lazygit";
     }
     {
