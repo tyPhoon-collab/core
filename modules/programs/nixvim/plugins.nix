@@ -45,6 +45,21 @@
       require("mini.pairs").setup()
       require("mini.pick").setup()
       require("mini.statusline").setup()
+      local mode_colors = {
+        Normal = { fg = "#ebdbb2", bg = "#3c3836" },
+        Insert = { fg = "#ebdbb2", bg = "#458588" },
+        Visual = { fg = "#282828", bg = "#b8bb26" },
+        Replace = { fg = "#ebdbb2", bg = "#cc241d" },
+        Command = { fg = "#282828", bg = "#fabd2f" },
+        Other = { fg = "#ebdbb2", bg = "#8f3f71" },
+      }
+      for mode, colors in pairs(mode_colors) do
+        vim.api.nvim_set_hl(0, "MiniStatuslineMode" .. mode, {
+          fg = colors.fg,
+          bg = colors.bg,
+          bold = true,
+        })
+      end
       require("mini.surround").setup()
       require("mini.tabline").setup()
     '';
