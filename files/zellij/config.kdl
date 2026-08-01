@@ -1,3 +1,6 @@
+web_server true
+web_sharing "on"
+
 ui {
     pane_frames {
         rounded_corners true
