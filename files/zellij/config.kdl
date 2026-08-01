@@ -242,6 +242,9 @@ keybinds clear-defaults=true {
 }
 
 plugins {
+    ime-unlock location="https://github.com/tyPhoon-collab/zellij-ime-unlock/releases/download/v0.1.0/zellij-ime-unlock.wasm" {
+        macism_path "macism"
+    }
     about location="zellij:about"
     compact-bar location="zellij:compact-bar"
     configuration location="zellij:configuration"
@@ -259,6 +262,7 @@ plugins {
 }
 
 load_plugins {
+    ime-unlock
 }
 
 web_client {
