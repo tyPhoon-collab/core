@@ -27,7 +27,9 @@
       })
 
       require("mini.ai").setup()
-      require("mini.bracketed").setup()
+      require("mini.bracketed").setup({
+        comment = { suffix = "" },
+      })
       require("mini.cursorword").setup()
       require("mini.files").setup({
         windows = {
