@@ -1,0 +1,25 @@
+set -euo pipefail
+
+repo_root=$(git rev-parse --show-toplevel 2>/dev/null || true)
+if [ -z "$repo_root" ]; then
+  echo "hunk-tab: current directory is not a Git repository" >&2
+  exit 1
+fi
+
+repo_name=$(basename "$repo_root")
+tab_name="hunk:$repo_name"
+hunk_exe=$(command -v hunk || true)
+if [ -z "$hunk_exe" ]; then
+  echo "hunk-tab: hunk command not found" >&2
+  exit 1
+fi
+
+if zellij action list-tabs --json \
+  | jq -e --arg name "$tab_name" 'any(.[]; .name == $name)' >/dev/null; then
+  exec zellij action go-to-tab-name "$tab_name"
+fi
+
+exec zellij action new-tab \
+  --name "$tab_name" \
+  --cwd "$repo_root" \
+  -- "$hunk_exe" diff HEAD --watch

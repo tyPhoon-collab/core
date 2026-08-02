@@ -1,0 +1,18 @@
+set -euo pipefail
+
+repo_root=$(git rev-parse --show-toplevel 2>/dev/null || true)
+if [ -z "$repo_root" ]; then
+  echo "lazygit-tab: current directory is not a Git repository" >&2
+  exit 1
+fi
+
+repo_name=$(basename "$repo_root")
+tab_name="lazygit:$repo_name"
+lazygit_exe=$(command -v lazygit)
+
+if zellij action list-tabs --json \
+  | jq -e --arg name "$tab_name" 'any(.[]; .name == $name)' >/dev/null; then
+  exec zellij action go-to-tab-name "$tab_name"
+fi
+
+exec zellij action new-tab --name "$tab_name" --cwd "$repo_root" -- "$lazygit_exe"

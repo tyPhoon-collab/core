@@ -1,5 +1,20 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
+let
+  lazygitTab = pkgs.writeShellApplication {
+    name = "lazygit-tab";
+    runtimeInputs = with pkgs; [
+      coreutils
+      git
+      jq
+      config.programs.lazygit.package
+      zellij
+    ];
+    text = builtins.readFile ../../files/bin/lazygit-tab;
+  };
+in
 {
+  home.packages = [ lazygitTab ];
+
   programs.git = {
     enable = true;
     lfs.enable = true;

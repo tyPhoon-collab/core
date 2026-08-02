@@ -274,8 +274,36 @@
     {
       mode = "n";
       key = "<leader>g";
-      action = "<cmd>botright split | resize 30 | terminal lazygit<CR>";
+      action.__raw = ''
+        function()
+          if vim.env.ZELLIJ and vim.env.ZELLIJ ~= "" then
+            vim.fn.jobstart({ "lazygit-tab" }, {
+              cwd = vim.fn.getcwd(),
+              detach = true,
+            })
+          else
+            vim.cmd("botright split | resize 30 | terminal lazygit")
+          end
+        end
+      '';
       options.desc = "Lazygit";
+    }
+    {
+      mode = "n";
+      key = "<leader>H";
+      action.__raw = ''
+        function()
+          if vim.env.ZELLIJ and vim.env.ZELLIJ ~= "" then
+            vim.fn.jobstart({ "hunk-tab" }, {
+              cwd = vim.fn.getcwd(),
+              detach = true,
+            })
+          else
+            vim.cmd("botright split | terminal hunk diff HEAD --watch")
+          end
+        end
+      '';
+      options.desc = "Hunk Review";
     }
     {
       mode = "n";
