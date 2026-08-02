@@ -44,7 +44,7 @@ alt-semicolon = "resize smart +50"
 
 # __CORE_AEROSPACE_WORKSPACE_BINDINGS__
 
-alt-tab = "workspace-back-and-forth"
+alt-backtick = "workspace-back-and-forth"
 alt-shift-tab = "move-workspace-to-monitor --wrap-around next"
 alt-shift-semicolon = "mode service"
 
