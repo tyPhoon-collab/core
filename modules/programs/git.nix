@@ -15,6 +15,7 @@
       pull.rebase = true;
       push.autoSetupRemote = true;
       merge.conflictStyle = "zdiff3";
+      url."git@github.com:".insteadOf = "https://github.com/";
     };
   };
 
@@ -41,5 +42,8 @@
     };
   };
 
-  programs.gh.enable = true;
+  programs.gh = {
+    enable = true;
+    settings.git_protocol = "ssh";
+  };
 }
