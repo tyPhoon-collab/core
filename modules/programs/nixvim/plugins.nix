@@ -45,7 +45,6 @@
       })
       require("mini.notify").setup()
       require("mini.pairs").setup()
-      require("mini.pick").setup()
       require("mini.statusline").setup()
       local mode_colors = {
         Normal = { fg = "#ebdbb2", bg = "#3c3836" },
@@ -68,6 +67,8 @@
 
     plugins =
       {
+        fzf-lua.enable = true;
+
         lsp = {
           enable = config.core.system.devLevel >= 1;
           servers =

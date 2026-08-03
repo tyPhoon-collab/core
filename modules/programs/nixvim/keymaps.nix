@@ -144,37 +144,31 @@
     {
       mode = "n";
       key = "<leader>ff";
-      action.__raw = ''function() MiniPick.builtin.cli({ command = { "rg", "--files", "--glob", "!.git", "--glob", "!.jj", "--glob", "!node_modules" } }) end'';
+      action.__raw = "function() require('fzf-lua').files() end";
       options.desc = "Find Files";
     }
     {
       mode = "n";
-      key = "<leader>fg";
-      action.__raw = "function() MiniPick.builtin.grep_live() end";
-      options.desc = "Live Grep";
-    }
-    {
-      mode = "n";
-      key = "<leader>,";
-      action.__raw = "function() MiniPick.builtin.buffers() end";
-      options.desc = "Buffers";
-    }
-    {
-      mode = "n";
       key = "<leader>fh";
-      action.__raw = "function() MiniPick.builtin.help() end";
+      action.__raw = "function() require('fzf-lua').helptags() end";
       options.desc = "Help Tags";
     }
     {
       mode = "n";
+      key = "<leader>k";
+      action.__raw = "function() require('fzf-lua').builtin() end";
+      options.desc = "Fzf Commands";
+    }
+    {
+      mode = "n";
       key = "<leader><leader>";
-      action.__raw = ''function() MiniPick.builtin.cli({ command = { "rg", "--files", "--hidden", "--no-ignore", "--glob", "!.git", "--glob", "!.jj", "--glob", "!node_modules" } }) end'';
+      action.__raw = "function() require('fzf-lua').files({ hidden = true, no_ignore = true }) end";
       options.desc = "Find Files";
     }
     {
       mode = "n";
       key = "<leader>/";
-      action.__raw = "function() MiniPick.builtin.grep_live() end";
+      action.__raw = "function() require('fzf-lua').live_grep() end";
       options.desc = "Live Grep";
     }
     {
@@ -238,13 +232,13 @@
     {
       mode = "n";
       key = "<leader>sw";
-      action.__raw = "function() MiniPick.builtin.grep({ pattern = vim.fn.expand('<cword>') }) end";
+      action.__raw = "function() require('fzf-lua').grep_cword() end";
       options.desc = "Search Current Word";
     }
     {
       mode = "n";
       key = "<leader>st";
-      action.__raw = "function() MiniPick.builtin.grep({ pattern = 'TODO|FIXME|HACK|NOTE|WARN' }) end";
+      action.__raw = "function() require('fzf-lua').grep({ search = 'TODO|FIXME|HACK|NOTE|WARN' }) end";
       options.desc = "Todo Comments";
     }
     {
