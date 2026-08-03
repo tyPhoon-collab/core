@@ -180,8 +180,8 @@
     {
       mode = "n";
       key = "<leader>un";
-      action = "<cmd>messages<CR>";
-      options.desc = "Messages";
+      action.__raw = "function() MiniNotify.show_history() end";
+      options.desc = "Notification History";
     }
     {
       mode = "n";
