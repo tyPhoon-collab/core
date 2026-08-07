@@ -18,71 +18,71 @@ let
   defaultWorkspaces = {
     "1" = {
       enable = true;
-      monitor = "main";
+      monitor = "1";
     };
     "2" = {
       enable = true;
-      monitor = "main";
+      monitor = "1";
     };
     "3" = {
       enable = true;
-      monitor = "main";
+      monitor = "1";
     };
     "4" = {
       enable = true;
-      monitor = "main";
+      monitor = "1";
     };
     "5" = {
       enable = true;
-      monitor = "3";
+      monitor = [ "3" "1" ];
     };
     "6" = {
       enable = true;
-      monitor = "3";
+      monitor = [ "3" "2" ];
     };
     "7" = {
       enable = true;
-      monitor = "secondary";
+      monitor = "2";
     };
     "8" = {
       enable = true;
-      monitor = "secondary";
+      monitor = "2";
     };
     "9" = {
       enable = true;
-      monitor = "secondary";
+      monitor = "2";
     };
     "0" = {
       enable = true;
-      monitor = "secondary";
+      monitor = "2";
     };
     B = {
       enable = true;
-      monitor = "main";
+      monitor = "1";
     };
     D = {
       enable = true;
-      monitor = "secondary";
+      monitor = "2";
       appIds = [ "com.hnc.Discord" ];
     };
     M = {
       enable = true;
-      monitor = "main";
+      monitor = "1";
       appIds = [ "com.apple.Music" ];
     };
     O = {
       enable = true;
-      monitor = "secondary";
+      monitor = "2";
       appIds = [ "md.obsidian" ];
     };
     T = {
       enable = true;
-      monitor = "main";
+      monitor = "1";
       appIds = [ "com.mitchellh.ghostty" ];
     };
     W = {
       enable = true;
-      monitor = "secondary";
+      monitor = "2";
       appIds = [ "dev.nekonata.denbrowser" ];
     };
   };
@@ -136,8 +136,14 @@ let
       workspace:
       let
         monitor = cfg.workspaces.${workspace}.monitor;
+        monitors = if builtins.isList monitor then monitor else [ monitor ];
+        renderedMonitors =
+          if builtins.length monitors == 1 then
+            ''"${builtins.head monitors}"''
+          else
+            ''[${lib.concatMapStringsSep ", " (monitor: ''"${monitor}"'') monitors}]'';
       in
-      ''"${workspace}" = "${monitor}"''
+      ''"${workspace}" = ${renderedMonitors}''
     ) workspaceNames}'';
 
   workspaceAwareToml =
@@ -204,10 +210,13 @@ in
             };
 
             monitor = lib.mkOption {
-              type = lib.types.str;
-              default = "main";
-              example = "secondary";
-              description = "Monitor assignment for workspace-to-monitor-force-assignment.";
+              type = lib.types.oneOf [
+                lib.types.str
+                (lib.types.listOf lib.types.str)
+              ];
+              default = "1";
+              example = [ "3" "1" ];
+              description = "Monitor pattern, or ordered monitor patterns for workspace-to-monitor-force-assignment; first matching pattern wins.";
             };
 
             appIds = lib.mkOption {

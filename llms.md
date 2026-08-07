@@ -51,6 +51,7 @@ consumer は生の入力として `coreConfig` を渡します。repo 内の mod
 
 - `core.brew.resolved` は read-only の派生値。consumer が直接設定するものではない
 - `core.apps.aerospace.workspaces` は workspace 生成、key binding、monitor assignment、app rule に影響する
+- `core.apps.aerospace.workspaces.<name>.monitor` は monitor pattern の文字列、または優先順リスト。リストは先頭から最初に一致した monitor を使う
 - `core.apps.espanso.extraMatches` は generated YAML として追加される
 - consumer option を持たない配布設定の具体値は `modules/` と `files/` を確認する
 
@@ -81,6 +82,8 @@ home-manager.lib.homeManagerConfiguration {
   ];
 }
 ```
+
+AeroSpace workspace の monitor fallback は `monitor = [ "3" "1" ];` のように指定します。
 
 nix-darwin or NixOS with Home Manager:
 

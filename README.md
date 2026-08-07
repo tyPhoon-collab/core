@@ -71,6 +71,7 @@ consumer 側は `coreConfig` を渡し、core 内部では正規化された `co
   coreConfig = {
     identity.email = "you@example.com";
     system.desktop = true;
+    apps.aerospace.workspaces."5".monitor = [ "3" "1" ];
   };
 }
 ```
