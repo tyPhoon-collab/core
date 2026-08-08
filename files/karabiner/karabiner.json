@@ -8,6 +8,203 @@
       "complex_modifications": {
         "rules": [
           {
+            "description": "Tab長押し→アプリ起動レイヤー",
+            "manipulators": [
+              {
+                "description": "Tab単押し→Tab / 長押し→レイヤー",
+                "from": {
+                  "key_code": "tab"
+                },
+                "parameters": {
+                  "basic.to_if_alone_timeout_milliseconds": 250
+                },
+                "to": [
+                  {
+                    "set_variable": {
+                      "name": "tab_layer",
+                      "value": 1
+                    }
+                  }
+                ],
+                "to_after_key_up": [
+                  {
+                    "set_variable": {
+                      "name": "tab_layer",
+                      "value": 0
+                    }
+                  }
+                ],
+                "to_if_alone": [
+                  {
+                    "key_code": "tab"
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "conditions": [
+                  {
+                    "name": "tab_layer",
+                    "type": "variable_if",
+                    "value": 1
+                  }
+                ],
+                "description": "Tab + T (大西: J)→Ghostty",
+                "from": {
+                  "key_code": "j"
+                },
+                "to": [
+                  {
+                    "software_function": {
+                      "open_application": {
+                        "bundle_identifier": "com.mitchellh.ghostty"
+                      }
+                    }
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "conditions": [
+                  {
+                    "name": "tab_layer",
+                    "type": "variable_if",
+                    "value": 1
+                  }
+                ],
+                "description": "Tab + B (大西: /)→Zen Browser",
+                "from": {
+                  "key_code": "slash"
+                },
+                "to": [
+                  {
+                    "software_function": {
+                      "open_application": {
+                        "bundle_identifier": "app.zen-browser.zen"
+                      }
+                    }
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "conditions": [
+                  {
+                    "name": "tab_layer",
+                    "type": "variable_if",
+                    "value": 1
+                  }
+                ],
+                "description": "Tab + S (大西: L)→Slack",
+                "from": {
+                  "key_code": "l"
+                },
+                "to": [
+                  {
+                    "software_function": {
+                      "open_application": {
+                        "bundle_identifier": "com.tinyspeck.slackmacgap"
+                      }
+                    }
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "conditions": [
+                  {
+                    "name": "tab_layer",
+                    "type": "variable_if",
+                    "value": 1
+                  }
+                ],
+                "description": "Tab + E (大西: A)→Finder (Explorer)",
+                "from": {
+                  "key_code": "a"
+                },
+                "to": [
+                  {
+                    "software_function": {
+                      "open_application": {
+                        "bundle_identifier": "com.apple.finder"
+                      }
+                    }
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "conditions": [
+                  {
+                    "name": "tab_layer",
+                    "type": "variable_if",
+                    "value": 1
+                  }
+                ],
+                "description": "Tab + D (大西: M)→Discord",
+                "from": {
+                  "key_code": "m"
+                },
+                "to": [
+                  {
+                    "software_function": {
+                      "open_application": {
+                        "bundle_identifier": "com.hnc.Discord"
+                      }
+                    }
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "conditions": [
+                  {
+                    "name": "tab_layer",
+                    "type": "variable_if",
+                    "value": 1
+                  }
+                ],
+                "description": "Tab + W (大西: U)→dev.nekonata.denbrowser",
+                "from": {
+                  "key_code": "u"
+                },
+                "to": [
+                  {
+                    "software_function": {
+                      "open_application": {
+                        "bundle_identifier": "dev.nekonata.denbrowser"
+                      }
+                    }
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "conditions": [
+                  {
+                    "name": "tab_layer",
+                    "type": "variable_if",
+                    "value": 1
+                  }
+                ],
+                "description": "Tab + O (大西: F)→Obsidian",
+                "from": {
+                  "key_code": "f"
+                },
+                "to": [
+                  {
+                    "software_function": {
+                      "open_application": {
+                        "bundle_identifier": "md.obsidian"
+                      }
+                    }
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
             "description": "LShift単押し→英数",
             "enabled": false,
             "manipulators": [
