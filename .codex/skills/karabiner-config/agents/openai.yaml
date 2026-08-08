@@ -1,0 +1,4 @@
+interface:
+  display_name: "Karabiner Config"
+  short_description: "Safely edit and verify Karabiner JSON"
+  default_prompt: "Use $karabiner-config to edit and verify files/karabiner/karabiner.json."
