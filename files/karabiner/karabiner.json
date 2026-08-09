@@ -6,6 +6,9 @@
   "profiles": [
     {
       "complex_modifications": {
+        "parameters": {
+          "basic.to_if_alone_timeout_milliseconds": 300
+        },
         "rules": [
           {
             "description": "Tab長押し→アプリ起動レイヤー",
@@ -14,9 +17,6 @@
                 "description": "Tab単押し→Tab / 長押し→レイヤー",
                 "from": {
                   "key_code": "tab"
-                },
-                "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 250
                 },
                 "to": [
                   {
@@ -205,60 +205,6 @@
             ]
           },
           {
-            "description": "LShift単押し→英数",
-            "enabled": false,
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "left_shift",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "left_shift"
-                  }
-                ],
-                "to_if_alone": [
-                  {
-                    "key_code": "japanese_eisuu"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "RShift単押し→かな",
-            "enabled": false,
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "right_shift",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "right_shift"
-                  }
-                ],
-                "to_if_alone": [
-                  {
-                    "key_code": "japanese_kana"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
             "description": "英数/かなレイヤー",
             "manipulators": [
               {
@@ -377,9 +323,6 @@
                       "any"
                     ]
                   }
-                },
-                "parameters": {
-                  "basic.to_if_alone_timeout_milliseconds": 300
                 },
                 "to": [
                   {
@@ -1247,33 +1190,6 @@
                 "to": [
                   {
                     "key_code": "return_or_enter"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Cmd単押→BS",
-            "enabled": false,
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "left_command",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "left_command"
-                  }
-                ],
-                "to_if_alone": [
-                  {
-                    "key_code": "delete_or_backspace"
                   }
                 ],
                 "type": "basic"
