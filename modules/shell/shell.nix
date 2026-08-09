@@ -7,6 +7,8 @@ let
   cfg = config.core.shell.nushell;
   defaultAliases = {
     b = "bat";
+    bru = "brew update";
+    brg = "brew upgrade";
     lg = "lazygit";
     j = "just";
     la = "eza -a";
