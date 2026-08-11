@@ -149,6 +149,12 @@
     }
     {
       mode = "n";
+      key = "<leader>,";
+      action.__raw = "function() require('fzf-lua').buffers() end";
+      options.desc = "Find Buffers";
+    }
+    {
+      mode = "n";
       key = "<leader>fh";
       action.__raw = "function() require('fzf-lua').helptags() end";
       options.desc = "Help Tags";
