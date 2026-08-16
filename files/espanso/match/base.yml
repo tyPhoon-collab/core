@@ -126,6 +126,8 @@ matches:
     replace: 'git commit -m "test: $|$"'
   - trigger: ";gom"
     replace: "origin/main"
+  - trigger: ";wsw"
+    replace: "wt switch"
 
   # AI
   - trigger: ";aib"
