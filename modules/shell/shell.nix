@@ -65,6 +65,7 @@ in
       $env.config.show_banner = false
 
       source ${pkgs.nu_scripts}/share/nu_scripts/aliases/git/git-aliases.nu
+      source ${../../files/nushell/completions/zmx.nu}
 
       # zellij auto-start was convenient, but too aggressive as a shared default.
       # Re-enable if you want terminal-specific opt-in again.
