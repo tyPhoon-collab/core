@@ -20,6 +20,8 @@ in
       keybind = alt+down=unbind
       keybind = super+enter=unbind
       keybind = super+ctrl+f=unbind
+      keybind = super+j=scroll_page_lines:3
+      keybind = super+k=scroll_page_lines:-3
       keybind = global:super+space=toggle_quick_terminal
       quick-terminal-position = center
       quick-terminal-size = 70%,80%
