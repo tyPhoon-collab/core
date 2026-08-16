@@ -283,6 +283,26 @@
             })
           else
             vim.cmd("botright split | resize 30 | terminal lazygit")
+            local lazygit_buf = vim.api.nvim_get_current_buf()
+            local lazygit_win = vim.api.nvim_get_current_win()
+            vim.api.nvim_create_autocmd("TermClose", {
+              buffer = lazygit_buf,
+              once = true,
+              callback = function()
+                vim.schedule(function()
+                  if
+                    vim.api.nvim_win_is_valid(lazygit_win)
+                    and vim.api.nvim_win_get_buf(lazygit_win) == lazygit_buf
+                  then
+                    vim.api.nvim_win_close(lazygit_win, true)
+                  end
+                  if vim.api.nvim_buf_is_valid(lazygit_buf) then
+                    vim.api.nvim_buf_delete(lazygit_buf, { force = true })
+                  end
+                end)
+              end,
+            })
+            vim.cmd("startinsert")
           end
         end
       '';
