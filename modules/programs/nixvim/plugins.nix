@@ -36,6 +36,20 @@
           preview = true,
         },
       })
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "MiniFilesBufferCreate",
+        callback = function(args)
+          local buf_id = args.data.buf_id
+          vim.keymap.set("n", "<Left>", MiniFiles.go_out, {
+            buffer = buf_id,
+            desc = "Go out of directory",
+          })
+          vim.keymap.set("n", "<Right>", MiniFiles.go_in, {
+            buffer = buf_id,
+            desc = "Go in entry",
+          })
+        end,
+      })
 
       require("mini.indentscope").setup()
       require("mini.jump2d").setup({
