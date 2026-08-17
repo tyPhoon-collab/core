@@ -204,7 +204,13 @@
     {
       mode = "n";
       key = "<leader>t";
-      action = "<cmd>botright split | resize 15 | terminal<CR>";
+      action.__raw = ''
+        function()
+          vim.cmd("botright split | resize 15")
+          vim.cmd("terminal")
+          vim.cmd("startinsert")
+        end
+      '';
       options.desc = "Open Terminal";
     }
     {
@@ -320,6 +326,26 @@
             })
           else
             vim.cmd("botright split | terminal hunk diff HEAD --watch")
+            local hunk_buf = vim.api.nvim_get_current_buf()
+            local hunk_win = vim.api.nvim_get_current_win()
+            vim.api.nvim_create_autocmd("TermClose", {
+              buffer = hunk_buf,
+              once = true,
+              callback = function()
+                vim.schedule(function()
+                  if
+                    vim.api.nvim_win_is_valid(hunk_win)
+                    and vim.api.nvim_win_get_buf(hunk_win) == hunk_buf
+                  then
+                    vim.api.nvim_win_close(hunk_win, true)
+                  end
+                  if vim.api.nvim_buf_is_valid(hunk_buf) then
+                    vim.api.nvim_buf_delete(hunk_buf, { force = true })
+                  end
+                end)
+              end,
+            })
+            vim.cmd("startinsert")
           end
         end
       '';
