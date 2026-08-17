@@ -104,26 +104,8 @@ matches:
   # コマンド
   - regex: ";z(?P<session>\\w+) "
     replace: "zellij a -c {{session}}"
-  - trigger: ";gc "
-    replace: 'git commit -m "$|$"'
-  - trigger: ";gcft"
-    replace: 'git commit -m "feat: $|$"'
-  - trigger: ";gcfx"
-    replace: 'git commit -m "fix: $|$"'
-  - trigger: ";gcrf"
-    replace: 'git commit -m "refactor: $|$"'
-  - trigger: ";gcch"
-    replace: 'git commit -m "chore: $|$"'
-  - trigger: ";gcdc"
-    replace: 'git commit -m "docs: $|$"'
-  - trigger: ";gcci"
-    replace: 'git commit -m "ci: $|$"'
-  - trigger: ";gcts"
-    replace: 'git commit -m "test: $|$"'
-  - trigger: ";gom"
-    replace: "origin/main"
   - trigger: ";wsw"
-    replace: "wt switch"
+    replace: "wt switch "
 
   # AI
   - trigger: ";ab"
