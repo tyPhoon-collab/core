@@ -63,6 +63,8 @@ in
       $env.config.buffer_editor = "nvim"
       $env.config.edit_mode = "vi"
       $env.config.show_banner = false
+      $env.config.history.file_format = "sqlite"
+      $env.config.history.isolation = true
 
       source ${pkgs.nu_scripts}/share/nu_scripts/aliases/git/git-aliases.nu
       source ${../../files/nushell/completions/zmx.nu}
