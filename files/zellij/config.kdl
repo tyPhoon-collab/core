@@ -1,4 +1,4 @@
-web_sharing "on"
+web_sharing "disabled"
 
 ui {
     pane_frames {
