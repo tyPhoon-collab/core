@@ -2,3 +2,4 @@ theme = "gruvbox-dark-hard"
 menu_bar = true
 wrap_lines = true
 watch = true
+agent_notes = true
