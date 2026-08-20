@@ -113,6 +113,10 @@
                 enable = config.core.system.devLevel >= 2;
                 package = null;
               };
+              roslyn_ls = {
+                enable = config.core.system.devLevel >= 2;
+                package = null;
+              };
               rust_analyzer = {
                 enable = config.core.system.devLevel >= 2;
                 installCargo = false;
