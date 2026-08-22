@@ -27,6 +27,7 @@
       })
 
       require("mini.ai").setup()
+      require("mini.completion").setup()
       require("mini.bracketed").setup({
         comment = { suffix = "" },
       })
@@ -59,6 +60,15 @@
       })
       require("mini.notify").setup()
       require("mini.pairs").setup()
+      vim.keymap.set("i", "<CR>", function()
+        if vim.fn.complete_info().selected ~= -1 then
+          return "\25"
+        end
+        return MiniPairs.cr()
+      end, {
+        expr = true,
+        desc = "Confirm completion or insert pair",
+      })
       require("mini.statusline").setup()
       local mode_colors = {
         Normal = { fg = "#ebdbb2", bg = "#3c3836" },
@@ -163,25 +173,6 @@
                 options.desc = "Goto Type Definition";
               }
             ];
-          };
-        };
-
-        cmp = {
-          enable = true;
-          autoEnableSources = true;
-          settings = {
-            sources = [
-              { name = "nvim_lsp"; }
-              { name = "path"; }
-              { name = "buffer"; }
-            ];
-            mapping = {
-              "<C-Space>" = "cmp.mapping.complete()";
-              "<C-e>" = "cmp.mapping.close()";
-              "<CR>" = "cmp.mapping.confirm({ select = true })";
-              "<Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
-              "<S-Tab>" = "cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})";
-            };
           };
         };
 
