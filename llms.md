@@ -8,6 +8,7 @@
 
 - `README.md`: 人向けに repo の目的、統合方法、公開面の境界を書く
 - `llms.md`: AI 向けに公開 option、runtime contract、統合前提、壊しやすい注意を書く
+- `lsp.md`: LSP の有効条件、実行時依存、project ごとの前提を書く。設定の最終的な source of truth は `modules/programs/nixvim/plugins.nix`
 - `AGENTS.md`: 作業する agent 向けに検証手順と docs 更新判断を書く
 - 静的設定ファイル、keymap、plugin、font、alias、package list の現在値は docs に複製しない。公開面だけを docs に残す
 
@@ -20,6 +21,7 @@
 - `modules/system/*`: nix-darwin 側から必要に応じて import する補助 module
 - `files/*`: module から配布する静的設定。具体値はここを SoT とする
 - `lib/home-manager.nix`: Home Manager 統合時の共通既定値
+- `lsp.md`: Neovim LSP の有効条件と Consumer 側の runtime 前提
 
 ## Known pitfalls
 

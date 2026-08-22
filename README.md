@@ -78,6 +78,8 @@ consumer 側は `coreConfig` を渡し、core 内部では正規化された `co
 
 公開される `core.*` option の一覧、runtime contract、実装上の注意は `llms.md` を参照してください。細かい tool 設定、keymap、font、alias、package list、静的 config の現在値は `modules/` と `files/` が source of truth です。
 
+Neovim LSP の有効条件と Consumer 側の runtime 前提は [lsp.md](lsp.md) を参照してください。
+
 ## Darwin 統合
 
 consumer 側で Homebrew まで統合する場合は、必要に応じて system module を追加 import します。
@@ -97,4 +99,4 @@ consumer 側で Homebrew まで統合する場合は、必要に応じて system
 
 ## ドキュメント方針
 
-README は repo の目的、統合方法、公開面の境界だけを書きます。公開 option と更新判断は `llms.md`、作業規約は `AGENTS.md` を参照してください。現在値の一覧は docs に写さず、コードを source of truth とします。
+README は repo の目的、統合方法、公開面の境界だけを書きます。公開 option と更新判断は `llms.md`、LSP の runtime 前提は `lsp.md`、作業規約は `AGENTS.md` を参照してください。現在値の一覧は docs に写さず、コードを source of truth とします。
