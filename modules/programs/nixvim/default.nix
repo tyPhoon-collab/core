@@ -107,8 +107,7 @@
     colorschemes.gruvbox = {
       enable = true;
       settings = {
-        contrast = "dark";
-        transparent_mode = true;
+        transparent_mode = false;
       };
     };
   };
