@@ -27,7 +27,6 @@
       })
 
       require("mini.ai").setup()
-      require("mini.completion").setup()
       require("mini.bracketed").setup({
         comment = { suffix = "" },
       })
@@ -91,6 +90,16 @@
 
     plugins =
       {
+        blink-cmp = {
+          enable = true;
+          settings = {
+            keymap.preset = "enter";
+            completion.list.selection = {
+              preselect = true;
+              auto_insert = true;
+            };
+          };
+        };
         fzf-lua.enable = true;
 
         lsp = {
