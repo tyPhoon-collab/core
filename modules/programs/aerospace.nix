@@ -56,10 +56,6 @@ let
       enable = true;
       monitor = "2";
     };
-    B = {
-      enable = true;
-      monitor = "1";
-    };
     D = {
       enable = true;
       monitor = "2";
@@ -82,7 +78,7 @@ let
     };
     W = {
       enable = true;
-      monitor = "2";
+      monitor = "1";
       appIds = [ "dev.nekonata.denbrowser" ];
     };
   };
