@@ -1,10 +1,14 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }:
 let
   cfg = config.core.shell.nushell;
+  worktrunkNushellConfig = pkgs.runCommand "worktrunk-nushell-config.nu" { } ''
+    ${lib.getExe pkgs.worktrunk} config shell init nu > $out
+  '';
   defaultAliases = {
     b = "bat";
     bru = "brew update";
@@ -22,6 +26,8 @@ let
   };
 in
 {
+  home.packages = [ pkgs.worktrunk ];
+
   programs.direnv = {
     enable = true;
     enableNushellIntegration = true;
@@ -68,6 +74,7 @@ in
 
       source ${pkgs.nu_scripts}/share/nu_scripts/aliases/git/git-aliases.nu
       source ${../../files/nushell/completions/zmx.nu}
+      source ${worktrunkNushellConfig}
 
       # zellij auto-start was convenient, but too aggressive as a shared default.
       # Re-enable if you want terminal-specific opt-in again.
