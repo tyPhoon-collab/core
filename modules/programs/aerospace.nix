@@ -34,11 +34,17 @@ let
     };
     "5" = {
       enable = true;
-      monitor = [ "3" "1" ];
+      monitor = [
+        "3"
+        "1"
+      ];
     };
     "6" = {
       enable = true;
-      monitor = [ "3" "2" ];
+      monitor = [
+        "3"
+        "2"
+      ];
     };
     "7" = {
       enable = true;
@@ -83,31 +89,10 @@ let
     };
   };
 
-  workspaceOrder = [
-    "1"
-    "2"
-    "3"
-    "4"
-    "5"
-    "6"
-    "7"
-    "8"
-    "9"
-    "0"
-    "B"
-    "D"
-    "M"
-    "O"
-    "S"
-    "T"
-  ];
-
   workspaceEnabled =
     workspace: builtins.hasAttr workspace cfg.workspaces && cfg.workspaces.${workspace}.enable;
 
-  workspaceNames = lib.filter workspaceEnabled (
-    lib.unique (workspaceOrder ++ lib.attrNames cfg.workspaces)
-  );
+  workspaceNames = lib.filter workspaceEnabled (lib.attrNames cfg.workspaces);
 
   workspaceKey = workspace: lib.toLower workspace;
 
@@ -137,7 +122,7 @@ let
           if builtins.length monitors == 1 then
             ''"${builtins.head monitors}"''
           else
-            ''[${lib.concatMapStringsSep ", " (monitor: ''"${monitor}"'') monitors}]'';
+            "[${lib.concatMapStringsSep ", " (monitor: ''"${monitor}"'') monitors}]";
       in
       ''"${workspace}" = ${renderedMonitors}''
     ) workspaceNames}'';
@@ -211,7 +196,10 @@ in
                 (lib.types.listOf lib.types.str)
               ];
               default = "1";
-              example = [ "3" "1" ];
+              example = [
+                "3"
+                "1"
+              ];
               description = "Monitor pattern, or ordered monitor patterns for workspace-to-monitor-force-assignment; first matching pattern wins.";
             };
 
