@@ -50,9 +50,21 @@
           desc = "Enter directory or open file";
         }
         {
-          on = [ "g" "f" ];
+          on = [
+            "g"
+            "f"
+          ];
           run = "shell -- open .";
           desc = "Open current directory in Finder";
+        }
+        {
+          on = [
+            "c"
+            "y"
+          ];
+          run = "shell -- if [ -f %h ]; then pbcopy < %h; fi";
+          desc = "Copy hovered file contents";
+          for = "macos";
         }
       ];
     };
