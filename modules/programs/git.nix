@@ -48,9 +48,9 @@ in
     enable = true;
     settings = {
       git = {
-        pagers = [
+        diffRenderers = [
           {
-            pager = "${lib.getExe config.programs.delta.package} --no-gitconfig --dark --syntax-theme=gruvbox-dark --paging=never --hyperlinks --hyperlinks-file-link-format=\"lazygit-edit://{path}:{line}\"";
+            command = "${lib.getExe config.programs.delta.package} --no-gitconfig --dark --syntax-theme=gruvbox-dark --paging=never --hyperlinks --hyperlinks-file-link-format=\"lazygit-edit://{path}:{line}\"";
           }
         ];
       };
