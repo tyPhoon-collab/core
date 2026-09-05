@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ hunk, pkgs, ... }:
 let
   hunkTab = pkgs.writeShellApplication {
     name = "hunk-tab";
@@ -12,7 +12,18 @@ let
   };
 in
 {
-  home.packages = [ hunkTab ];
+  imports = [ hunk.homeManagerModules.default ];
 
-  xdg.configFile."hunk/config.toml".source = ../../files/hunk/config.toml;
+  programs.hunk = {
+    enable = true;
+    settings = {
+      theme = "gruvbox-dark-hard";
+      menu_bar = true;
+      wrap_lines = true;
+      watch = true;
+      agent_notes = true;
+    };
+  };
+
+  home.packages = [ hunkTab ];
 }

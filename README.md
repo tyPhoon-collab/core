@@ -43,6 +43,7 @@ extraSpecialArgs = {
   };
   nixvim = inputs.nixvim;
   yaziPlugins = inputs.yazi-plugins;
+  hunk = inputs.hunk;
 };
 ```
 
@@ -60,7 +61,7 @@ Home Manager module から import します。
 }
 ```
 
-`home.nix` が前提にする主な引数は `username`、`homeDirectory`、`coreConfig`、`nixvim`、`yaziPlugins` です。
+`home.nix` が前提にする主な引数は `username`、`homeDirectory`、`coreConfig`、`nixvim`、`yaziPlugins`、`hunk` です。
 
 ## 設定
 

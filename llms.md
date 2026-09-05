@@ -36,6 +36,7 @@ Karabiner-Elements の UI で設定保存すると、Home Manager が作る `~/.
 - `coreConfig`
 - `nixvim`
 - `yaziPlugins`
+- `hunk`
 
 consumer は生の入力として `coreConfig` を渡します。repo 内の module は、評価後に正規化された `config.core` を参照します。
 
@@ -76,6 +77,7 @@ home-manager.lib.homeManagerConfiguration {
     inherit username homeDirectory core coreConfig;
     nixvim = inputs.nixvim;
     yaziPlugins = inputs.yazi-plugins;
+    hunk = inputs.hunk;
   };
   modules = [
     ({ core, ... }: {
@@ -100,6 +102,7 @@ in
       inherit username homeDirectory core coreConfig;
       nixvim = inputs.nixvim;
       yaziPlugins = inputs.yazi-plugins;
+      hunk = inputs.hunk;
     };
   };
 }
