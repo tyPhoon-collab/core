@@ -28,6 +28,7 @@ in
       quick-terminal-animation-duration = 0
       macos-titlebar-style = hidden
       confirm-close-surface = false
+      copy-on-select = clipboard
     '';
   };
 }
