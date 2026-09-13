@@ -23,6 +23,7 @@ let
     nhh = "nh home switch .";
     nho = "nh os switch .";
     v = "nvim";
+    x = "zmx";
     zw = "zellij -l welcome";
   };
 in
