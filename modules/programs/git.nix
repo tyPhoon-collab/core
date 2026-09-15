@@ -48,6 +48,22 @@ in
     enable = true;
     settings = {
       promptToReturnFromSubprocess = false;
+      customCommands = [
+        {
+          key = "<c-t>";
+          context = "files";
+          command = "hunk diff HEAD";
+          description = "Review all changes with Hunk";
+          output = "terminal";
+        }
+        {
+          key = "<c-t>";
+          context = "commits, commitFiles";
+          command = "hunk show {{.SelectedCommit.Hash}}";
+          description = "Review commit with Hunk";
+          output = "terminal";
+        }
+      ];
       git = {
         diffRenderers = [
           {
