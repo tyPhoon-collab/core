@@ -64,6 +64,7 @@ in
           output = "terminal";
         }
       ];
+      os.editPreset = "nvim";
       git = {
         diffRenderers = [
           {
