@@ -10,7 +10,7 @@
     ../programs/karabiner.nix
   ];
 
-  config = lib.mkIf pkgs.stdenv.isDarwin {
+  config = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
     home.packages = lib.optionals config.core.system.desktop [
       pkgs.macism
     ];

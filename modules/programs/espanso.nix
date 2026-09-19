@@ -30,7 +30,7 @@ in
   };
 
   config = lib.mkMerge [
-    (lib.mkIf (pkgs.stdenv.isDarwin && cfg.enable) {
+    (lib.mkIf (pkgs.stdenv.hostPlatform.isDarwin && cfg.enable) {
       xdg.configFile = {
         "espanso/config/default.yml".source = ../../files/espanso/config/default.yml;
         "espanso/match/base.yml".source = ../../files/espanso/match/base.yml;
@@ -38,7 +38,7 @@ in
       // extraMatchFile;
     })
 
-    (lib.mkIf (pkgs.stdenv.isLinux && cfg.enable) {
+    (lib.mkIf (pkgs.stdenv.hostPlatform.isLinux && cfg.enable) {
       # Avoid parent-directory link conflicts with files created by services.espanso.
       xdg.configFile = {
         "espanso/config/default.yml".source = lib.mkForce ../../files/espanso/config/default.yml;

@@ -5,7 +5,7 @@
   ...
 }:
 {
-  config = lib.mkIf (pkgs.stdenv.isDarwin && config.core.brew.enable) {
+  config = lib.mkIf (pkgs.stdenv.hostPlatform.isDarwin && config.core.brew.enable) {
     homebrew = {
       enable = true;
       onActivation = {

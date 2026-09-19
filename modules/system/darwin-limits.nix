@@ -7,7 +7,7 @@
 let
   cfg = config.core.system.openFiles;
 in
-lib.mkIf pkgs.stdenv.isDarwin {
+lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
   assertions = [
     {
       assertion = cfg.soft <= cfg.hard;

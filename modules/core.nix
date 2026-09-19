@@ -97,7 +97,7 @@ in
       aerospace.enable = lib.mkOption {
         type = lib.types.bool;
         default = fromPath [ "apps" "aerospace" "enable" ] (
-          pkgs.stdenv.isDarwin && config.core.system.desktop
+          pkgs.stdenv.hostPlatform.isDarwin && config.core.system.desktop
         );
         description = "Whether the core AeroSpace configuration should be installed.";
       };
@@ -111,7 +111,7 @@ in
       karabiner.enable = lib.mkOption {
         type = lib.types.bool;
         default = fromPath [ "apps" "karabiner" "enable" ] (
-          pkgs.stdenv.isDarwin && config.core.system.desktop
+          pkgs.stdenv.hostPlatform.isDarwin && config.core.system.desktop
         );
         description = "Whether the core Karabiner configuration should be installed.";
       };
@@ -119,7 +119,8 @@ in
       ghostty.enable = lib.mkOption {
         type = lib.types.bool;
         default = fromPath [ "apps" "ghostty" "enable" ] (
-          config.core.system.desktop && (pkgs.stdenv.isDarwin || pkgs.stdenv.isLinux)
+          config.core.system.desktop
+          && (pkgs.stdenv.hostPlatform.isDarwin || pkgs.stdenv.hostPlatform.isLinux)
         );
         description = "Whether the core Ghostty configuration should be installed.";
       };
@@ -138,7 +139,9 @@ in
     brew = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = fromPath [ "brew" "enable" ] (pkgs.stdenv.isDarwin && config.core.system.desktop);
+        default = fromPath [ "brew" "enable" ] (
+          pkgs.stdenv.hostPlatform.isDarwin && config.core.system.desktop
+        );
         description = "Whether core Homebrew integration should be considered enabled.";
       };
 

@@ -52,7 +52,7 @@
     globals = {
       mapleader = " ";
       maplocalleader = " ";
-      clipboard = lib.mkIf (!pkgs.stdenv.isDarwin) "osc52";
+      clipboard = lib.mkIf (!pkgs.stdenv.hostPlatform.isDarwin) "osc52";
 
       loaded_netrw = 1;
       loaded_netrwPlugin = 1;
