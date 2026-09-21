@@ -13,6 +13,8 @@ let
     b = "bat";
     bru = "brew update";
     brg = "brew upgrade";
+    hd = "hunk diff HEAD";
+    hs = "hunk show";
     lg = "lazygit";
     j = "just";
     la = "eza -a";
