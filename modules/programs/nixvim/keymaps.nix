@@ -138,7 +138,7 @@
     {
       mode = "n";
       key = "<leader>e";
-      action.__raw = "function() MiniFiles.open() end";
+      action.__raw = "function() vim.cmd('Neotree toggle') end";
       options.desc = "Explorer";
     }
     {

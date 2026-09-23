@@ -13,6 +13,8 @@
     extraPlugins = with pkgs.vimPlugins; [
       cutlass-nvim
       mini-nvim
+      neo-tree-nvim
+      nui-nvim
       plenary-nvim
       lazyjj-nvim
     ];
@@ -31,24 +33,12 @@
         comment = { suffix = "" },
       })
       require("mini.cursorword").setup()
-      require("mini.files").setup({
-        windows = {
-          preview = true,
+      require("neo-tree").setup({
+        window = {
+          mappings = {
+            ["Z"] = "expand_all_nodes",
+          },
         },
-      })
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "MiniFilesBufferCreate",
-        callback = function(args)
-          local buf_id = args.data.buf_id
-          vim.keymap.set("n", "<Left>", MiniFiles.go_out, {
-            buffer = buf_id,
-            desc = "Go out of directory",
-          })
-          vim.keymap.set("n", "<Right>", MiniFiles.go_in, {
-            buffer = buf_id,
-            desc = "Go in entry",
-          })
-        end,
       })
 
       require("mini.indentscope").setup()
