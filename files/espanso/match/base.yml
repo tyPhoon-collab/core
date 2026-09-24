@@ -120,6 +120,8 @@ matches:
     replace: "Webで調査してください。"
   - trigger: ";af"
     replace: "修正してください。"
+  - trigger: ";aj"
+    replace: "実装して下さい。"
   - trigger: ";at"
     replace: "対応してください。"
   - trigger: ";ane"
