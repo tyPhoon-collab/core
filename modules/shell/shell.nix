@@ -13,7 +13,9 @@ let
     b = "bat";
     bru = "brew update";
     brg = "brew upgrade";
-    hd = "hunk diff HEAD";
+    hd = "hunk diff";
+    hdm = "hunk diff main";
+    hdH = "hunk diff HEAD";
     hs = "hunk show";
     lg = "lazygit";
     j = "just";
