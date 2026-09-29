@@ -27,6 +27,8 @@
 
 Karabiner-Elements の UI で設定保存すると、Home Manager が作る `~/.config/karabiner/karabiner.json` symlink が通常ファイルへ置換されることがある。反映確認時は symlink か確認し、必要なら consumer 側を `--override-input core /Users/hiroaki/.config/core` 付きで再適用する。
 
+`leaf` の実行ファイルは mise で管理し、Home Manager module は設定ファイルだけを同期する。
+
 ## Runtime contract
 
 `home.nix` が前提にしている主な引数:

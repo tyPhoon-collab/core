@@ -15,6 +15,7 @@
     ./modules/programs/ghostty.nix
     ./modules/programs/hunk.nix
     ./modules/programs/jujutsu.nix
+    ./modules/programs/leaf.nix
     ./modules/programs/yazi.nix
     ./modules/programs/zellij.nix
     ./modules/programs/nixvim
