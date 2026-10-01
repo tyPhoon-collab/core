@@ -32,7 +32,7 @@ let
   };
 in
 {
-  home.packages = [ pkgs.worktrunk ];
+  home.packages = [ pkgs.worktrunk pkgs.zmx ];
 
   programs.direnv = {
     enable = true;
