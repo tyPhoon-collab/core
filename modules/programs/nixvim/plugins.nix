@@ -36,6 +36,8 @@
       require("neo-tree").setup({
         window = {
           mappings = {
+            ["<Right>"] = "open",
+            ["<Left>"] = "close_node",
             ["Z"] = "expand_all_nodes",
           },
         },
