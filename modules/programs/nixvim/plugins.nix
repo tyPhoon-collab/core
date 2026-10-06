@@ -34,6 +34,9 @@
       })
       require("mini.cursorword").setup()
       require("neo-tree").setup({
+        filesystem = {
+          use_libuv_file_watcher = true,
+        },
         window = {
           mappings = {
             ["<Right>"] = "open",

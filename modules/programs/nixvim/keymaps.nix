@@ -319,7 +319,7 @@
           if vim.wo.diff then
             vim.cmd.normal({ "]c", bang = true })
           else
-            require("gitsigns").nav_hunk("next")
+            require("gitsigns").nav_hunk("next", { target = "all" })
           end
         end
       '';
@@ -333,11 +333,17 @@
           if vim.wo.diff then
             vim.cmd.normal({ "[c", bang = true })
           else
-            require("gitsigns").nav_hunk("prev")
+            require("gitsigns").nav_hunk("prev", { target = "all" })
           end
         end
       '';
       options.desc = "Prev Hunk";
+    }
+    {
+      mode = "n";
+      key = "<leader>hQ";
+      action.__raw = "function() require(\"gitsigns\").setqflist(\"all\") end";
+      options.desc = "All Hunks to Quickfix";
     }
     {
       mode = "n";
