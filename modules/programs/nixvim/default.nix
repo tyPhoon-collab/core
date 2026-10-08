@@ -61,29 +61,30 @@
     extraConfigLua = ''
       local ime_group = vim.api.nvim_create_augroup("macos-ime-reset", { clear = true })
       local autoread_group = vim.api.nvim_create_augroup("autoread-checktime", { clear = true })
-      local git_tabs = {}
+      local terminal_tabs = {}
 
-      _G.core_open_git_tab = function(kind, command)
-        local tab = git_tabs[kind]
+      _G.core_open_terminal_tab = function(kind, command)
+        local tab = terminal_tabs[kind]
         if tab and vim.api.nvim_tabpage_is_valid(tab) then
           vim.api.nvim_set_current_tabpage(tab)
           vim.cmd("startinsert")
           return
         end
 
-        vim.cmd("tabnew | terminal " .. command)
+        vim.cmd("tabnew")
+        vim.fn.termopen(command)
         local buf = vim.api.nvim_get_current_buf()
         local win = vim.api.nvim_get_current_win()
         tab = vim.api.nvim_get_current_tabpage()
-        git_tabs[kind] = tab
+        terminal_tabs[kind] = tab
 
         vim.api.nvim_create_autocmd("TermClose", {
           buffer = buf,
           once = true,
           callback = function()
             vim.schedule(function()
-              if git_tabs[kind] == tab then
-                git_tabs[kind] = nil
+              if terminal_tabs[kind] == tab then
+                terminal_tabs[kind] = nil
               end
               if
                 vim.api.nvim_win_is_valid(win)

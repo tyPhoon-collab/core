@@ -186,7 +186,7 @@
     {
       mode = "n";
       key = "<leader>uw";
-      action.__raw = ''function() vim.opt.wrap = not vim.opt.wrap:get() end'';
+      action.__raw = "function() vim.opt.wrap = not vim.opt.wrap:get() end";
       options.desc = "Toggle Wrap";
     }
     {
@@ -198,7 +198,7 @@
     {
       mode = "n";
       key = "<leader>ul";
-      action.__raw = ''function() vim.opt.relativenumber = not vim.opt.relativenumber:get() end'';
+      action.__raw = "function() vim.opt.relativenumber = not vim.opt.relativenumber:get() end";
       options.desc = "Toggle Relative Line Number";
     }
     {
@@ -288,7 +288,7 @@
               detach = true,
             })
           else
-            core_open_git_tab("lazygit", "lazygit")
+            core_open_terminal_tab("lazygit", "lazygit")
           end
         end
       '';
@@ -305,11 +305,40 @@
               detach = true,
             })
           else
-            core_open_git_tab("hunk", "hunk diff HEAD --watch")
+            core_open_terminal_tab("hunk", "hunk diff HEAD --watch")
           end
         end
       '';
       options.desc = "Hunk Review";
+    }
+    {
+      mode = "n";
+      key = "<leader>p";
+      action.__raw = ''
+        function()
+          local buf = vim.api.nvim_get_current_buf()
+          local path = vim.api.nvim_buf_get_name(buf)
+          if path == "" then
+            vim.notify("Leaf requires a named Markdown buffer", vim.log.levels.WARN)
+            return
+          end
+          if vim.bo[buf].filetype ~= "markdown" then
+            vim.notify("Leaf preview is available for Markdown buffers", vim.log.levels.WARN)
+            return
+          end
+
+          path = vim.uv.fs_realpath(path) or vim.fn.fnamemodify(path, ":p")
+          if vim.env.ZELLIJ and vim.env.ZELLIJ ~= "" then
+            vim.fn.jobstart({ "leaf-tab", path }, {
+              cwd = vim.fn.getcwd(),
+              detach = true,
+            })
+          else
+            core_open_terminal_tab("leaf:" .. path, { "leaf", path })
+          end
+        end
+      '';
+      options.desc = "Leaf Preview";
     }
     {
       mode = "n";
