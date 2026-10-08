@@ -280,35 +280,13 @@
     {
       mode = "n";
       key = "<leader>g";
-      action.__raw = ''
-        function()
-          if vim.env.ZELLIJ and vim.env.ZELLIJ ~= "" then
-            vim.fn.jobstart({ "lazygit-tab" }, {
-              cwd = vim.fn.getcwd(),
-              detach = true,
-            })
-          else
-            core_open_terminal_tab("lazygit", "lazygit")
-          end
-        end
-      '';
+      action.__raw = ''function() core_open_terminal_tab("lazygit", "lazygit") end'';
       options.desc = "Lazygit";
     }
     {
       mode = "n";
       key = "<leader>H";
-      action.__raw = ''
-        function()
-          if vim.env.ZELLIJ and vim.env.ZELLIJ ~= "" then
-            vim.fn.jobstart({ "hunk-tab" }, {
-              cwd = vim.fn.getcwd(),
-              detach = true,
-            })
-          else
-            core_open_terminal_tab("hunk", "hunk diff HEAD --watch")
-          end
-        end
-      '';
+      action.__raw = ''function() core_open_terminal_tab("hunk", "hunk diff HEAD --watch") end'';
       options.desc = "Hunk Review";
     }
     {
@@ -328,14 +306,7 @@
           end
 
           path = vim.uv.fs_realpath(path) or vim.fn.fnamemodify(path, ":p")
-          if vim.env.ZELLIJ and vim.env.ZELLIJ ~= "" then
-            vim.fn.jobstart({ "leaf-tab", path }, {
-              cwd = vim.fn.getcwd(),
-              detach = true,
-            })
-          else
-            core_open_terminal_tab("leaf:" .. path, { "leaf", path })
-          end
+          core_open_terminal_tab("leaf:" .. path, { "leaf", path })
         end
       '';
       options.desc = "Leaf Preview";

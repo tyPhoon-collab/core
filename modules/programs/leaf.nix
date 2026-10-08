@@ -1,16 +1,4 @@
-{ pkgs, ... }:
-let
-  leafTab = pkgs.writeShellApplication {
-    name = "leaf-tab";
-    runtimeInputs = with pkgs; [
-      coreutils
-      git
-      jq
-      zellij
-    ];
-    text = builtins.readFile ../../files/bin/leaf-tab;
-  };
-in
+{ ... }:
 {
   xdg.configFile = {
     "leaf/config.toml" = {
@@ -22,6 +10,4 @@ in
       force = true;
     };
   };
-
-  home.packages = [ leafTab ];
 }
