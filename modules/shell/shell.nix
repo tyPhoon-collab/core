@@ -13,6 +13,9 @@ let
     b = "bat";
     bru = "brew update";
     brg = "brew upgrade";
+    cx = "codex";
+    cxluna = "cx --model gpt-6-luna";
+    cxsol = "cx --model gpt-6.1-sol";
     hd = "hunk diff";
     hdm = "hunk diff main";
     hdH = "hunk diff HEAD";
