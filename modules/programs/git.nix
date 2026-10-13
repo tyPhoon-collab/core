@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   programs.git = {
     enable = true;
@@ -53,7 +58,13 @@
       git = {
         diffRenderers = [
           {
+            name = "delta";
             command = "${lib.getExe config.programs.delta.package} --no-gitconfig --dark --syntax-theme=gruvbox-dark --paging=never --hyperlinks --hyperlinks-file-link-format=\"lazygit-edit://{path}:{line}\"";
+          }
+          {
+            name = "difftastic";
+            type = "extDiff";
+            command = "${lib.getExe pkgs.difftastic} --color=always --display=inline";
           }
         ];
       };

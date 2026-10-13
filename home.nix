@@ -29,6 +29,7 @@
       nix-output-monitor
       nu_scripts
       nvd
+      difftastic
       eza
       gdu
       procs
