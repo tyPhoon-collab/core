@@ -1645,6 +1645,34 @@
             ]
           },
           {
+            "description": "大西配列: t+n同時押しでEsc",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "simultaneous": [
+                    {
+                      "key_code": "j"
+                    },
+                    {
+                      "key_code": "k"
+                    }
+                  ],
+                  "modifiers": {
+                    "optional": [
+                      "caps_lock"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "escape"
+                  }
+                ]
+              }
+            ]
+          },
+          {
             "description": "大西配列",
             "manipulators": [
               {
@@ -2216,3 +2244,4 @@
     }
   ]
 }
+
