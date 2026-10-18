@@ -144,7 +144,7 @@
     {
       mode = "n";
       key = "<leader>ff";
-      action.__raw = "function() require('fzf-lua').files() end";
+      action.__raw = "function() require('fzf-lua').files({ hidden = true, no_ignore = true }) end";
       options.desc = "Find Files";
     }
     {
@@ -168,7 +168,7 @@
     {
       mode = "n";
       key = "<leader><leader>";
-      action.__raw = "function() require('fzf-lua').files({ hidden = true, no_ignore = true }) end";
+      action.__raw = "function() require('fzf-lua').files() end";
       options.desc = "Find Files";
     }
     {
@@ -246,6 +246,12 @@
       key = "<leader>sw";
       action.__raw = "function() require('fzf-lua').grep_cword() end";
       options.desc = "Search Current Word";
+    }
+    {
+      mode = "x";
+      key = "<leader>sw";
+      action.__raw = "function() require('fzf-lua').grep_visual() end";
+      options.desc = "Search Selection";
     }
     {
       mode = "n";
