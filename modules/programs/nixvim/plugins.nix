@@ -47,11 +47,6 @@
       })
 
       require("mini.indentscope").setup()
-      require("mini.jump2d").setup({
-        mappings = {
-          start_jumping = "",
-        },
-      })
       require("mini.notify").setup()
       require("mini.pairs").setup()
       vim.keymap.set("i", "<CR>", function()
@@ -96,6 +91,7 @@
           };
         };
         fzf-lua.enable = true;
+        flash.enable = true;
 
         lsp = {
           enable = config.core.system.devLevel >= 1;

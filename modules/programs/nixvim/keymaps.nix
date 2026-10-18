@@ -237,9 +237,34 @@
         "x"
         "o"
       ];
-      key = "<leader>j";
-      action.__raw = "function() MiniJump2d.start(MiniJump2d.builtin_opts.word_start) end";
-      options.desc = "Jump 2D";
+      key = "s";
+      action.__raw = "function() require('flash').jump() end";
+      options.desc = "Flash";
+    }
+    {
+      mode = [
+        "n"
+        "x"
+        "o"
+      ];
+      key = "S";
+      action.__raw = "function() require('flash').treesitter() end";
+      options.desc = "Flash Treesitter";
+    }
+    {
+      mode = "o";
+      key = "r";
+      action.__raw = "function() require('flash').remote() end";
+      options.desc = "Remote Flash";
+    }
+    {
+      mode = [
+        "o"
+        "x"
+      ];
+      key = "R";
+      action.__raw = "function() require('flash').treesitter_search() end";
+      options.desc = "Treesitter Search";
     }
     {
       mode = "n";
