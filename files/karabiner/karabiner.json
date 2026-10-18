@@ -2224,6 +2224,14 @@
               ]
             }
           ]
+        },
+        {
+          "disable_built_in_keyboard_if_exists": true,
+          "identifiers": {
+            "is_keyboard": true,
+            "product_id": 1024,
+            "vendor_id": 22871
+          }
         }
       ],
       "name": "大西配列",
