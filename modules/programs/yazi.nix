@@ -24,6 +24,11 @@
     keymap = {
       mgr.prepend_keymap = [
         {
+          on = [ "+" ];
+          run = "plugin toggle-pane max-preview";
+          desc = "Maximize or restore the preview pane";
+        }
+        {
           on = [
             ","
             "d"
@@ -70,6 +75,7 @@
     };
     plugins = {
       smart-enter = "${yaziPlugins}/smart-enter.yazi";
+      toggle-pane = "${yaziPlugins}/toggle-pane.yazi";
     };
   };
   programs.fzf.enable = true;
