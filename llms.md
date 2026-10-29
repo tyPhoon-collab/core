@@ -64,6 +64,8 @@ consumer は生の入力として `coreConfig` を渡します。repo 内の mod
 
 Home Manager では `(core + /home.nix)` を import し、`extraSpecialArgs` で runtime contract の引数を渡します。
 
+Darwin で `core.system.desktop` を有効にすると、Home Manager は macOS のショートカット辞書全体を置き換えます。Nix にないショートカットの設定変更も次の activation で失われます。反映にはログアウトが必要な場合があります。
+
 nix-darwin 側で Homebrew を使う場合は、`modules/core.nix` と `modules/system/darwin-homebrew.nix` を同じ評価に import します。`darwin-homebrew.nix` は `config.core.brew.resolved` を `homebrew.*` に流します。
 
 `modules/system/darwin-defaults.nix` と `modules/system/darwin-limits.nix` は必須ではありません。必要な host だけが import します。
