@@ -134,6 +134,10 @@ matches:
     replace: "これはただの質問です。"
   - trigger: ";aas"
     replace: "これはただの相談です。"
+  - trigger: ";acm"
+    replace: "コミットしてください。"
+  - trigger: ";acp"
+    replace: "コミットしてプッシュしてください。"
   - trigger: ";acf"
     replace: "コミットしてフィニッシュしてください。"
 
