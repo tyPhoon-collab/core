@@ -13,7 +13,7 @@ let
     b = "bat";
     bru = "brew update";
     brg = "brew upgrade";
-    cx = "codex";
+    cx = "codex --no-daemon";
     cxluna = "cx --model gpt-6-luna";
     cxsol = "cx --model gpt-6.1-sol";
     hd = "hunk diff";
