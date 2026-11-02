@@ -49,15 +49,6 @@
       require("mini.indentscope").setup()
       require("mini.notify").setup()
       require("mini.pairs").setup()
-      vim.keymap.set("i", "<CR>", function()
-        if vim.fn.complete_info().selected ~= -1 then
-          return "\25"
-        end
-        return MiniPairs.cr()
-      end, {
-        expr = true,
-        desc = "Confirm completion or insert pair",
-      })
       require("mini.statusline").setup()
       local mode_colors = {
         Normal = { fg = "#ebdbb2", bg = "#3c3836" },
@@ -83,10 +74,14 @@
         blink-cmp = {
           enable = true;
           settings = {
-            keymap.preset = "enter";
+            keymap = {
+              preset = "default";
+              "<CR>" = [ "fallback" ];
+              "<C-m>" = [ "accept" "fallback" ];
+            };
             completion.list.selection = {
               preselect = true;
-              auto_insert = true;
+              auto_insert = false;
             };
           };
         };
