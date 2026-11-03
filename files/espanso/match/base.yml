@@ -130,6 +130,8 @@ matches:
     replace: "対応は不要です。"
   - trigger: ";asr"
     replace: "セルフレビューしてください。"
+  - trigger: ";asu"
+    replace: "要約してください。"
   - trigger: ";aq"
     replace: "これはただの質問です。"
   - trigger: ";aas"
