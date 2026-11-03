@@ -108,12 +108,6 @@
         end
       end
 
-      local function to_eisuu_unless_insert()
-        if not vim.tbl_contains({ "i", "ic", "ix" }, vim.fn.mode()) then
-          to_eisuu()
-        end
-      end
-
       vim.api.nvim_create_autocmd({ "InsertLeave", "TermLeave" }, {
         group = ime_group,
         callback = to_eisuu,
@@ -122,11 +116,6 @@
       vim.api.nvim_create_autocmd("CmdlineEnter", {
         group = ime_group,
         callback = to_eisuu,
-      })
-
-      vim.api.nvim_create_autocmd("FocusGained", {
-        group = ime_group,
-        callback = to_eisuu_unless_insert,
       })
 
       vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "CursorHold", "CursorHoldI" }, {
