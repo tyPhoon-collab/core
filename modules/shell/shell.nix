@@ -15,6 +15,7 @@ let
     brg = "brew upgrade";
     cx = "codex --no-daemon";
     cxluna = "cx --model gpt-6-luna";
+    cxterra = "cx --model gpt-6.1-terra";
     cxsol = "cx --model gpt-6.1-sol";
     hd = "hunk diff";
     hdm = "hunk diff main";
