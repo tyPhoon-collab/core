@@ -67,11 +67,6 @@ let
       monitor = "2";
       appIds = [ "com.hnc.Discord" ];
     };
-    M = {
-      enable = true;
-      monitor = "1";
-      appIds = [ "com.apple.Music" ];
-    };
     O = {
       enable = true;
       monitor = "2";
