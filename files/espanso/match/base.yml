@@ -121,7 +121,7 @@ matches:
   - trigger: ";af"
     replace: "修正してください。"
   - trigger: ";aj"
-    replace: "実装して下さい。"
+    replace: "実装してください。"
   - trigger: ";at"
     replace: "対応してください。"
   - trigger: ";ane"
@@ -142,6 +142,8 @@ matches:
     replace: "コミットしてプッシュしてください。"
   - trigger: ";acf"
     replace: "コミットしてフィニッシュしてください。"
+  - trigger: ";aha"
+    replace: "どうでしょうか？"
 
   # Neovim
   - trigger: ";vy"
