@@ -424,5 +424,17 @@
       action = "<cmd>LazyJJ<CR>";
       options.desc = "LazyJJ";
     }
+    {
+      mode = "n";
+      key = "<leader>oa";
+      action = "<cmd>lua require('orgmode').action('agenda.prompt')<CR>";
+      options.desc = "Org Agenda";
+    }
+    {
+      mode = "n";
+      key = "<leader>oc";
+      action = "<cmd>lua require('orgmode').action('capture.prompt')<CR>";
+      options.desc = "Org Capture";
+    }
   ];
 }

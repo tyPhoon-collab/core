@@ -88,6 +88,28 @@
         fzf-lua.enable = true;
         flash.enable = true;
 
+        orgmode = {
+          enable = true;
+          settings = {
+            org_agenda_files = [ "~/org/**/*" ];
+            org_default_notes_file = "~/org/inbox.org";
+            org_todo_keywords = [
+              "TODO"
+              "WAIT"
+              "|"
+              "DONE"
+              "CANCEL"
+            ];
+            org_capture_templates = {
+              t = {
+                description = "Task";
+                template = "* TODO %?\n  SCHEDULED: %t";
+                target = "~/org/inbox.org";
+              };
+            };
+          };
+        };
+
         lsp = {
           enable = config.core.system.devLevel >= 1;
           servers =
