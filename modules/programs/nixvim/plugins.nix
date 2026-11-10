@@ -106,6 +106,19 @@
                 template = "* TODO %?\n  SCHEDULED: %t";
                 target = "~/org/inbox.org";
               };
+              n = {
+                description = "Note";
+                template = "* %?\n  %U";
+                target = "~/org/notes.org";
+              };
+              j = {
+                description = "Journal";
+                template = "* %<%H:%M> %?";
+                target = "~/org/journal.org";
+                datetree = {
+                  tree_type = "day";
+                };
+              };
             };
           };
         };
