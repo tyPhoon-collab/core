@@ -84,6 +84,7 @@ in
 
       source ${pkgs.nu_scripts}/share/nu_scripts/aliases/git/git-aliases.nu
       source ${../../files/nushell/completions/zmx.nu}
+      use ${../../files/nushell/tui}/zml.nu
       source ${worktrunkNushellConfig}
 
       # zellij auto-start was convenient, but too aggressive as a shared default.
