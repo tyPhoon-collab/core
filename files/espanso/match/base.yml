@@ -38,18 +38,6 @@ matches:
   - trigger: ";end"
     replace: "23:59"
 
-  # 絵文字
-  - trigger: ";gd"
-    replace: "👍️"
-  - trigger: ";plz"
-    replace: "🙏"
-  - trigger: ";ok"
-    replace: "👌"
-  - trigger: ";pw"
-    replace: "💪"
-  - trigger: ";bow"
-    replace: "🙇‍♂️"
-
   # テキスト
   - trigger: ";lorem"
     replace: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
@@ -121,6 +109,8 @@ matches:
     replace: "セルフレビューしてください。"
   - trigger: ";asu"
     replace: "要約してください。"
+  - trigger: ";asg"
+    replace: "よさそうです。それでお願いします。"
   - trigger: ";aq"
     replace: "これはただの質問です。"
   - trigger: ";aas"
