@@ -110,7 +110,7 @@ matches:
   - trigger: ";asu"
     replace: "要約してください。"
   - trigger: ";asg"
-    replace: "よさそうです。それでお願いします。"
+    replace: "よさそうです。"
   - trigger: ";aq"
     replace: "これはただの質問です。"
   - trigger: ";aas"
