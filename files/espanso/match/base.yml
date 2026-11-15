@@ -1,5 +1,13 @@
 matches:
   # 日時
+  - trigger: ";orgnow"
+    replace: "{{now}}"
+    vars:
+      - name: "now"
+        type: "date"
+        params:
+          format: "[%Y-%m-%d %a %H:%M]"
+          locale: "en-US"
   - trigger: ";now"
     replace: "{{now}}"
     vars:
