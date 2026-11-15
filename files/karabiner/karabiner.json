@@ -12,7 +12,7 @@
                         "description": "Tab長押し→アプリ起動レイヤー",
                         "manipulators": [
                             {
-                                "description": "Tab単押し→Tab / 長押し→レイヤー",
+                                "description": "Tab長押し→レイヤー",
                                 "from": { "key_code": "tab" },
                                 "to": [
                                     {
@@ -41,7 +41,7 @@
                                         "value": 1
                                     }
                                 ],
-                                "description": "Tab + T (大西: J)→Ghostty",
+                                "description": "Tab + T→Ghostty",
                                 "from": { "key_code": "j" },
                                 "to": [{ "software_function": { "open_application": { "bundle_identifier": "com.mitchellh.ghostty" } } }],
                                 "type": "basic"
@@ -54,7 +54,7 @@
                                         "value": 1
                                     }
                                 ],
-                                "description": "Tab + B (大西: /)→Zen Browser",
+                                "description": "Tab + B→Zen Browser",
                                 "from": { "key_code": "slash" },
                                 "to": [{ "software_function": { "open_application": { "bundle_identifier": "app.zen-browser.zen" } } }],
                                 "type": "basic"
@@ -67,7 +67,7 @@
                                         "value": 1
                                     }
                                 ],
-                                "description": "Tab + S (大西: L)→Slack",
+                                "description": "Tab + S→Slack",
                                 "from": { "key_code": "l" },
                                 "to": [{ "software_function": { "open_application": { "bundle_identifier": "com.tinyspeck.slackmacgap" } } }],
                                 "type": "basic"
@@ -80,7 +80,7 @@
                                         "value": 1
                                     }
                                 ],
-                                "description": "Tab + E (大西: A)→Finder (Explorer)",
+                                "description": "Tab + E→Finder",
                                 "from": { "key_code": "a" },
                                 "to": [{ "software_function": { "open_application": { "bundle_identifier": "com.apple.finder" } } }],
                                 "type": "basic"
@@ -93,7 +93,7 @@
                                         "value": 1
                                     }
                                 ],
-                                "description": "Tab + D (大西: M)→Discord",
+                                "description": "Tab + D→Discord",
                                 "from": { "key_code": "m" },
                                 "to": [{ "software_function": { "open_application": { "bundle_identifier": "com.hnc.Discord" } } }],
                                 "type": "basic"
@@ -106,7 +106,7 @@
                                         "value": 1
                                     }
                                 ],
-                                "description": "Tab + W (大西: U)→dev.nekonata.denbrowser",
+                                "description": "Tab + W→Den",
                                 "from": { "key_code": "u" },
                                 "to": [{ "software_function": { "open_application": { "bundle_identifier": "dev.nekonata.denbrowser" } } }],
                                 "type": "basic"
@@ -119,7 +119,7 @@
                                         "value": 1
                                     }
                                 ],
-                                "description": "Tab + O (大西: F)→Obsidian",
+                                "description": "Tab + O→Obsidian",
                                 "from": { "key_code": "f" },
                                 "to": [{ "software_function": { "open_application": { "bundle_identifier": "md.obsidian" } } }],
                                 "type": "basic"
@@ -137,7 +137,7 @@
                                         "value": 1
                                     }
                                 ],
-                                "description": "英数レイヤー中(英数保持) + かな → 英数入力 (Target-First)",
+                                "description": "英数 + かな→英数",
                                 "from": {
                                     "key_code": "japanese_kana",
                                     "modifiers": { "optional": ["any"] }
@@ -153,7 +153,7 @@
                                         "value": 1
                                     }
                                 ],
-                                "description": "かなレイヤー中(かな保持) + 英数 → かな入力 (Target-First)",
+                                "description": "かな + 英数→かな",
                                 "from": {
                                     "key_code": "japanese_eisuu",
                                     "modifiers": { "optional": ["any"] }
@@ -162,7 +162,7 @@
                                 "type": "basic"
                             },
                             {
-                                "description": "英数 → Sticky Cmd / Layer",
+                                "description": "英数単押し→Sticky LCmd / 長押し→レイヤー",
                                 "from": {
                                     "key_code": "japanese_eisuu",
                                     "modifiers": { "optional": ["any"] }
@@ -194,7 +194,7 @@
                                         "value": 1
                                     }
                                 ],
-                                "description": "Z → BS (Layer)",
+                                "description": "英数 + Z→BS",
                                 "from": {
                                     "key_code": "z",
                                     "modifiers": { "optional": ["any"] }
@@ -203,7 +203,7 @@
                                 "type": "basic"
                             },
                             {
-                                "description": "かな → Enter / Layer",
+                                "description": "かな単押し→Enter / 長押し→レイヤー",
                                 "from": {
                                     "key_code": "japanese_kana",
                                     "modifiers": { "optional": ["any"] }
@@ -235,7 +235,7 @@
                                         "value": 1
                                     }
                                 ],
-                                "description": "かな + A (物理D) → @ (Layer)",
+                                "description": "かな + D→@",
                                 "from": {
                                     "key_code": "d",
                                     "modifiers": { "optional": ["any"] }
@@ -251,7 +251,7 @@
                                         "value": 1
                                     }
                                 ],
-                                "description": "R/T → 角括弧 (Layer)",
+                                "description": "かな + R→[",
                                 "from": {
                                     "key_code": "r",
                                     "modifiers": { "optional": ["any"] }
@@ -267,7 +267,7 @@
                                         "value": 1
                                     }
                                 ],
-                                "description": "T → 角括弧閉じ (Layer)",
+                                "description": "かな + T→]",
                                 "from": {
                                     "key_code": "t",
                                     "modifiers": { "optional": ["any"] }
@@ -283,7 +283,7 @@
                                         "value": 1
                                     }
                                 ],
-                                "description": "Q-P → 記号 (Layer)",
+                                "description": "英数 + Q-P→記号",
                                 "from": {
                                     "key_code": "q",
                                     "modifiers": { "optional": ["any"] }
@@ -484,6 +484,7 @@
                                         "value": 1
                                     }
                                 ],
+                                "description": "英数 + A-;→1-0",
                                 "from": {
                                     "key_code": "a",
                                     "modifiers": { "optional": ["any"] }
@@ -634,6 +635,7 @@
                                         "value": 1
                                     }
                                 ],
+                                "description": "英数 + X/C/V/B→Del/,/./:",
                                 "from": {
                                     "key_code": "x",
                                     "modifiers": { "optional": ["any"] }
@@ -694,7 +696,7 @@
                                         "value": 1
                                     }
                                 ],
-                                "description": "U/I → Shift+Tab/Tab (Layer)",
+                                "description": "かな + I/U→Tab/Shift+Tab",
                                 "from": {
                                     "key_code": "i",
                                     "modifiers": { "optional": ["any"] }
@@ -730,7 +732,7 @@
                                         "value": 1
                                     }
                                 ],
-                                "description": "HJKL → 矢印 (Layer)",
+                                "description": "かな + HJKL→矢印",
                                 "from": {
                                     "key_code": "h",
                                     "modifiers": { "optional": ["any"] }
@@ -791,6 +793,7 @@
                                         "value": 1
                                     }
                                 ],
+                                "description": "かな + V/B/N/M/,/.→^/~/ /? /Enter",
                                 "from": {
                                     "key_code": "v",
                                     "modifiers": { "optional": ["any"] }
@@ -886,7 +889,7 @@
                         ]
                     },
                     {
-                        "description": "Optタップ→Sticky Ctrl / ホールド→Opt",
+                        "description": "LOpt単押し→Sticky LCtrl",
                         "manipulators": [
                             {
                                 "from": {
@@ -900,7 +903,7 @@
                         ]
                     },
                     {
-                        "description": "Hyper + YUIHNJK, and Space でテンキー",
+                        "description": "Hyper→テンキー",
                         "manipulators": [
                             {
                                 "from": {
@@ -985,7 +988,7 @@
                         ]
                     },
                     {
-                        "description": "Space→Shift",
+                        "description": "Space長押し→LShift",
                         "manipulators": [
                             {
                                 "from": {
@@ -999,7 +1002,7 @@
                         ]
                     },
                     {
-                        "description": "RShift単押→/",
+                        "description": "RShift単押し→/",
                         "manipulators": [
                             {
                                 "from": {
@@ -1013,7 +1016,7 @@
                         ]
                     },
                     {
-                        "description": "Ctrl単押→Esc",
+                        "description": "LCtrl単押し→Esc",
                         "manipulators": [
                             {
                                 "from": {
@@ -1027,7 +1030,7 @@
                         ]
                     },
                     {
-                        "description": "LShift単押→Enter",
+                        "description": "LShift単押し→Enter",
                         "manipulators": [
                             {
                                 "from": {
@@ -1041,7 +1044,7 @@
                         ]
                     },
                     {
-                        "description": "§ tap = `, § hold = Hyper",
+                        "description": "`長押し→Hyper",
                         "manipulators": [
                             {
                                 "from": { "key_code": "grave_accent_and_tilde" },
@@ -1057,10 +1060,10 @@
                         ]
                     },
                     {
-                        "description": "TK音直入力法: 語彙19件＋音節24件＋二重母音4件（計47件、kotoはk+t、iruはw+r、naiはw+n、50ms）",
+                        "description": "TK音直入力法",
                         "manipulators": [
                             {
-                                "description": "大西 d+s+n → desita",
+                                "description": "d+s+n→desita",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -1112,7 +1115,7 @@
                                 }
                             },
                             {
-                                "description": "大西 m+s+t → masita",
+                                "description": "m+s+t→masita",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -1164,7 +1167,7 @@
                                 }
                             },
                             {
-                                "description": "大西 s+t+h → siteha",
+                                "description": "s+t+h→siteha",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -1216,7 +1219,7 @@
                                 }
                             },
                             {
-                                "description": "大西 s+t+n → sita",
+                                "description": "s+t+n→sita",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -1266,7 +1269,7 @@
                                 }
                             },
                             {
-                                "description": "大西 o+i → oi（二重母音）",
+                                "description": "o+i→oi",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -1313,7 +1316,7 @@
                                 }
                             },
                             {
-                                "description": "大西 d+h → deha",
+                                "description": "d+h→deha",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -1362,7 +1365,7 @@
                                 }
                             },
                             {
-                                "description": "大西 d+s → desu",
+                                "description": "d+s→desu",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -1411,7 +1414,7 @@
                                 }
                             },
                             {
-                                "description": "大西 k+r → kara",
+                                "description": "k+r→kara",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -1460,7 +1463,7 @@
                                 }
                             },
                             {
-                                "description": "大西 k+t → koto（t+n→Escを維持するため変更）",
+                                "description": "k+t→koto",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -1509,7 +1512,7 @@
                                 }
                             },
                             {
-                                "description": "大西 m+s → masu",
+                                "description": "m+s→masu",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -1558,7 +1561,7 @@
                                 }
                             },
                             {
-                                "description": "大西 d+m → mono",
+                                "description": "d+m→mono",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -1607,7 +1610,7 @@
                                 }
                             },
                             {
-                                "description": "大西 n+d → nado",
+                                "description": "n+d→nado",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -1656,7 +1659,7 @@
                                 }
                             },
                             {
-                                "description": "大西 n+h → niha",
+                                "description": "n+h→niha",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -1705,7 +1708,7 @@
                                 }
                             },
                             {
-                                "description": "大西 s+k → sika",
+                                "description": "s+k→sika",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -1754,7 +1757,7 @@
                                 }
                             },
                             {
-                                "description": "大西 s+t → site",
+                                "description": "s+t→site",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -1803,7 +1806,7 @@
                                 }
                             },
                             {
-                                "description": "大西 s+r → suru",
+                                "description": "s+r→suru",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -1852,7 +1855,7 @@
                                 }
                             },
                             {
-                                "description": "大西 t+m → tame",
+                                "description": "t+m→tame",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -1901,7 +1904,7 @@
                                 }
                             },
                             {
-                                "description": "大西 t+h → toha",
+                                "description": "t+h→toha",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -1950,7 +1953,7 @@
                                 }
                             },
                             {
-                                "description": "大西 a+c → aki（入声）",
+                                "description": "a+c→aki",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -1998,7 +2001,7 @@
                                 }
                             },
                             {
-                                "description": "大西 a+x → aku（入声）",
+                                "description": "a+x→aku",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -2046,7 +2049,7 @@
                                 }
                             },
                             {
-                                "description": "大西 a+v → ann（撥音）",
+                                "description": "a+v→ann",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -2094,7 +2097,7 @@
                                 }
                             },
                             {
-                                "description": "大西 a+l → ati（入声）",
+                                "description": "a+l→ati",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -2142,7 +2145,7 @@
                                 }
                             },
                             {
-                                "description": "大西 a+, → atu（入声）",
+                                "description": "a+,→atu",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -2190,7 +2193,7 @@
                                 }
                             },
                             {
-                                "description": "大西 e+c → eki（入声）",
+                                "description": "e+c→eki",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -2238,7 +2241,7 @@
                                 }
                             },
                             {
-                                "description": "大西 e+v → enn（撥音）",
+                                "description": "e+v→enn",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -2286,7 +2289,7 @@
                                 }
                             },
                             {
-                                "description": "大西 e+l → eti（入声）",
+                                "description": "e+l→eti",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -2334,7 +2337,7 @@
                                 }
                             },
                             {
-                                "description": "大西 e+, → etu（入声）",
+                                "description": "e+,→etu",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -2382,7 +2385,7 @@
                                 }
                             },
                             {
-                                "description": "大西 i+c → iki（入声）",
+                                "description": "i+c→iki",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -2430,7 +2433,7 @@
                                 }
                             },
                             {
-                                "description": "大西 i+x → iku（入声）",
+                                "description": "i+x→iku",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -2478,7 +2481,7 @@
                                 }
                             },
                             {
-                                "description": "大西 i+l → iti（入声）",
+                                "description": "i+l→iti",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -2526,7 +2529,7 @@
                                 }
                             },
                             {
-                                "description": "大西 i+, → itu（入声）",
+                                "description": "i+,→itu",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -2574,7 +2577,7 @@
                                 }
                             },
                             {
-                                "description": "大西 i+v → inn（撥音）",
+                                "description": "i+v→inn",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -2622,7 +2625,7 @@
                                 }
                             },
                             {
-                                "description": "大西 o+c → oki（入声）",
+                                "description": "o+c→oki",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -2670,7 +2673,7 @@
                                 }
                             },
                             {
-                                "description": "大西 o+x → oku（入声）",
+                                "description": "o+x→oku",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -2718,7 +2721,7 @@
                                 }
                             },
                             {
-                                "description": "大西 j+o → onn（撥音）",
+                                "description": "j+o→onn",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -2766,7 +2769,7 @@
                                 }
                             },
                             {
-                                "description": "大西 o+l → oti（入声）",
+                                "description": "o+l→oti",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -2814,7 +2817,7 @@
                                 }
                             },
                             {
-                                "description": "大西 o+, → otu（入声）",
+                                "description": "o+,→otu",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -2862,7 +2865,7 @@
                                 }
                             },
                             {
-                                "description": "大西 u+c → uki（入声）",
+                                "description": "u+c→uki",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -2910,7 +2913,7 @@
                                 }
                             },
                             {
-                                "description": "大西 u+x → uku（入声）",
+                                "description": "u+x→uku",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -2958,7 +2961,7 @@
                                 }
                             },
                             {
-                                "description": "大西 u+v → unn（撥音）",
+                                "description": "u+v→unn",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -3006,7 +3009,7 @@
                                 }
                             },
                             {
-                                "description": "大西 u+l → uti（入声）",
+                                "description": "u+l→uti",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -3054,7 +3057,7 @@
                                 }
                             },
                             {
-                                "description": "大西 u+, → utu（入声）",
+                                "description": "u+,→utu",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -3102,7 +3105,7 @@
                                 }
                             },
                             {
-                                "description": "大西 a+i → ai（二重母音）",
+                                "description": "a+i→ai",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -3149,7 +3152,7 @@
                                 }
                             },
                             {
-                                "description": "大西 e+i → ei（二重母音）",
+                                "description": "e+i→ei",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -3196,7 +3199,7 @@
                                 }
                             },
                             {
-                                "description": "大西 o+a → ou（二重母音）",
+                                "description": "o+a→ou",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -3243,7 +3246,7 @@
                                 }
                             },
                             {
-                                "description": "大西 w+r → iru（語彙）",
+                                "description": "w+r→iru",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -3291,7 +3294,7 @@
                                 }
                             },
                             {
-                                "description": "大西 w+n → nai（語彙）",
+                                "description": "w+n→nai",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
@@ -3341,7 +3344,7 @@
                         ]
                     },
                     {
-                        "description": "大西配列: t+n同時押しでEsc",
+                        "description": "JK同時押し→Esc",
                         "manipulators": [
                             {
                                 "from": {
