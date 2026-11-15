@@ -2721,12 +2721,12 @@
                                 }
                             },
                             {
-                                "description": "j+o→onn",
+                                "description": "o+v→onn",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
-                                        { "key_code": "period" },
-                                        { "key_code": "f" }
+                                        { "key_code": "f" },
+                                        { "key_code": "v" }
                                     ],
                                     "simultaneous_options": {
                                         "key_up_when": "all"
