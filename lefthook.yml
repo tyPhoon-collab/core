@@ -1,0 +1,24 @@
+pre-commit:
+  parallel: true
+  commands:
+    diff-check:
+      run: git diff --cached --check
+    karabiner-lint:
+      glob: "files/karabiner/karabiner.json"
+      run: just karabiner::lint
+    karabiner-simultaneous:
+      glob: "files/karabiner/karabiner.json"
+      run: just karabiner::check-simultaneous
+    nix-fmt:
+      priority: 1
+      glob: "**/*.nix"
+      run: just nix::fmt {staged_files}
+      stage_fixed: true
+    nix-deadnix:
+      priority: 2
+      glob: "**/*.nix"
+      run: just nix::deadnix
+    nix-statix:
+      priority: 2
+      glob: "**/*.nix"
+      run: just nix::statix

@@ -1,5 +1,4 @@
-{ ... }:
-{
+_: {
   xdg.configFile = {
     "leaf/config.toml" = {
       source = ../../files/leaf/config.toml;

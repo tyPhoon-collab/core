@@ -22,40 +22,43 @@
     ./modules/platform/entrypoint.nix
   ];
 
-  home.packages =
-    with pkgs;
-    [
-      home-manager
-      nix-output-monitor
-      nu_scripts
-      nvd
-      difftastic
-      eza
-      gdu
-      procs
-      rsync
-    ]
-    ++ lib.optionals config.core.system.fonts [
-      maple-mono.NF-CN-unhinted
-      nerd-fonts.hack
-    ]
-    ++ lib.optionals config.core.system.extended [
-      ffmpeg
-      nixfmt
-    ];
+  home = {
+    packages =
+      with pkgs;
+      [
+        home-manager
+        nix-output-monitor
+        nu_scripts
+        nvd
+        difftastic
+        eza
+        gdu
+        procs
+        rsync
+      ]
+      ++ lib.optionals config.core.system.fonts [
+        maple-mono.NF-CN-unhinted
+        nerd-fonts.hack
+      ]
+      ++ lib.optionals config.core.system.extended [
+        ffmpeg
+        nixfmt
+      ];
 
-  programs.bottom.enable = true;
+    inherit username homeDirectory;
+    stateVersion = "25.11";
+  };
 
-  programs.nh = {
-    enable = true;
-    clean.enable = true;
-    clean.extraArgs = "--keep-since 7d --keep 10";
+  programs = {
+    bottom.enable = true;
+
+    nh = {
+      enable = true;
+      clean.enable = true;
+      clean.extraArgs = "--keep-since 7d --keep 10";
+    };
+
   };
 
   fonts.fontconfig.enable = config.core.system.fonts;
-
-  home.username = username;
-  home.homeDirectory = homeDirectory;
-
-  home.stateVersion = "25.11";
 }

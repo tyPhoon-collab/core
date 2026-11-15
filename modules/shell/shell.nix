@@ -36,72 +36,77 @@ let
   };
 in
 {
-  home.packages = [ pkgs.worktrunk pkgs.zmx ];
+  home.packages = [
+    pkgs.worktrunk
+    pkgs.zmx
+  ];
 
-  programs.direnv = {
-    enable = true;
-    enableNushellIntegration = true;
-    nix-direnv.enable = true;
-  };
+  programs = {
+    direnv = {
+      enable = true;
+      enableNushellIntegration = true;
+      nix-direnv.enable = true;
+    };
 
-  programs.zoxide = {
-    enable = true;
-    enableNushellIntegration = true;
-  };
+    zoxide = {
+      enable = true;
+      enableNushellIntegration = true;
+    };
 
-  programs.starship = {
-    enable = true;
-    enableNushellIntegration = true;
-    settings = fromTOML (builtins.readFile ./starship.toml);
-  };
+    starship = {
+      enable = true;
+      enableNushellIntegration = true;
+      settings = fromTOML (builtins.readFile ./starship.toml);
+    };
 
-  programs.carapace = {
-    enable = true;
-    enableNushellIntegration = true;
-  };
+    carapace = {
+      enable = true;
+      enableNushellIntegration = true;
+    };
 
-  programs.mise = {
-    enable = true;
-    enableNushellIntegration = true;
-  };
+    mise = {
+      enable = true;
+      enableNushellIntegration = true;
+    };
 
-  programs.bat.enable = true;
+    bat.enable = true;
 
-  programs.zellij = {
-    enable = true;
-    # The shared config file is distributed from modules/programs/zellij.nix.
-  };
+    zellij = {
+      enable = true;
+      # The shared config file is distributed from modules/programs/zellij.nix.
+    };
 
-  programs.nushell = {
-    enable = true;
-    shellAliases = defaultAliases // cfg.shellAliases;
-    extraConfig = ''
-      $env.config.buffer_editor = "nvim"
-      $env.config.edit_mode = "vi"
-      $env.config.show_banner = false
-      $env.config.history.file_format = "sqlite"
-      $env.config.history.isolation = true
+    nushell = {
+      enable = true;
+      shellAliases = defaultAliases // cfg.shellAliases;
+      extraConfig = ''
+        $env.config.buffer_editor = "nvim"
+        $env.config.edit_mode = "vi"
+        $env.config.show_banner = false
+        $env.config.history.file_format = "sqlite"
+        $env.config.history.isolation = true
 
-      source ${pkgs.nu_scripts}/share/nu_scripts/aliases/git/git-aliases.nu
-      source ${../../files/nushell/completions/zmx.nu}
-      use ${../../files/nushell/tui}/zml.nu
-      source ${worktrunkNushellConfig}
+        source ${pkgs.nu_scripts}/share/nu_scripts/aliases/git/git-aliases.nu
+        source ${../../files/nushell/completions/zmx.nu}
+        use ${../../files/nushell/tui}/zml.nu
+        source ${worktrunkNushellConfig}
 
-      # zellij auto-start was convenient, but too aggressive as a shared default.
-      # Re-enable if you want terminal-specific opt-in again.
-      # if $nu.is-interactive and "ZELLIJ" not-in $env and "SSH_CLIENT" not-in $env and "WSL_DISTRO_NAME" not-in $env {
-      #     let allow_terminals = ["ghostty"]
-      #     if ($env.TERM_PROGRAM? in $allow_terminals) {
-      #         exec zellij a -c main
-      #     }
-      # }
-    '';
+        # zellij auto-start was convenient, but too aggressive as a shared default.
+        # Re-enable if you want terminal-specific opt-in again.
+        # if $nu.is-interactive and "ZELLIJ" not-in $env and "SSH_CLIENT" not-in $env and "WSL_DISTRO_NAME" not-in $env {
+        #     let allow_terminals = ["ghostty"]
+        #     if ($env.TERM_PROGRAM? in $allow_terminals) {
+        #         exec zellij a -c main
+        #     }
+        # }
+      '';
 
-    extraEnv = ''
-      $env.CARAPACE_BRIDGES = 'zsh,bash'
-      $env.EDITOR = "nvim"
-      $env.VISUAL = "nvim"
-      $env.SUDO_EDITOR = "nvim"
-    '';
+      extraEnv = ''
+        $env.CARAPACE_BRIDGES = 'zsh,bash'
+        $env.EDITOR = "nvim"
+        $env.VISUAL = "nvim"
+        $env.SUDO_EDITOR = "nvim"
+      '';
+    };
   };
 }

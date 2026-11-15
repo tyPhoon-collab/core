@@ -6,53 +6,57 @@
   ...
 }:
 lib.mkIf (pkgs.stdenv.hostPlatform.isLinux && config.core.system.wsl) {
-  # Activation Script for WSL config files
-  home.activation.syncWslConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    # Runtime check: Ensure we are actually running on WSL
-    if ! grep -qi microsoft /proc/version; then
-      exit 0
-    fi
-
-    # Sync .wslconfig to Windows User Profile
-    WIN_HOME="/mnt/c/Users/${username}"
-    SRC_WSLCONFIG="$HOME/.config/wsl/.wslconfig"
-
-    if [ -d "$WIN_HOME" ] && [ -f "$SRC_WSLCONFIG" ]; then
-      if ! cmp -s "$SRC_WSLCONFIG" "$WIN_HOME/.wslconfig"; then
-        cp -f "$SRC_WSLCONFIG" "$WIN_HOME/.wslconfig"
-        echo "Updated Windows .wslconfig. Run 'wsl --shutdown' to apply."
+  home = {
+    # Activation Script for WSL config files
+    activation.syncWslConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      # Runtime check: Ensure we are actually running on WSL
+      if ! grep -qi microsoft /proc/version; then
+        exit 0
       fi
-    fi
 
-    # Sync wsl.conf to /etc/wsl.conf (Requires sudo)
-    SRC_WSLCONF="$HOME/.config/wsl/wsl.conf"
+      # Sync .wslconfig to Windows User Profile
+      WIN_HOME="/mnt/c/Users/${username}"
+      SRC_WSLCONFIG="$HOME/.config/wsl/.wslconfig"
 
-    if [ -f "$SRC_WSLCONF" ]; then
-      if ! cmp -s "$SRC_WSLCONF" "/etc/wsl.conf"; then
-        echo "WSL config changed. Run: sudo cp $SRC_WSLCONF /etc/wsl.conf"
+      if [ -d "$WIN_HOME" ] && [ -f "$SRC_WSLCONFIG" ]; then
+        if ! cmp -s "$SRC_WSLCONFIG" "$WIN_HOME/.wslconfig"; then
+          cp -f "$SRC_WSLCONFIG" "$WIN_HOME/.wslconfig"
+          echo "Updated Windows .wslconfig. Run 'wsl --shutdown' to apply."
+        fi
       fi
-    fi
-  '';
 
-  home.file.".config/wsl/wsl.conf".text = ''
-    [boot]
-    systemd=true
+      # Sync wsl.conf to /etc/wsl.conf (Requires sudo)
+      SRC_WSLCONF="$HOME/.config/wsl/wsl.conf"
 
-    [interop]
-    appendWindowsPath = false
+      if [ -f "$SRC_WSLCONF" ]; then
+        if ! cmp -s "$SRC_WSLCONF" "/etc/wsl.conf"; then
+          echo "WSL config changed. Run: sudo cp $SRC_WSLCONF /etc/wsl.conf"
+        fi
+      fi
+    '';
 
-    [automount]
-    options = "metadata"
-  '';
+    file = {
+      ".config/wsl/wsl.conf".text = ''
+        [boot]
+        systemd=true
 
-  home.file.".config/wsl/.wslconfig".text = ''
-    [wsl2]
-    networkingMode=mirrored
+        [interop]
+        appendWindowsPath = false
 
-    [experimental]
-    sparseVhd=true
-    hostAddressLoopback=true
-  '';
+        [automount]
+        options = "metadata"
+      '';
+
+      ".config/wsl/.wslconfig".text = ''
+        [wsl2]
+        networkingMode=mirrored
+
+        [experimental]
+        sparseVhd=true
+        hostAddressLoopback=true
+      '';
+    };
+  };
 
   programs.nushell = {
     shellAliases = {

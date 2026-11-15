@@ -69,180 +69,182 @@
       require("mini.tabline").setup()
     '';
 
-    plugins =
-      {
-        blink-cmp = {
-          enable = true;
-          settings = {
-            keymap = {
-              preset = "default";
-              "<CR>" = [ "fallback" ];
-              "<C-m>" = [ "accept" "fallback" ];
-            };
-            completion.list.selection = {
-              preselect = true;
-              auto_insert = false;
-            };
-          };
-        };
-        fzf-lua.enable = true;
-        flash.enable = true;
-
-        orgmode = {
-          enable = true;
-          settings = {
-            org_agenda_files = [ "~/org/**/*" ];
-            org_default_notes_file = "~/org/inbox.org";
-            org_todo_keywords = [
-              "TODO"
-              "WAIT"
-              "|"
-              "DONE"
-              "CANCEL"
+    plugins = {
+      blink-cmp = {
+        enable = true;
+        settings = {
+          keymap = {
+            preset = "default";
+            "<CR>" = [ "fallback" ];
+            "<C-m>" = [
+              "accept"
+              "fallback"
             ];
-            org_capture_templates = {
-              t = {
-                description = "Task";
-                template = "* TODO %?\n  SCHEDULED: %t";
-                target = "~/org/inbox.org";
-              };
-              n = {
-                description = "Note";
-                template = "* %?\n  %U";
-                target = "~/org/notes.org";
-              };
-              j = {
-                description = "Journal";
-                template = "* %<%H:%M> %?";
-                target = "~/org/journal.org";
-                datetree = {
-                  tree_type = "day";
-                };
+          };
+          completion.list.selection = {
+            preselect = true;
+            auto_insert = false;
+          };
+        };
+      };
+      fzf-lua.enable = true;
+      flash.enable = true;
+
+      orgmode = {
+        enable = true;
+        settings = {
+          org_agenda_files = [ "~/org/**/*" ];
+          org_default_notes_file = "~/org/inbox.org";
+          org_todo_keywords = [
+            "TODO"
+            "WAIT"
+            "|"
+            "DONE"
+            "CANCEL"
+          ];
+          org_capture_templates = {
+            t = {
+              description = "Task";
+              template = "* TODO %?\n  SCHEDULED: %t";
+              target = "~/org/inbox.org";
+            };
+            n = {
+              description = "Note";
+              template = "* %?\n  %U";
+              target = "~/org/notes.org";
+            };
+            j = {
+              description = "Journal";
+              template = "* %<%H:%M> %?";
+              target = "~/org/journal.org";
+              datetree = {
+                tree_type = "day";
               };
             };
           };
         };
+      };
 
-        lsp = {
-          enable = config.core.system.devLevel >= 1;
-          servers =
-            (lib.genAttrs [ "jsonls" "lua_ls" "nixd" "markdown_oxide" ] (name: {
-              enable = config.core.system.devLevel >= 1;
-            }))
-            // (lib.genAttrs [ "bashls" "ts_ls" "pyright" "yamlls" "gopls" ] (name: {
+      lsp = {
+        enable = config.core.system.devLevel >= 1;
+        servers =
+          (lib.genAttrs [ "jsonls" "lua_ls" "nixd" "markdown_oxide" ] (_: {
+            enable = config.core.system.devLevel >= 1;
+          }))
+          // (lib.genAttrs [ "bashls" "ts_ls" "pyright" "yamlls" "gopls" ] (_: {
+            enable = config.core.system.devLevel >= 2;
+          }))
+          // {
+            kotlin_lsp = {
               enable = config.core.system.devLevel >= 2;
-            }))
-            // {
-              kotlin_lsp = {
-                enable = config.core.system.devLevel >= 2;
-                package = null;
-                cmd = [
-                  "kotlin-lsp"
-                  "--stdio"
-                ];
-              };
-              jdtls = {
-                enable = config.core.system.devLevel >= 2;
-                packageFallback = true;
-              };
-              dartls = {
-                enable = config.core.system.devLevel >= 2;
-                package = null;
-              };
-              sourcekit = {
-                enable = config.core.system.devLevel >= 2;
-                package = null;
-              };
-              roslyn_ls = {
-                enable = config.core.system.devLevel >= 2;
-                package = null;
-              };
-              rust_analyzer = {
-                enable = config.core.system.devLevel >= 2;
-                installCargo = false;
-                installRustc = false;
-              };
+              package = null;
+              cmd = [
+                "kotlin-lsp"
+                "--stdio"
+              ];
             };
-          keymaps = {
-            silent = true;
-            lspBuf.K = "hover";
-            diagnostic = {
-              "<leader>cd" = "open_float";
-              "[d" = "goto_prev";
-              "]d" = "goto_next";
+            jdtls = {
+              enable = config.core.system.devLevel >= 2;
+              packageFallback = true;
             };
-            extra = [
-              {
-                mode = "n";
-                key = "<leader>ca";
-                action.__raw = "function() vim.lsp.buf.code_action() end";
-                options.desc = "Code Action";
-              }
-              {
-                mode = "n";
-                key = "gd";
-                action.__raw = "function() vim.lsp.buf.definition() end";
-                options.desc = "Goto Definition";
-              }
-              {
-                mode = "n";
-                key = "grr";
-                action.__raw = "function() vim.lsp.buf.references() end";
-                options.desc = "References";
-              }
-              {
-                mode = "n";
-                key = "gri";
-                action.__raw = "function() vim.lsp.buf.implementation() end";
-                options.desc = "Goto Implementation";
-              }
-              {
-                mode = "n";
-                key = "grt";
-                action.__raw = "function() vim.lsp.buf.type_definition() end";
-                options.desc = "Goto Type Definition";
-              }
-            ];
+            dartls = {
+              enable = config.core.system.devLevel >= 2;
+              package = null;
+            };
+            sourcekit = {
+              enable = config.core.system.devLevel >= 2;
+              package = null;
+            };
+            roslyn_ls = {
+              enable = config.core.system.devLevel >= 2;
+              package = null;
+            };
+            rust_analyzer = {
+              enable = config.core.system.devLevel >= 2;
+              installCargo = false;
+              installRustc = false;
+            };
           };
-        };
-
-        treesitter = {
-          enable = true;
-          settings = {
-            highlight.enable = true;
-            indent.enable = true;
+        keymaps = {
+          silent = true;
+          lspBuf.K = "hover";
+          diagnostic = {
+            "<leader>cd" = "open_float";
+            "[d" = "goto_prev";
+            "]d" = "goto_next";
           };
+          extra = [
+            {
+              mode = "n";
+              key = "<leader>ca";
+              action.__raw = "function() vim.lsp.buf.code_action() end";
+              options.desc = "Code Action";
+            }
+            {
+              mode = "n";
+              key = "gd";
+              action.__raw = "function() vim.lsp.buf.definition() end";
+              options.desc = "Goto Definition";
+            }
+            {
+              mode = "n";
+              key = "grr";
+              action.__raw = "function() vim.lsp.buf.references() end";
+              options.desc = "References";
+            }
+            {
+              mode = "n";
+              key = "gri";
+              action.__raw = "function() vim.lsp.buf.implementation() end";
+              options.desc = "Goto Implementation";
+            }
+            {
+              mode = "n";
+              key = "grt";
+              action.__raw = "function() vim.lsp.buf.type_definition() end";
+              options.desc = "Goto Type Definition";
+            }
+          ];
         };
+      };
 
-        "treesitter-context".enable = true;
-
-        "smear-cursor" = {
-          enable = true;
-          settings = {
-            smear_insert_mode = true;
-            stiffness = 0.8;
-            trailing_stiffness = 0.6;
-            stiffness_insert_mode = 0.7;
-            trailing_stiffness_insert_mode = 0.7;
-            damping = 0.95;
-            damping_insert_mode = 0.95;
-            distance_stop_animating = 0.5;
-            hide_target_hack = false;
-          };
+      treesitter = {
+        enable = true;
+        settings = {
+          highlight.enable = true;
+          indent.enable = true;
         };
+      };
 
-      }
-      // (lib.genAttrs
-        [
-          "web-devicons"
-          "gitsigns"
-          "todo-comments"
-          "trouble"
-          "yazi"
-        ]
-        (_: {
-          enable = true;
-        })
-      );
+      "treesitter-context".enable = true;
+
+      "smear-cursor" = {
+        enable = true;
+        settings = {
+          smear_insert_mode = true;
+          stiffness = 0.8;
+          trailing_stiffness = 0.6;
+          stiffness_insert_mode = 0.7;
+          trailing_stiffness_insert_mode = 0.7;
+          damping = 0.95;
+          damping_insert_mode = 0.95;
+          distance_stop_animating = 0.5;
+          hide_target_hack = false;
+        };
+      };
+
+    }
+    // (lib.genAttrs
+      [
+        "web-devicons"
+        "gitsigns"
+        "todo-comments"
+        "trouble"
+        "yazi"
+      ]
+      (_: {
+        enable = true;
+      })
+    );
   };
 }

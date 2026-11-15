@@ -6,82 +6,84 @@
   ...
 }:
 {
-  programs.yazi = {
-    enable = true;
-    enableNushellIntegration = true;
-    shellWrapperName = "y";
-    settings = {
-      mgr = {
-        show_hidden = true;
-        sort_by = "natural";
-        sort_dir_first = true;
+  programs = {
+    yazi = {
+      enable = true;
+      enableNushellIntegration = true;
+      shellWrapperName = "y";
+      settings = {
+        mgr = {
+          show_hidden = true;
+          sort_by = "natural";
+          sort_dir_first = true;
+        };
+        preview = {
+          max_width = 1600;
+          max_height = 1600;
+        };
       };
-      preview = {
-        max_width = 1600;
-        max_height = 1600;
+      keymap = {
+        mgr.prepend_keymap = [
+          {
+            on = [ "+" ];
+            run = "plugin toggle-pane max-preview";
+            desc = "Maximize or restore the preview pane";
+          }
+          {
+            on = [
+              ","
+              "d"
+            ];
+            run = "sort --dir-first=no";
+            desc = "Files first";
+          }
+          {
+            on = [
+              ","
+              "D"
+            ];
+            run = "sort --dir-first";
+            desc = "Dirs first";
+          }
+          {
+            on = [ "l" ];
+            run = "plugin smart-enter";
+            desc = "Enter directory or open file";
+          }
+          {
+            on = [ "<Enter>" ];
+            run = "plugin smart-enter";
+            desc = "Enter directory or open file";
+          }
+          {
+            on = [
+              "g"
+              "f"
+            ];
+            run = "shell -- open .";
+            desc = "Open current directory in Finder";
+          }
+          {
+            on = [
+              "c"
+              "y"
+            ];
+            run = "shell -- if [ -f %h ]; then pbcopy < %h; fi";
+            desc = "Copy hovered file contents";
+            for = "macos";
+          }
+        ];
+      };
+      plugins = {
+        smart-enter = "${yaziPlugins}/smart-enter.yazi";
+        toggle-pane = "${yaziPlugins}/toggle-pane.yazi";
       };
     };
-    keymap = {
-      mgr.prepend_keymap = [
-        {
-          on = [ "+" ];
-          run = "plugin toggle-pane max-preview";
-          desc = "Maximize or restore the preview pane";
-        }
-        {
-          on = [
-            ","
-            "d"
-          ];
-          run = "sort --dir-first=no";
-          desc = "Files first";
-        }
-        {
-          on = [
-            ","
-            "D"
-          ];
-          run = "sort --dir-first";
-          desc = "Dirs first";
-        }
-        {
-          on = [ "l" ];
-          run = "plugin smart-enter";
-          desc = "Enter directory or open file";
-        }
-        {
-          on = [ "<Enter>" ];
-          run = "plugin smart-enter";
-          desc = "Enter directory or open file";
-        }
-        {
-          on = [
-            "g"
-            "f"
-          ];
-          run = "shell -- open .";
-          desc = "Open current directory in Finder";
-        }
-        {
-          on = [
-            "c"
-            "y"
-          ];
-          run = "shell -- if [ -f %h ]; then pbcopy < %h; fi";
-          desc = "Copy hovered file contents";
-          for = "macos";
-        }
-      ];
-    };
-    plugins = {
-      smart-enter = "${yaziPlugins}/smart-enter.yazi";
-      toggle-pane = "${yaziPlugins}/toggle-pane.yazi";
-    };
+    fzf.enable = true;
+    ripgrep.enable = true;
+    fd.enable = true;
+    jq.enable = true;
   };
-  programs.fzf.enable = true;
-  programs.ripgrep.enable = true;
-  programs.fd.enable = true;
-  programs.jq.enable = true;
 
   home.packages =
     with pkgs;

@@ -1,5 +1,4 @@
-{ ... }:
-{
+_: {
   security.pam.services.sudo_local.touchIdAuth = true;
 
   # https://github.com/nix-darwin/nix-darwin/tree/master/modules/system/defaults
