@@ -109,6 +109,8 @@ matches:
     replace: "実装してください。"
   - trigger: ";at"
     replace: "対応してください。"
+  - trigger: ";ak"
+    replace: "検討してください。"
   - trigger: ";ane"
     replace: "編集は不要です。"
   - trigger: ";ant"
