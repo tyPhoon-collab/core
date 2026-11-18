@@ -325,19 +325,34 @@ _: {
           local buf = vim.api.nvim_get_current_buf()
           local path = vim.api.nvim_buf_get_name(buf)
           if path == "" then
-            vim.notify("Leaf requires a named Markdown buffer", vim.log.levels.WARN)
-            return
-          end
-          if vim.bo[buf].filetype ~= "markdown" then
-            vim.notify("Leaf preview is available for Markdown buffers", vim.log.levels.WARN)
+            vim.notify("Preview requires a named buffer", vim.log.levels.WARN)
             return
           end
 
+          local ft = vim.bo[buf].filetype
           path = vim.uv.fs_realpath(path) or vim.fn.fnamemodify(path, ":p")
-          core_open_terminal_tab("leaf:" .. path, { "leaf", path })
+
+          if ft == "markdown" then
+            core_open_terminal_tab("leaf:" .. path, { "leaf", path })
+          elseif ft == "html" then
+            local den = vim.fn.executable("den") == 1 and "den" or "/Applications/Den Browser.app/Contents/MacOS/den"
+            if vim.fn.executable(den) ~= 1 then
+              vim.notify("den CLI not found", vim.log.levels.ERROR)
+              return
+            end
+            vim.system({ den, "board", "web", "new", vim.uri_from_fname(path), "--focus" }, { text = true }, function(res)
+              if res.code ~= 0 then
+                vim.schedule(function()
+                  vim.notify("Den preview failed: " .. (res.stderr ~= "" and res.stderr or ("exit " .. res.code)), vim.log.levels.ERROR)
+                end)
+              end
+            end)
+          else
+            vim.notify("Preview is available for Markdown or HTML buffers", vim.log.levels.WARN)
+          end
         end
       '';
-      options.desc = "Leaf Preview";
+      options.desc = "Preview (Leaf / Den)";
     }
     {
       mode = "n";
