@@ -1610,6 +1610,55 @@
                                 }
                             },
                             {
+                                "description": "k+m→kamo",
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        { "key_code": "h" },
+                                        { "key_code": "comma" }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_up_when": "all"
+                                    }
+                                },
+                                "to": [
+                                    { "key_code": "k" },
+                                    { "key_code": "a" },
+                                    { "key_code": "m" },
+                                    { "key_code": "o" },
+                                    { "key_code": "vk_none" }
+                                ],
+                                "conditions": [
+                                    {
+                                        "type": "input_source_if",
+                                        "input_sources": [
+                                            {
+                                                "input_source_id": "^com\\.google\\.inputmethod\\.Japanese\\.base$",
+                                                "input_mode_id": "^com\\.apple\\.inputmethod\\.Japanese$"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "tab_layer",
+                                        "value": 1
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "eisuu_layer",
+                                        "value": 1
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "kana_arrow_mode",
+                                        "value": 1
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 50
+                                }
+                            },
+                            {
                                 "description": "k+r→kara",
                                 "type": "basic",
                                 "from": {
