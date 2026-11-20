@@ -78,6 +78,7 @@ in
 
     nushell = {
       enable = true;
+      loadSessionVariables = false;
       shellAliases = defaultAliases // cfg.shellAliases;
       extraConfig = ''
         $env.config.buffer_editor = "nvim"
