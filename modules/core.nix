@@ -37,13 +37,13 @@ in
       name = lib.mkOption {
         type = lib.types.nullOr lib.types.str;
         default = fromPath [ "identity" "name" ] null;
-        description = "Display name shared across developer tools such as Git and Jujutsu.";
+        description = "Display name shared across developer tools such as Git.";
       };
 
       email = lib.mkOption {
         type = lib.types.nullOr lib.types.str;
         default = fromPath [ "identity" "email" ] null;
-        description = "Email address shared across developer tools such as Git and Jujutsu.";
+        description = "Email address shared across developer tools such as Git.";
       };
     };
 

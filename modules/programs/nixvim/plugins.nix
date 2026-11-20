@@ -6,26 +6,17 @@
 }:
 {
   programs.nixvim = {
-    extraPackages = with pkgs; [
-      lazyjj
-    ];
-
     extraPlugins = with pkgs.vimPlugins; [
       cutlass-nvim
       mini-nvim
       neo-tree-nvim
       nui-nvim
       plenary-nvim
-      lazyjj-nvim
     ];
 
     extraConfigLuaPost = ''
       require("cutlass").setup({
         exclude = { "ns", "nS", "xs", "xS", "os", "oS", "nd", "nD", "xd", "xD" },
-      })
-
-      require("lazyjj").setup({
-        mapping = false,
       })
 
       require("mini.ai").setup()

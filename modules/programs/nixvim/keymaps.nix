@@ -432,12 +432,6 @@ _: {
     }
     {
       mode = "n";
-      key = "<leader>jj";
-      action = "<cmd>LazyJJ<CR>";
-      options.desc = "LazyJJ";
-    }
-    {
-      mode = "n";
       key = "<leader>oa";
       action = "<cmd>lua require('orgmode').action('agenda.prompt')<CR>";
       options.desc = "Org Agenda";
