@@ -27,6 +27,7 @@ let
     ll = "eza -lah";
     lt = "eza --tree";
     m = "mise";
+    mi = "mise install";
     nhd = "nh darwin switch .";
     nhh = "nh home switch .";
     nho = "nh os switch .";
