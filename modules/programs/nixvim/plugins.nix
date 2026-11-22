@@ -6,13 +6,17 @@
 }:
 {
   programs.nixvim = {
-    extraPlugins = with pkgs.vimPlugins; [
-      cutlass-nvim
-      mini-nvim
-      neo-tree-nvim
-      nui-nvim
-      plenary-nvim
-    ];
+    extraPlugins =
+      (with pkgs.vimPlugins; [
+        cutlass-nvim
+        mini-nvim
+        neo-tree-nvim
+        nui-nvim
+        plenary-nvim
+      ])
+      ++ lib.optionals (config.core.system.devLevel >= 2) [
+        pkgs.vimPlugins.lean-nvim
+      ];
 
     extraConfigLuaPost = ''
       require("cutlass").setup({
@@ -58,6 +62,15 @@
       end
       require("mini.surround").setup()
       require("mini.tabline").setup()
+    ''
+    + lib.optionalString (config.core.system.devLevel >= 2) ''
+      require("lean").setup({ mappings = true })
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "lean",
+        callback = function(args)
+          vim.keymap.set("i", "¥", "\\", { buffer = args.buf })
+        end,
+      })
     '';
 
     plugins = {
