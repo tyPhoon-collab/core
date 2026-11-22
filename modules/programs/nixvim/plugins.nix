@@ -40,6 +40,15 @@
           },
         },
       })
+      vim.api.nvim_create_autocmd("FocusGained", {
+        group = vim.api.nvim_create_augroup("neotree-focus-refresh", { clear = true }),
+        callback = function()
+          local manager = package.loaded["neo-tree.sources.manager"]
+          if manager then
+            manager.refresh("filesystem")
+          end
+        end,
+      })
 
       require("mini.indentscope").setup()
       require("mini.notify").setup()
