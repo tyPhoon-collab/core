@@ -3,7 +3,7 @@ def "zml parse" []: string -> list<record> {
     lines
     | where {|line| ($line | str trim) != "" }
     | each {|line|
-        $line | str trim --left | split row "\t"
+        $line | str trim --left | str replace --regex '^→\s*' '' | split row "\t"
         | reduce --fold {} {|field, row|
             let pair = $field | split row --number 2 '='
             if ($pair | length) != 2 {
@@ -58,6 +58,19 @@ def "zml preview" [row: record]: nothing -> string {
     $"($details)\n\n($content)"
 }
 
+def "zml list" []: nothing -> list<record> {
+    ^zmx list
+    | complete
+    | do {|result|
+        if $result.exit_code != 0 {
+            error make {msg: $"zmx list failed: ($result.stderr | str trim)"}
+        }
+        $result.stdout
+    } $in
+    | zml parse
+    | zml rows
+}
+
 def "zml ui" []: list<record> -> any {
     tui label --titlebar 'zmx sessions'
     | tui search --bind / --fuzzy --columns [NAME STATUS DIRECTORY] --placeholder 'Search sessions'
@@ -65,7 +78,21 @@ def "zml ui" []: list<record> -> any {
         (tui table --id sessions --focus --title Sessions --columns [NAME STATUS AGE DIRECTORY])
         (tui preview --from sessions --title Screen {|row| zml preview $row })
     ]
-    | tui label --status 'j/k: select  /: search  Enter: attach  q: quit'
+    | tui label --status 'j/k: select  /: search  Enter: attach  x: kill  r: reload  q: quit'
+    | tui bind r {|_| zml list }
+    | tui bind x {|state|
+        let name = $state.selected?.session?.name?
+        if ($name | is-empty) {
+            return null
+        }
+        let res = ^zmx kill $name | complete
+        let rows = zml list
+        if $res.exit_code == 0 {
+            $rows | where {|row| $row.session.name != $name }
+        } else {
+            $rows
+        }
+    }
 }
 
 def "zml attach" []: record -> nothing {
@@ -77,16 +104,7 @@ def "zml attach" []: record -> nothing {
 
 # Import with `use zml.nu`, then run `zml`.
 export def main [] {
-    ^zmx list
-    | complete
-    | do {|result|
-        if $result.exit_code != 0 {
-            error make {msg: $"zmx list failed: ($result.stderr | str trim)"}
-        }
-        $result.stdout
-    } $in
-    | zml parse
-    | zml rows
+    zml list
     | zml ui
     | tui run
     | zml attach
