@@ -1079,6 +1079,55 @@
                         "description": "TK音直入力法",
                         "manipulators": [
                             {
+                                "description": "o+e+i+u→io",
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        { "key_code": "f" },
+                                        { "key_code": "a" },
+                                        { "key_code": "s" },
+                                        { "key_code": "e" }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_up_when": "all"
+                                    }
+                                },
+                                "to": [
+                                    { "key_code": "i" },
+                                    { "key_code": "o" },
+                                    { "key_code": "vk_none" }
+                                ],
+                                "conditions": [
+                                    {
+                                        "type": "input_source_if",
+                                        "input_sources": [
+                                            {
+                                                "input_source_id": "^com\\.google\\.inputmethod\\.Japanese\\.base$",
+                                                "input_mode_id": "^com\\.apple\\.inputmethod\\.Japanese$"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "tab_layer",
+                                        "value": 1
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "eisuu_layer",
+                                        "value": 1
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "kana_arrow_mode",
+                                        "value": 1
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 50
+                                }
+                            },
+                            {
                                 "description": "d+s+n→desita",
                                 "type": "basic",
                                 "from": {
@@ -2081,11 +2130,12 @@
                                 }
                             },
                             {
-                                "description": "o+i→oi",
+                                "description": "o+e+i→oi",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
                                         { "key_code": "f" },
+                                        { "key_code": "a" },
                                         { "key_code": "s" }
                                     ],
                                     "simultaneous_options": {
@@ -2128,11 +2178,156 @@
                                 }
                             },
                             {
-                                "description": "d+h→deha",
+                                "description": "o+e+a→oo",
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        { "key_code": "f" },
+                                        { "key_code": "a" },
+                                        { "key_code": "d" }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_up_when": "all"
+                                    }
+                                },
+                                "to": [
+                                    { "key_code": "o" },
+                                    { "key_code": "o" },
+                                    { "key_code": "vk_none" }
+                                ],
+                                "conditions": [
+                                    {
+                                        "type": "input_source_if",
+                                        "input_sources": [
+                                            {
+                                                "input_source_id": "^com\\.google\\.inputmethod\\.Japanese\\.base$",
+                                                "input_mode_id": "^com\\.apple\\.inputmethod\\.Japanese$"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "tab_layer",
+                                        "value": 1
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "eisuu_layer",
+                                        "value": 1
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "kana_arrow_mode",
+                                        "value": 1
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 50
+                                }
+                            },
+                            {
+                                "description": "i+u+e→iu",
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        { "key_code": "s" },
+                                        { "key_code": "e" },
+                                        { "key_code": "a" }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_up_when": "all"
+                                    }
+                                },
+                                "to": [
+                                    { "key_code": "i" },
+                                    { "key_code": "u" },
+                                    { "key_code": "vk_none" }
+                                ],
+                                "conditions": [
+                                    {
+                                        "type": "input_source_if",
+                                        "input_sources": [
+                                            {
+                                                "input_source_id": "^com\\.google\\.inputmethod\\.Japanese\\.base$",
+                                                "input_mode_id": "^com\\.apple\\.inputmethod\\.Japanese$"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "tab_layer",
+                                        "value": 1
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "eisuu_layer",
+                                        "value": 1
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "kana_arrow_mode",
+                                        "value": 1
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 50
+                                }
+                            },
+                            {
+                                "description": "o+e+u→ie",
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        { "key_code": "f" },
+                                        { "key_code": "a" },
+                                        { "key_code": "e" }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_up_when": "all"
+                                    }
+                                },
+                                "to": [
+                                    { "key_code": "i" },
+                                    { "key_code": "e" },
+                                    { "key_code": "vk_none" }
+                                ],
+                                "conditions": [
+                                    {
+                                        "type": "input_source_if",
+                                        "input_sources": [
+                                            {
+                                                "input_source_id": "^com\\.google\\.inputmethod\\.Japanese\\.base$",
+                                                "input_mode_id": "^com\\.apple\\.inputmethod\\.Japanese$"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "tab_layer",
+                                        "value": 1
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "eisuu_layer",
+                                        "value": 1
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "kana_arrow_mode",
+                                        "value": 1
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 50
+                                }
+                            },
+                            {
+                                "description": "d+e+h→deha",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
                                         { "key_code": "m" },
+                                        { "key_code": "a" },
                                         { "key_code": "semicolon" }
                                     ],
                                     "simultaneous_options": {
@@ -2585,6 +2780,55 @@
                                     { "key_code": "i" },
                                     { "key_code": "h" },
                                     { "key_code": "a" },
+                                    { "key_code": "vk_none" }
+                                ],
+                                "conditions": [
+                                    {
+                                        "type": "input_source_if",
+                                        "input_sources": [
+                                            {
+                                                "input_source_id": "^com\\.google\\.inputmethod\\.Japanese\\.base$",
+                                                "input_mode_id": "^com\\.apple\\.inputmethod\\.Japanese$"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "tab_layer",
+                                        "value": 1
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "eisuu_layer",
+                                        "value": 1
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "kana_arrow_mode",
+                                        "value": 1
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 50
+                                }
+                            },
+                            {
+                                "description": "n+s→naru",
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        { "key_code": "k" },
+                                        { "key_code": "l" }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_up_when": "all"
+                                    }
+                                },
+                                "to": [
+                                    { "key_code": "n" },
+                                    { "key_code": "a" },
+                                    { "key_code": "r" },
+                                    { "key_code": "u" },
                                     { "key_code": "vk_none" }
                                 ],
                                 "conditions": [
@@ -4015,12 +4259,200 @@
                                 }
                             },
                             {
-                                "description": "a+i→ai",
+                                "description": "i+a→ya",
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        { "key_code": "s" },
+                                        { "key_code": "d" }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_up_when": "all"
+                                    }
+                                },
+                                "to": [
+                                    { "key_code": "y" },
+                                    { "key_code": "a" },
+                                    { "key_code": "vk_none" }
+                                ],
+                                "conditions": [
+                                    {
+                                        "type": "input_source_if",
+                                        "input_sources": [
+                                            {
+                                                "input_source_id": "^com\\.google\\.inputmethod\\.Japanese\\.base$",
+                                                "input_mode_id": "^com\\.apple\\.inputmethod\\.Japanese$"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "tab_layer",
+                                        "value": 1
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "eisuu_layer",
+                                        "value": 1
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "kana_arrow_mode",
+                                        "value": 1
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 50
+                                }
+                            },
+                            {
+                                "description": "i+u→yu",
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        { "key_code": "s" },
+                                        { "key_code": "e" }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_up_when": "all"
+                                    }
+                                },
+                                "to": [
+                                    { "key_code": "y" },
+                                    { "key_code": "u" },
+                                    { "key_code": "vk_none" }
+                                ],
+                                "conditions": [
+                                    {
+                                        "type": "input_source_if",
+                                        "input_sources": [
+                                            {
+                                                "input_source_id": "^com\\.google\\.inputmethod\\.Japanese\\.base$",
+                                                "input_mode_id": "^com\\.apple\\.inputmethod\\.Japanese$"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "tab_layer",
+                                        "value": 1
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "eisuu_layer",
+                                        "value": 1
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "kana_arrow_mode",
+                                        "value": 1
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 50
+                                }
+                            },
+                            {
+                                "description": "i+e→ye",
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        { "key_code": "s" },
+                                        { "key_code": "a" }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_up_when": "all"
+                                    }
+                                },
+                                "to": [
+                                    { "key_code": "y" },
+                                    { "key_code": "e" },
+                                    { "key_code": "vk_none" }
+                                ],
+                                "conditions": [
+                                    {
+                                        "type": "input_source_if",
+                                        "input_sources": [
+                                            {
+                                                "input_source_id": "^com\\.google\\.inputmethod\\.Japanese\\.base$",
+                                                "input_mode_id": "^com\\.apple\\.inputmethod\\.Japanese$"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "tab_layer",
+                                        "value": 1
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "eisuu_layer",
+                                        "value": 1
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "kana_arrow_mode",
+                                        "value": 1
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 50
+                                }
+                            },
+                            {
+                                "description": "i+o→yo",
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        { "key_code": "s" },
+                                        { "key_code": "f" }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_up_when": "all"
+                                    }
+                                },
+                                "to": [
+                                    { "key_code": "y" },
+                                    { "key_code": "o" },
+                                    { "key_code": "vk_none" }
+                                ],
+                                "conditions": [
+                                    {
+                                        "type": "input_source_if",
+                                        "input_sources": [
+                                            {
+                                                "input_source_id": "^com\\.google\\.inputmethod\\.Japanese\\.base$",
+                                                "input_mode_id": "^com\\.apple\\.inputmethod\\.Japanese$"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "tab_layer",
+                                        "value": 1
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "eisuu_layer",
+                                        "value": 1
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "kana_arrow_mode",
+                                        "value": 1
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 50
+                                }
+                            },
+                            {
+                                "description": "a+e→ai",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
                                         { "key_code": "d" },
-                                        { "key_code": "s" }
+                                        { "key_code": "a" }
                                     ],
                                     "simultaneous_options": {
                                         "key_up_when": "all"
@@ -4062,12 +4494,59 @@
                                 }
                             },
                             {
-                                "description": "e+i→ei",
+                                "description": "u+e→ui",
                                 "type": "basic",
                                 "from": {
                                     "simultaneous": [
-                                        { "key_code": "a" },
-                                        { "key_code": "s" }
+                                        { "key_code": "e" },
+                                        { "key_code": "a" }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_up_when": "all"
+                                    }
+                                },
+                                "to": [
+                                    { "key_code": "u" },
+                                    { "key_code": "i" },
+                                    { "key_code": "vk_none" }
+                                ],
+                                "conditions": [
+                                    {
+                                        "type": "input_source_if",
+                                        "input_sources": [
+                                            {
+                                                "input_source_id": "^com\\.google\\.inputmethod\\.Japanese\\.base$",
+                                                "input_mode_id": "^com\\.apple\\.inputmethod\\.Japanese$"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "tab_layer",
+                                        "value": 1
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "eisuu_layer",
+                                        "value": 1
+                                    },
+                                    {
+                                        "type": "variable_unless",
+                                        "name": "kana_arrow_mode",
+                                        "value": 1
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 50
+                                }
+                            },
+                            {
+                                "description": "o+e→ei",
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        { "key_code": "f" },
+                                        { "key_code": "a" }
                                     ],
                                     "simultaneous_options": {
                                         "key_up_when": "all"
